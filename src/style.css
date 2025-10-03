@@ -1,0 +1,16 @@
+/* style.css */
+
+/* Variables globales */
+:root {
+  --primary-color: #3B82F6; /* Azul Tailwind */
+  --sidebar-bg: #1F2937;    /* Gris oscuro */
+  --text-color: #F9FAFB;    /* Gris muy claro */
+  --body-bg: #F3F4F6;       /* Fondo gris claro */
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--body-bg);
+  color: #111827;
+}
