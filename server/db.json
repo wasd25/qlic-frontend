@@ -1,0 +1,39 @@
+{
+  "notifications": [
+    {
+      "id": 1,
+      "title": "Abnormal temperature detected",
+      "message": "The IoT sensor in the main tank reports 35°C, outside the safe range.",
+      "read": false,
+      "created": "2025-10-03T11:30:00Z"
+    },
+    {
+      "id": 2,
+      "title": "High water consumption",
+      "message": "Water consumption in the last hour exceeded 120% of the average.",
+      "read": false,
+      "created": "2025-10-03T09:15:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Possible leak detected",
+      "message": "The IoT device detected abnormal continuous flow in the secondary pipeline.",
+      "read": true,
+      "created": "2025-10-02T22:45:00Z"
+    },
+    {
+      "id": 4,
+      "title": "Maintenance recommended",
+      "message": "Filter inspection is recommended every 30 days. Last check: 28 days ago.",
+      "read": false,
+      "created": "2025-10-01T16:00:00Z"
+    },
+    {
+      "id": 5,
+      "title": "Low reservoir level",
+      "message": "The storage tank is at 15% of its capacity.",
+      "read": true,
+      "created": "2025-09-30T08:30:00Z"
+    }
+  ]
+}
