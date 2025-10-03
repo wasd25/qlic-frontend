@@ -1,4 +1,4 @@
-<!-- src/public/pages/page-not-found.component.vue -->
+<!-- src/shared/pages/page-not-found.component.vue -->
 <template>
   <div class="not-found">
     <i class="pi pi-exclamation-triangle icon"></i>
