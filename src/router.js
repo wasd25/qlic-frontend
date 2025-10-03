@@ -1,6 +1,6 @@
 // src/router.js
 import { createRouter, createWebHistory } from 'vue-router'
-import PageNotFound from './public/pages/page-not-found.component.vue'
+import PageNotFound from './shared/pages/page-not-found.component.vue'
 
 const routes = [
     { path: '/', redirect: '/dashboard' },

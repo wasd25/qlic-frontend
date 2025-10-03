@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import SideBarNavigation from './public/components/side-bar-navigation.component.vue'
+import SideBarNavigation from './shared/components/side-bar-navigation.component.vue'
 </script>
 
 <style scoped>
