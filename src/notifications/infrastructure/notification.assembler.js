@@ -15,5 +15,7 @@ export class NotificationAssembler {
             return [];
         }
         let resources = response.data instanceof Array ? response.data : ['notifications'];
+
+        return resources.map(resource => this.toEntityFromResource(resource));
     }
 }
