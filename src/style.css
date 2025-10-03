@@ -2,6 +2,7 @@
 
 /* Variables globales */
 :root {
+  --app-bg: #f8f9fa; /* puedes cambiar el color de fondo */
   --primary-color: #3B82F6; /* Azul Tailwind */
   --sidebar-bg: #1F2937;    /* Gris oscuro */
   --text-color: #F9FAFB;    /* Gris muy claro */

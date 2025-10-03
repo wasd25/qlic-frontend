@@ -1,25 +1,63 @@
-<script setup>
-import { menuItems } from '../utils/menu-items.js'
-</script>
-
 <template>
   <aside class="sidebar">
     <!-- Logo -->
     <div class="sidebar-logo">
-      <img src="https://i.imgur.com/FCYH4sj.png" alt="Logo" class="logo" />
+      <img
+          src="https://i.imgur.com/FCYH4sj.png"
+          alt="App Logo"
+          class="logo"
+      />
     </div>
 
-    <!-- Divider -->
-    <div class="sidebar-divider"></div>
-
-    <!-- Navigation -->
+    <!-- Navegación -->
     <nav>
       <ul>
-        <li v-for="item in menuItems" :key="item.name">
-          <router-link :to="item.to" class="nav-link">
-            <i :class="item.icon"></i>
-            <span>{{ item.label }}</span>
-            <span v-if="item.badge" class="badge">{{ item.badge }}</span>
+        <li>
+          <router-link to="/dashboard">
+            <i class="pi pi-home"></i>
+            <span>Dashboard</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/reports">
+            <i class="pi pi-chart-bar"></i>
+            <span>Reports</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/profile">
+            <i class="pi pi-user"></i>
+            <span>Profile</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/alerts">
+            <i class="pi pi-bell"></i>
+            <span>Alerts</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/usage-management">
+            <i class="pi pi-sliders-h"></i>
+            <span>Usage Management</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/anomaly-detection">
+            <i class="pi pi-exclamation-circle"></i>
+            <span>Anomaly Detection</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/payments">
+            <i class="pi pi-credit-card"></i>
+            <span>Payments</span>
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/subscription">
+            <i class="pi pi-wallet"></i>
+            <span>Subscription</span>
           </router-link>
         </li>
       </ul>
@@ -28,63 +66,67 @@ import { menuItems } from '../utils/menu-items.js'
 </template>
 
 <style scoped>
+/* Sidebar contenedor */
 .sidebar {
-  width: 250px;
-  height: 100vh;
-  background-color: #ffffff; /* Sidebar blanco */
-  border-right: 1px solid #a5a9b2; /* Borde lateral */
+  width: 220px;
+  background-color: #ffffff; /* Fondo blanco */
+  color: #000000; /* Texto negro */
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  /* Borde lateral derecho */
+  border-right: 2px solid #a5a9b2;
 }
 
 .sidebar-logo {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #a5a9b2; /* línea separadora */
+  width: 100%; /* OBLIGA al contenedor a medir el ancho */
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 1rem 0;
 }
 
 .sidebar-logo .logo {
-  max-width: 120px;
-  height: auto;
+  width: 120px;
+  max-height: 80px;
+  object-fit: contain;
 }
 
-.sidebar-divider {
-  border-bottom: 1px solid #a5a9b2; /* Línea de separación */
+/* Lista de navegación */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar li {
   margin-bottom: 1rem;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-link {
+.sidebar a {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  color: #000000; /* Texto negro */
+  gap: 0.8rem;
+  color: #000000; /* Negro para íconos y texto */
   text-decoration: none;
-  transition: background-color 0.3s;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-.nav-link i {
-  font-size: 1.2rem;
-  color: #000000; /* Iconos negros */
+/* Hover */
+.sidebar a:hover {
+  background-color: #e5e7eb; /* gris claro al pasar */
 }
 
-.nav-link:hover {
-  background-color: #f0f0f0; /* Hover gris claro */
-}
-
-.badge {
-  margin-left: auto;
-  background-color: #a5a9b2;
-  color: white;
-  font-size: 0.75rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 9999px;
+/* Active */
+.sidebar a.router-link-active {
+  font-weight: bold;
+  color: #378aa1; /* blue chill */
+  background-color: #e6f4ef; /* verde muy clarito */
 }
 </style>
