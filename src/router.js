@@ -1,6 +1,7 @@
 // src/router.js
 import { createRouter, createWebHistory } from 'vue-router'
 import PageNotFound from './shared/pages/page-not-found.component.vue'
+import ReportsPage from './domains/reports/pages/reports-page.component.vue'
 
 const routes = [
     { path: '/', redirect: '/dashboard' },
@@ -12,7 +13,8 @@ const routes = [
     { path: '/anomaly-detection', name: 'AnomalyDetection', component: { template: '<h1>Anomaly Detection Placeholder</h1>' } },
     { path: '/payments', name: 'Payments', component: { template: '<h1>Payments Placeholder</h1>' } },
     { path: '/subscription', name: 'Subscription', component: { template: '<h1>Subscription Placeholder</h1>' } },
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: PageNotFound }
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: PageNotFound },
+    { path: '/reports', name: 'Reports', component: ReportsPage },
 ]
 
 const router = createRouter({
