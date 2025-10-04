@@ -25,10 +25,7 @@
   </section>
 </template>
 
-
 <script setup>
-
-
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import ReportFilter from '../components/report-filter.component.vue'
@@ -41,18 +38,18 @@ import { getReportSummary } from '../services/report.service.js'
 const summary = ref({
   usageTrends: [],
   costBreakdown: [],
-  efficiencyMetrics: {},
-  recentReports: []
+  efficiencyMetrics: {}
 })
 
 const reports = ref([])
+const currentFilters = ref({})
 
+// 🔄 Cargar reportes desde db.json y aplicar filtros si existen
 async function fetchReports(filters = {}) {
   try {
     const response = await axios.get('http://localhost:3000/reports')
     const allReports = response.data
 
-    // Filtrar por tipo y ubicación si se especifican
     const filtered = allReports.filter(report => {
       const matchType = filters.type ? report.type === filters.type : true
       const matchLocation = filters.location ? report.location === filters.location : true
@@ -65,26 +62,29 @@ async function fetchReports(filters = {}) {
   }
 }
 
-
+// 📥 Marcar como descargado y recargar lista
 async function downloadReport(report) {
-  await axios.patch(`http://localhost:3000/reports/${report.id}`, {
-    downloaded: true
-  })
-  await fetchReports()
+  try {
+    await axios.patch(`http://localhost:3000/reports/${report.id}`, {
+      downloaded: true
+    })
+    await fetchReports(currentFilters.value)
+  } catch (error) {
+    console.error('Error al marcar como descargado:', error)
+  }
 }
 
-
+// 🔄 Generar resumen y cargar reportes filtrados
 async function loadData(filters = {}) {
+  currentFilters.value = filters
   const data = await getReportSummary(filters)
   summary.value = data
   await fetchReports(filters)
 }
 
-
-
+// 🟢 Cargar datos iniciales sin filtros
 onMounted(() => {
   loadData()
-  fetchReports()
 })
 </script>
 
