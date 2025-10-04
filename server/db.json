@@ -14,7 +14,7 @@
       "date": "3 days ago",
       "type": "Cost Analysis",
       "location": "All Locations",
-      "downloaded": false
+      "downloaded": true
     },
     {
       "id": "3",
@@ -22,7 +22,7 @@
       "date": "4 days ago",
       "type": "Efficiency",
       "location": "All Locations",
-      "downloaded": false
+      "downloaded": true
     }
   ]
 }
