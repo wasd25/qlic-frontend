@@ -1,0 +1,28 @@
+{
+  "reports": [
+    {
+      "id": "1",
+      "name": "Monthly Usage Report",
+      "date": "2 days ago",
+      "type": "Usage Analytics",
+      "location": "All Locations",
+      "downloaded": true
+    },
+    {
+      "id": "2",
+      "name": "Cost Analysis Q3",
+      "date": "3 days ago",
+      "type": "Cost Analysis",
+      "location": "All Locations",
+      "downloaded": false
+    },
+    {
+      "id": "3",
+      "name": "Efficiency Report",
+      "date": "4 days ago",
+      "type": "Efficiency",
+      "location": "All Locations",
+      "downloaded": false
+    }
+  ]
+}
