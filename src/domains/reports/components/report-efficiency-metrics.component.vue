@@ -20,11 +20,11 @@
     <!-- Water Saved & Cost Saved -->
     <div class="metrics-row">
       <div class="metric-box water">
-        <div class="metric-value">{{ metrics.saved }}L</div>
+        <div class="metric-value">{{ metrics.waterSaved }}L</div>
         <div class="metric-label">Water Saved</div>
       </div>
       <div class="metric-box cost">
-        <div class="metric-value">${{ metrics.cost }}</div>
+        <div class="metric-value">${{ metrics.costSaved }}</div>
         <div class="metric-label">Cost Saved</div>
       </div>
     </div>
