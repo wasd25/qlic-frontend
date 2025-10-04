@@ -3,45 +3,45 @@
     <h3>Recent Reports</h3>
     <div class="report-list">
       <div class="report-card" v-for="report in reports" :key="report.id">
-        <!-- Ícono separado -->
         <div class="icon-wrapper">
           <i class="pi pi-file"></i>
         </div>
-
-        <!-- Texto del reporte -->
         <div class="text-wrapper">
           <span class="report-name">{{ report.name }}</span>
           <span class="report-date">Generated {{ report.date }}</span>
         </div>
-
-        <!-- Ícono de descarga -->
         <i class="pi pi-download download-icon" @click="download(report)"></i>
       </div>
     </div>
   </div>
 </template>
 
-
-
 <script setup>
 import axios from 'axios'
+import { getReportSummary } from '@/domains/reports/services/report.service'
+import { exportReportToPDF } from '@/domains/reports/services/pdf.service'
 
-// Recibe los reportes como propiedad
 defineProps({ reports: Array })
 
-// Función para marcar como descargado
 async function download(report) {
   try {
     await axios.patch(`http://localhost:3000/reports/${report.id}`, {
       downloaded: true
     })
-    console.log(`Reporte "${report.name}" marcado como descargado`)
+
+    const filters = {
+      type: report.type,
+      location: report.location,
+      period: 'Last 7 Days'
+    }
+
+    const data = await getReportSummary(filters)
+    exportReportToPDF(report.type, data)
   } catch (error) {
-    console.error('Error al actualizar el reporte:', error)
+    console.error('Error al descargar el reporte:', error)
   }
 }
 </script>
-
 
 <style scoped>
 .report-history {
@@ -84,7 +84,6 @@ async function download(report) {
   height: 2.5rem;
 }
 
-
 .icon-wrapper i {
   font-size: 1.8rem;
   color: #6b7280;
@@ -122,49 +121,4 @@ async function download(report) {
 .report-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
-
-.report-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.report-title {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-
-.report-date {
-  font-size: 0.85rem;
-  color: #6b7280;
-}
-
-.download-btn {
-  background-color: transparent;
-  color: #3b82f6;
-  border: none;
-  font-size: 1.2rem;
-}
-
-.download-btn:hover {
-  color: #2563eb;
-}
-
-.file-icon {
-  font-size: 1.5rem;
-  color: #6b7280;
-}
-
-.name {
-  font-weight: 600;
-}
-
-.date {
-  font-size: 0.85rem;
-  color: #6b7280;
-}
-
-
 </style>
