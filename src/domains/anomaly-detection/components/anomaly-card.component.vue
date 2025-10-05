@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-const props = defineProps({ anomaly: Object })
+const props = defineProps({ anomalies: Array })
 
 function formatDate(dateStr) {
   const d = new Date(dateStr)

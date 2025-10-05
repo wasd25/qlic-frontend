@@ -1,7 +1,7 @@
 <template>
   <div class="anomaly-page">
     <h1>Anomaly Detection</h1>
-    <anomaly-summary :anomalies="anomalies" />
+    <anomaly-summary-panel :anomalies="anomalies" />
     <div class="anomaly-body">
       <anomaly-trend-chart :anomalies="anomalies" />
       <anomaly-table :anomalies="anomalies" />
@@ -20,7 +20,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { fetchAnomalies } from '../services/anomaly.service.js'
-import AnomalySummary from '../components/anomaly-summary-panel.component.vue'
+import AnomalySummaryPanel from '../components/anomaly-summary-panel.component.vue'
 import AnomalyTrendChart from '../components/anomaly-trend-chart.component.vue'
 import AnomalyTable from '../components/anomaly-table.component.vue'
 import AnomalyCard from '../components/anomaly-card.component.vue'
@@ -29,7 +29,9 @@ const anomalies = ref([])
 
 onMounted(async () => {
   anomalies.value = await fetchAnomalies()
+  console.log('Fetched anomalies:', anomalies.value)
 })
+
 </script>
 
 <style scoped>

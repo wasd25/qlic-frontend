@@ -20,6 +20,7 @@ const critical = props.anomalies.filter(a => mapType(a.type) === 'critical').len
 const warning = props.anomalies.filter(a => mapType(a.type) === 'warning').length
 const info = props.anomalies.filter(a => mapType(a.type) === 'info').length
 const resolved = props.anomalies.filter(a => a.resolved).length
+
 </script>
 
 <style scoped>

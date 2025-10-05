@@ -6,23 +6,29 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import Chart from 'chart.js/auto'
 
 const props = defineProps({ anomalies: Array })
 const chartCanvas = ref(null)
+let chartInstance = null
 
-onMounted(() => {
+function buildChart() {
+  if (!props.anomalies || props.anomalies.length === 0) return
+
   const grouped = {}
   props.anomalies.forEach(a => {
+    if (!a.detected_anomaly) return
     const date = a.detected_anomaly.split('T')[0]
     grouped[date] = (grouped[date] || 0) + 1
   })
 
   const labels = Object.keys(grouped).sort()
-  const data = Object.values(grouped)
+  const data = labels.map(date => grouped[date])
 
-  new Chart(chartCanvas.value, {
+  if (chartInstance) chartInstance.destroy()
+
+  chartInstance = new Chart(chartCanvas.value, {
     type: 'bar',
     data: {
       labels,
@@ -36,9 +42,25 @@ onMounted(() => {
       responsive: true,
       plugins: {
         legend: { display: false }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 1
+          }
+        }
       }
     }
   })
+}
+
+onMounted(() => {
+  buildChart()
+})
+
+watch(() => props.anomalies, () => {
+  buildChart()
 })
 </script>
 
