@@ -4,13 +4,14 @@ const BASE_URL = 'http://localhost:3000'
 
 export async function fetchAlerts() {
     try {
-        const response = await axios.get(`${BASE_URL}/alerts`)
+        const response = await axios.get('http://localhost:3000/alerts')
         return response.data
     } catch (error) {
         console.error('Error fetching alerts:', error)
         return []
     }
 }
+
 
 export async function fetchSettings() {
     try {

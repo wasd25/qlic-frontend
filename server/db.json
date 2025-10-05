@@ -2,38 +2,157 @@
   "alerts": [
     {
       "id": 1,
-      "type": "Warning",
-      "title": "Abnormal temperature detected",
-      "message": "The IoT sensor in the main tank reports 35°C, outside the safe range.",
+      "type": "Critical",
+      "title": "Water Pressure Critical",
+      "message": "Main tank pressure dropped below 15 PSI.",
       "timestamp": "2 minutes ago"
     },
     {
       "id": 2,
-      "type": "Warning",
-      "title": "High water consumption",
-      "message": "Water consumption in the last hour exceeded 120% of the average.",
-      "timestamp": "2 minutes ago"
+      "type": "Critical",
+      "title": "Pump Failure Detected",
+      "message": "Pump #2 stopped responding.",
+      "timestamp": "5 minutes ago"
     },
     {
       "id": 3,
       "type": "Critical",
-      "title": "Possible leak detected",
-      "message": "The IoT device detected abnormal continuous flow in the secondary pipeline.",
-      "timestamp": "2 minutes ago"
+      "title": "Low Reservoir Level",
+      "message": "Storage tank is at 15% capacity.",
+      "timestamp": "10 minutes ago"
     },
     {
       "id": 4,
-      "type": "Info",
-      "title": "Maintenance recommended",
-      "message": "Filter inspection is recommended every 30 days. Last check: 28 days ago.",
-      "timestamp": "2 minutes ago"
+      "type": "Warning",
+      "title": "High Water Usage",
+      "message": "Usage exceeded 500 gallons in 1 hour.",
+      "timestamp": "3 minutes ago"
     },
     {
       "id": 5,
-      "type": "Critical",
-      "title": "Low reservoir level",
-      "message": "The storage tank is at 15% of its capacity.",
-      "timestamp": "2 minutes ago"
+      "type": "Warning",
+      "title": "Abnormal Temperature",
+      "message": "Sensor reports 35°C, outside safe range.",
+      "timestamp": "6 minutes ago"
+    },
+    {
+      "id": 6,
+      "type": "Warning",
+      "title": "Pressure Fluctuation",
+      "message": "Pressure dropped and recovered rapidly.",
+      "timestamp": "8 minutes ago"
+    },
+    {
+      "id": 7,
+      "type": "Warning",
+      "title": "Valve Delay",
+      "message": "Valve #4 took longer than expected to close.",
+      "timestamp": "12 minutes ago"
+    },
+    {
+      "id": 8,
+      "type": "Warning",
+      "title": "Unexpected Flow Pattern",
+      "message": "Flow rate inconsistent with schedule.",
+      "timestamp": "15 minutes ago"
+    },
+    {
+      "id": 9,
+      "type": "Warning",
+      "title": "Sensor Timeout",
+      "message": "Sensor #7 failed to report in last cycle.",
+      "timestamp": "18 minutes ago"
+    },
+    {
+      "id": 10,
+      "type": "Warning",
+      "title": "Usage Spike",
+      "message": "Water usage 40% above normal.",
+      "timestamp": "20 minutes ago"
+    },
+    {
+      "id": 11,
+      "type": "Info",
+      "title": "Scheduled Maintenance Due",
+      "message": "Filter replacement scheduled for tomorrow.",
+      "timestamp": "10 minutes ago"
+    },
+    {
+      "id": 12,
+      "type": "Info",
+      "title": "System Check Completed",
+      "message": "Routine diagnostics completed successfully.",
+      "timestamp": "15 minutes ago"
+    },
+    {
+      "id": 13,
+      "type": "Info",
+      "title": "New Device Connected",
+      "message": "Sensor #12 added to monitoring network.",
+      "timestamp": "18 minutes ago"
+    },
+    {
+      "id": 14,
+      "type": "Info",
+      "title": "Backup Activated",
+      "message": "Backup pump engaged during peak usage.",
+      "timestamp": "20 minutes ago"
+    },
+    {
+      "id": 15,
+      "type": "Info",
+      "title": "Calibration Reminder",
+      "message": "Next calibration due in 5 days.",
+      "timestamp": "25 minutes ago"
+    },
+    {
+      "id": 16,
+      "type": "Info",
+      "title": "Usage Report Generated",
+      "message": "Daily usage report is ready.",
+      "timestamp": "30 minutes ago"
+    },
+    {
+      "id": 17,
+      "type": "Info",
+      "title": "No Anomalies Detected",
+      "message": "System running within normal parameters.",
+      "timestamp": "35 minutes ago"
+    },
+    {
+      "id": 18,
+      "type": "Info",
+      "title": "Subscription Renewed",
+      "message": "Your plan has been renewed successfully.",
+      "timestamp": "40 minutes ago"
+    },
+    {
+      "id": 19,
+      "type": "Info",
+      "title": "New Alert Type Available",
+      "message": "You can now enable 'Flow Alerts'.",
+      "timestamp": "45 minutes ago"
+    },
+    {
+      "id": 20,
+      "type": "Info",
+      "title": "Support Ticket Closed",
+      "message": "Issue #102 resolved by technician.",
+      "timestamp": "50 minutes ago"
+    },
+    {
+      "id": 21,
+      "type": "Info",
+      "title": "Firmware Updated",
+      "message": "All devices updated to v2.3.1.",
+      "timestamp": "55 minutes ago"
+    },
+    {
+      "id": 22,
+      "type": "Info",
+      "title": "New User Added",
+      "message": "Alexander Anisimov added as Administrator.",
+      "timestamp": "1 hour ago"
     }
   ],
   "notificationSettings": {
