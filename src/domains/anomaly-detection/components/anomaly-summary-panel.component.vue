@@ -8,6 +8,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 const props = defineProps({ anomalies: Array })
 
 function mapType(type) {
@@ -16,10 +17,21 @@ function mapType(type) {
   return 'info'
 }
 
-const critical = props.anomalies.filter(a => mapType(a.type) === 'critical').length
-const warning = props.anomalies.filter(a => mapType(a.type) === 'warning').length
-const info = props.anomalies.filter(a => mapType(a.type) === 'info').length
-const resolved = props.anomalies.filter(a => a.resolved).length
+const critical = computed(() => {
+  return props.anomalies.filter(a => mapType(a.type) === 'critical').length
+})
+
+const warning = computed(() => {
+  return props.anomalies.filter(a => mapType(a.type) === 'warning').length
+})
+
+const info = computed(() => {
+  return props.anomalies.filter(a => mapType(a.type) === 'info').length
+})
+
+const resolved = computed(() => {
+  return props.anomalies.filter(a => a.resolved).length
+})
 
 </script>
 
