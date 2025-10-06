@@ -8,39 +8,68 @@
     <form @submit.prevent="handleSubmit" class="password-form">
       <div class="form-group">
         <label for="currentPassword">Contraseña Actual *</label>
-        <Password
-            id="currentPassword"
-            v-model="formData.currentPassword"
-            placeholder="Ingresa tu contraseña actual"
-            :feedback="false"
-            toggleMask
-            :class="{ 'p-invalid': errors.currentPassword }"
-        />
+        <div class="password-input-wrapper">
+          <InputText
+              id="currentPassword"
+              v-model="formData.currentPassword"
+              placeholder="Ingresa tu contraseña actual"
+              :type="showCurrentPassword ? 'text' : 'password'"
+              :class="{ 'p-invalid': errors.currentPassword }"
+              class="w-full"
+          />
+          <button
+              type="button"
+              class="password-toggle"
+              @click="showCurrentPassword = !showCurrentPassword"
+          >
+            <i :class="showCurrentPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+          </button>
+        </div>
         <small v-if="errors.currentPassword" class="error-message">{{ errors.currentPassword }}</small>
       </div>
 
       <div class="form-group">
         <label for="newPassword">Nueva Contraseña *</label>
-        <Password
-            id="newPassword"
-            v-model="formData.newPassword"
-            placeholder="Ingresa tu nueva contraseña"
-            toggleMask
-            :class="{ 'p-invalid': errors.newPassword }"
-        />
+        <div class="password-input-wrapper">
+          <InputText
+              id="newPassword"
+              v-model="formData.newPassword"
+              placeholder="Ingresa tu nueva contraseña"
+              :type="showNewPassword ? 'text' : 'password'"
+              :class="{ 'p-invalid': errors.newPassword }"
+              class="w-full"
+          />
+          <button
+              type="button"
+              class="password-toggle"
+              @click="showNewPassword = !showNewPassword"
+          >
+            <i :class="showNewPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+          </button>
+        </div>
         <small class="hint">Mínimo 8 caracteres, con mayúsculas, minúsculas y números</small>
+        <small v-if="errors.newPassword" class="error-message">{{ errors.newPassword }}</small>
       </div>
 
       <div class="form-group">
         <label for="confirmPassword">Confirmar Nueva Contraseña *</label>
-        <Password
-            id="confirmPassword"
-            v-model="formData.confirmPassword"
-            placeholder="Confirma tu nueva contraseña"
-            :feedback="false"
-            toggleMask
-            :class="{ 'p-invalid': errors.confirmPassword }"
-        />
+        <div class="password-input-wrapper">
+          <InputText
+              id="confirmPassword"
+              v-model="formData.confirmPassword"
+              placeholder="Confirma tu nueva contraseña"
+              :type="showConfirmPassword ? 'text' : 'password'"
+              :class="{ 'p-invalid': errors.confirmPassword }"
+              class="w-full"
+          />
+          <button
+              type="button"
+              class="password-toggle"
+              @click="showConfirmPassword = !showConfirmPassword"
+          >
+            <i :class="showConfirmPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+          </button>
+        </div>
         <small v-if="errors.confirmPassword" class="error-message">{{ errors.confirmPassword }}</small>
       </div>
 
@@ -63,7 +92,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Password from 'primevue/password'
+import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 import Message from 'primevue/message'
 
@@ -78,6 +107,11 @@ const formData = ref({
 const isLoading = ref(false)
 const errors = ref({})
 const successMessage = ref('')
+
+// Estados para mostrar/ocultar contraseñas
+const showCurrentPassword = ref(false)
+const showNewPassword = ref(false)
+const showConfirmPassword = ref(false)
 
 // Validaciones
 const validateForm = () => {
@@ -126,6 +160,11 @@ const handleSubmit = async () => {
       newPassword: '',
       confirmPassword: ''
     }
+
+    // Resetear visibilidad de contraseñas
+    showCurrentPassword.value = false
+    showNewPassword.value = false
+    showConfirmPassword.value = false
 
     // Auto-ocultar mensaje después de 5 segundos
     setTimeout(() => {
@@ -181,6 +220,37 @@ const handleSubmit = async () => {
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   display: block;
+}
+
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper :deep(.p-inputtext) {
+  width: 100%;
+  padding-right: 2.5rem; /* Espacio para el ícono */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  background: #f3f4f6;
 }
 
 .hint {
