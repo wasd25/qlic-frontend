@@ -1,12 +1,13 @@
-<script>
-import membershipPlan from "../components/membership-plan.component.vue";
+<script setup>
+import MembershipPlan from "../components/membership-plan.component.vue";
 </script>
 
 <template>
   <section class="subscription-page">
     <h1>Subscription</h1>
     <p>Check, manage and change your subscription profile</p>
-    <membershipPlan/>
+
+    <MembershipPlan />
   </section>
 </template>
 
