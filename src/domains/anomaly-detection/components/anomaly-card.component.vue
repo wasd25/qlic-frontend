@@ -1,21 +1,15 @@
 <template>
   <div :class="['anomaly-card', severityClass]">
-    <div class="icon">
-      <i :class="iconClass"></i>
-    </div>
     <div class="content">
-      <h4>{{ anomaly.type }}</h4>
-      <p>Profile ID: {{ anomaly.profile_id }}</p>
-      <p>{{ formatDate(anomaly.detected_anomaly) }}</p>
-      <p :class="anomaly.resolved ? 'resolved' : 'unresolved'">
-        {{ anomaly.resolved ? 'Resolved' : 'Unresolved' }}
-      </p>
+      <h4>{{ anomaly.type }}</h4> <p>Profile ID: {{ anomaly.profile_id }}</p> <p>{{ formatDate(anomaly.detected_anomaly) }}</p> <p :class="anomaly.resolved ? 'resolved' : 'unresolved'">
+      {{ anomaly.resolved ? 'Resolved' : 'Unresolved' }} </p>
     </div>
   </div>
 </template>
 
 <script setup>
-const props = defineProps({ anomalies: Array })
+
+const props = defineProps({ anomaly: Object })
 
 function formatDate(dateStr) {
   const d = new Date(dateStr)
@@ -27,6 +21,7 @@ function getSeverity(type) {
   if (type.includes('High') || type.includes('Unusual')) return 'warning'
   return 'info'
 }
+
 
 const severity = getSeverity(props.anomaly.type)
 
