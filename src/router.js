@@ -1,5 +1,6 @@
 // src/router.js
 import { createRouter, createWebHistory } from 'vue-router'
+import SubscriptionPage from "./domains/subscriptions/pages/subscription-page.component.vue"
 import PageNotFound from './shared/pages/page-not-found.component.vue'
 import BillingPage from "./domains/payments/pages/BillingPage.vue";
 import ProfilePage from "./domains/profile/pages/profile-page.component.vue"
@@ -16,7 +17,7 @@ const routes = [
     { path: '/usage-management', name: 'UsageManagement', component: { template: '<h1>Usage Management Placeholder</h1>' } },
     { path: '/payments', name: 'Payments', component: BillingPage},
     { path: '/anomaly-detection', name: 'AnomalyDetection', component: AnomalyPage },
-    { path: '/subscription', name: 'Subscription', component: { template: '<h1>Subscription Placeholder</h1>' } },
+    { path: '/subscription', name: 'Subscription', component: SubscriptionPage},
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: PageNotFound }
 ]
 

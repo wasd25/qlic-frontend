@@ -303,5 +303,25 @@
       "detected_anomaly": "2025-10-05T06:20:00Z",
       "resolved": false
     }
+  ],
+  "subscriptions": [
+    {
+      "id": 1,
+      "plan": "Basic Plan",
+      "price": "$19/month",
+      "description": "Access to standard features with limited support."
+    },
+    {
+      "id": 2,
+      "plan": "Pro Plan",
+      "price": "$49/month",
+      "description": "Includes premium tools and priority support."
+    },
+    {
+      "id": 3,
+      "plan": "Enterprise Plan",
+      "price": "Custom",
+      "description": "Full access and dedicated account management."
+    }
   ]
 }
