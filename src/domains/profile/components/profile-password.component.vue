@@ -52,6 +52,11 @@
             severity="warning"
         />
       </div>
+
+      <!-- Mensaje de éxito -->
+      <Message v-if="successMessage" severity="success" :closable="true" @close="successMessage = ''">
+        {{ successMessage }}
+      </Message>
     </form>
   </div>
 </template>
@@ -60,6 +65,7 @@
 import { ref } from 'vue'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
+import Message from 'primevue/message'
 
 const emit = defineEmits(['change-password'])
 
@@ -71,6 +77,7 @@ const formData = ref({
 })
 const isLoading = ref(false)
 const errors = ref({})
+const successMessage = ref('')
 
 // Validaciones
 const validateForm = () => {
@@ -103,10 +110,15 @@ const handleSubmit = async () => {
 
   try {
     isLoading.value = true
+    errors.value = {} // Limpiar errores anteriores
+
     await emit('change-password', {
       currentPassword: formData.value.currentPassword,
       newPassword: formData.value.newPassword
     })
+
+    // Éxito
+    successMessage.value = '¡Contraseña cambiada exitosamente!'
 
     // Limpiar formulario después de éxito
     formData.value = {
@@ -115,12 +127,18 @@ const handleSubmit = async () => {
       confirmPassword: ''
     }
 
-    // Aquí podrías mostrar mensaje de éxito
-    console.log('Contraseña cambiada exitosamente')
+    // Auto-ocultar mensaje después de 5 segundos
+    setTimeout(() => {
+      successMessage.value = ''
+    }, 5000)
 
   } catch (error) {
     console.error('Error changing password:', error)
-    errors.value.currentPassword = 'Contraseña actual incorrecta'
+    if (error.message.includes('incorrecta')) {
+      errors.value.currentPassword = 'La contraseña actual es incorrecta'
+    } else {
+      errors.value.currentPassword = 'Error al cambiar la contraseña'
+    }
   } finally {
     isLoading.value = false
   }
