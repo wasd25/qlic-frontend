@@ -6,6 +6,17 @@
     </div>
 
     <form @submit.prevent="handleSubmit" class="password-form">
+      <!-- Mensajes arriba de todo -->
+      <div class="messages-container">
+        <Message v-if="errorMessage" severity="error" :closable="true" @close="errorMessage = ''">
+          {{ errorMessage }}
+        </Message>
+
+        <Message v-if="successMessage" severity="success" :closable="true" @close="successMessage = ''">
+          {{ successMessage }}
+        </Message>
+      </div>
+
       <div class="form-group">
         <label for="currentPassword">Contraseña Actual *</label>
         <div class="password-input-wrapper">
@@ -81,11 +92,6 @@
             severity="warning"
         />
       </div>
-
-      <!-- Mensaje de éxito -->
-      <Message v-if="successMessage" severity="success" :closable="true" @close="successMessage = ''">
-        {{ successMessage }}
-      </Message>
     </form>
   </div>
 </template>
@@ -107,6 +113,7 @@ const formData = ref({
 const isLoading = ref(false)
 const errors = ref({})
 const successMessage = ref('')
+const errorMessage = ref('')
 
 // Estados para mostrar/ocultar contraseñas
 const showCurrentPassword = ref(false)
@@ -116,6 +123,7 @@ const showConfirmPassword = ref(false)
 // Validaciones
 const validateForm = () => {
   errors.value = {}
+  errorMessage.value = ''
 
   if (!formData.value.currentPassword) {
     errors.value.currentPassword = 'La contraseña actual es requerida'
@@ -145,13 +153,15 @@ const handleSubmit = async () => {
   try {
     isLoading.value = true
     errors.value = {} // Limpiar errores anteriores
+    errorMessage.value = '' // Limpiar mensaje de error
+    successMessage.value = '' // Limpiar mensaje de éxito previo
 
     await emit('change-password', {
       currentPassword: formData.value.currentPassword,
       newPassword: formData.value.newPassword
     })
 
-    // Éxito
+    // Éxito - solo si llegamos aquí sin errores (el emit no lanzó excepción)
     successMessage.value = '¡Contraseña cambiada exitosamente!'
 
     // Limpiar formulario después de éxito
@@ -173,11 +183,20 @@ const handleSubmit = async () => {
 
   } catch (error) {
     console.error('Error changing password:', error)
+
+    // Mostrar mensaje de error específico
     if (error.message.includes('incorrecta')) {
-      errors.value.currentPassword = 'La contraseña actual es incorrecta'
+      errorMessage.value = 'La contraseña actual es incorrecta. Por favor, verifica e intenta nuevamente.'
+      errors.value.currentPassword = 'Contraseña incorrecta'
     } else {
-      errors.value.currentPassword = 'Error al cambiar la contraseña'
+      errorMessage.value = 'Error al cambiar la contraseña. Por favor, intenta nuevamente.'
     }
+
+    // Auto-ocultar mensaje de error después de 5 segundos
+    setTimeout(() => {
+      errorMessage.value = ''
+      errors.value.currentPassword = ''
+    }, 5000)
   } finally {
     isLoading.value = false
   }
@@ -208,6 +227,10 @@ const handleSubmit = async () => {
 
 .password-form {
   width: 100%;
+}
+
+.messages-container {
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
