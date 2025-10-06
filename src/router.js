@@ -5,6 +5,7 @@ import BillingPage from "./domains/payments/pages/BillingPage.vue";
 import ProfilePage from "./domains/profile/pages/profile-page.component.vue"
 import ReportPage from "./domains/reports/pages/reports-page.component.vue"
 import AlertPage from "./domains/alerts/pages/alerts-page.component.vue"
+import AnomalyPage from './domains/anomaly-detection/pages/anomaly-page.component.vue'
 
 const routes = [
     { path: '/', redirect: '/dashboard' },
@@ -13,8 +14,8 @@ const routes = [
     { path: '/profile', name: 'Profile', component: ProfilePage },
     { path: '/alerts', name: 'Alerts', component: AlertPage },
     { path: '/usage-management', name: 'UsageManagement', component: { template: '<h1>Usage Management Placeholder</h1>' } },
-    { path: '/anomaly-detection', name: 'AnomalyDetection', component: { template: '<h1>Anomaly Detection Placeholder</h1>' } },
     { path: '/payments', name: 'Payments', component: BillingPage},
+    { path: '/anomaly-detection', name: 'AnomalyDetection', component: AnomalyPage },
     { path: '/subscription', name: 'Subscription', component: { template: '<h1>Subscription Placeholder</h1>' } },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: PageNotFound }
 ]

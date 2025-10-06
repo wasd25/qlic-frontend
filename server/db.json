@@ -238,5 +238,70 @@
       "lastUpdate": "2025-10-05T03:18:30.923Z",
       "id": 1
     }
+  ],
+  "anomalies": [
+    {
+      "id": 1,
+      "profile_id": 1,
+      "type": "Leak detected",
+      "detected_anomaly": "2025-10-03T10:25:00Z",
+      "resolved": false
+    },
+    {
+      "id": 2,
+      "profile_id": 2,
+      "type": "High temperature",
+      "detected_anomaly": "2025-10-02T21:40:00Z",
+      "resolved": true
+    },
+    {
+      "id": 3,
+      "profile_id": 3,
+      "type": "Unusual consumption",
+      "detected_anomaly": "2025-10-02T09:15:00Z",
+      "resolved": false
+    },
+    {
+      "id": 4,
+      "profile_id": 4,
+      "type": "Low reservoir level",
+      "detected_anomaly": "2025-09-30T14:00:00Z",
+      "resolved": true
+    },
+    {
+      "id": 5,
+      "profile_id": 5,
+      "type": "Sensor offline",
+      "detected_anomaly": "2025-09-29T07:50:00Z",
+      "resolved": false
+    },
+    {
+      "id": 6,
+      "profile_id": 6,
+      "type": "High pressure",
+      "detected_anomaly": "2025-10-01T11:30:00Z",
+      "resolved": true
+    },
+    {
+      "id": 7,
+      "profile_id": 7,
+      "type": "Leak detected",
+      "detected_anomaly": "2025-10-04T08:10:00Z",
+      "resolved": false
+    },
+    {
+      "id": 8,
+      "profile_id": 8,
+      "type": "Unusual consumption",
+      "detected_anomaly": "2025-10-04T16:45:00Z",
+      "resolved": true
+    },
+    {
+      "id": 9,
+      "profile_id": 9,
+      "type": "Low reservoir level",
+      "detected_anomaly": "2025-10-05T06:20:00Z",
+      "resolved": false
+    }
   ]
 }
