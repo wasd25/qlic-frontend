@@ -156,7 +156,10 @@
     }
   ],
   "notificationSettings": {
-    "types": ["Critical Alerts", "Usage Warnings", "Maintenance Reminders"],
-    "methods": ["Push Notifications", "Email", "SMS"]
+    "types": [
+      "Critical Alerts",
+      "Usage Warnings",
+      "Maintenance Reminders"
+    ]
   }
 }
