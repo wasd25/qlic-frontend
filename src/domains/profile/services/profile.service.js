@@ -9,15 +9,24 @@ export class ProfileService {
      */
     async getProfile() {
         try {
+            console.log('🔄 GET Profile - Fetching from:', `${this.baseURL}/profile`);
             const response = await fetch(`${this.baseURL}/profile`);
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
 
-            return await response.json();
+            const data = await response.json();
+            console.log('✅ GET Profile - Raw data:', data);
+
+            // JSON Server devuelve un array, tomamos el primer elemento
+            if (Array.isArray(data)) {
+                return data[0]; // Retorna el primer perfil del array
+            }
+
+            return data;
         } catch (error) {
-            console.error('Error fetching profile:', error);
+            console.error('❌ GET Profile - Error:', error);
             throw error;
         }
     }
@@ -29,6 +38,7 @@ export class ProfileService {
      */
     async updateProfile(profileData) {
         try {
+            console.log('🔄 UPDATE Profile - Sending to:', `${this.baseURL}/profile/1`, profileData);
             const response = await fetch(`${this.baseURL}/profile/1`, {
                 method: 'PUT',
                 headers: {
@@ -41,9 +51,11 @@ export class ProfileService {
                 throw new Error(`Error: ${response.status}`);
             }
 
-            return await response.json();
+            const data = await response.json();
+            console.log('✅ UPDATE Profile - Success:', data);
+            return data;
         } catch (error) {
-            console.error('Error updating profile:', error);
+            console.error('❌ UPDATE Profile - Error:', error);
             throw error;
         }
     }
@@ -81,22 +93,45 @@ export class ProfileService {
      */
     async changePassword(passwordData) {
         try {
-            // En un backend real, esto iría a un endpoint específico
-            const response = await fetch(`${this.baseURL}/profile/1/password`, {
+            console.log('🔄 CHANGE PASSWORD - Sending:', passwordData);
+
+            // Primero obtenemos el perfil actual para verificar la contraseña actual
+            const currentProfile = await this.getProfile();
+            console.log('🔄 CHANGE PASSWORD - Current profile:', currentProfile);
+
+            // Verificar que la contraseña actual sea correcta
+            if (currentProfile.password !== passwordData.currentPassword) {
+                console.log('❌ CHANGE PASSWORD - Password mismatch:', {
+                    stored: currentProfile.password,
+                    provided: passwordData.currentPassword
+                });
+                throw new Error('La contraseña actual es incorrecta');
+            }
+
+            // Actualizar la contraseña
+            const updatedProfile = {
+                ...currentProfile,
+                password: passwordData.newPassword
+            };
+
+            // Guardar en JSON Server
+            const response = await fetch(`${this.baseURL}/profile/1`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(passwordData)
+                body: JSON.stringify(updatedProfile)
             });
 
             if (!response.ok) {
                 throw new Error(`Error: ${response.status}`);
             }
 
-            return await response.json();
+            const data = await response.json();
+            console.log('✅ CHANGE PASSWORD - Success');
+            return data;
         } catch (error) {
-            console.error('Error changing password:', error);
+            console.error('❌ CHANGE PASSWORD - Error:', error);
             throw error;
         }
     }
