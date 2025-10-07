@@ -12,7 +12,9 @@
 
       <!-- Paneles principales -->
       <div class="grid panels">
-        <report-usage-chart :data="summary.usageTrends" />
+        <report-usage-chart ref="usageChartComponent" :data="summary.usageTrends" />
+
+
         <report-cost-breakdown :data="summary.costBreakdown" />
       </div>
 
@@ -23,6 +25,9 @@
       </div>
     </div>
   </section>
+
+  <Button label="Descargar PDF" @click="handleDownload" />
+
 </template>
 
 <script setup>
@@ -34,6 +39,17 @@ import ReportCostBreakdown from '../components/report-cost-breakdown.component.v
 import ReportEfficiencyMetrics from '../components/report-efficiency-metrics.component.vue'
 import ReportHistoryList from '../components/report-history-list.component.vue'
 import { getReportSummary } from '../services/report.service.js'
+import { exportReportToPDF } from '../services/pdf.service.js'
+
+
+const usageChartComponent = ref(null)
+
+function handleDownload() {
+  const type = currentFilters.value.type || 'Usage Analytics'
+  const canvas = usageChartComponent.value?.getCanvas()
+  exportReportToPDF(type, summary.value, canvas)
+}
+
 
 const summary = ref({
   usageTrends: [],
