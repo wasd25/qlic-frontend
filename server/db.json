@@ -249,9 +249,7 @@
   ],
   "notificationSettings": {
     "types": [
-      "Critical Alerts",
-      "Usage Warnings",
-      "Maintenance Reminders"
+      "Critical Alerts"
     ]
   },
   "payments": [
