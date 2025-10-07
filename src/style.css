@@ -1,17 +1,71 @@
 /* style.css */
 
-/* Variables globales */
+/* 🌐 Variables globales */
 :root {
-  --app-bg: #f8f9fa; /* puedes cambiar el color de fondo */
-  --primary-color: #3B82F6; /* Azul Tailwind */
-  --sidebar-bg: #1F2937;    /* Gris oscuro */
-  --text-color: #F9FAFB;    /* Gris muy claro */
-  --body-bg: #F3F4F6;       /* Fondo gris claro */
+    --app-bg: #f8f9fa;
+    --primary-color: #3B82F6;
+    --sidebar-bg: #1F2937;
+    --text-color: #F9FAFB;
+    --body-bg: #F3F4F6;
 }
 
 body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--body-bg);
-  color: #111827;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--body-bg);
+    color: #111827;
+}
+
+/* 🔧 Panel flotante del Select */
+.p-select-panel,
+.p-select-items {
+    background-color: #ffffff !important; /* fondo blanco suave */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important; /* sombra ligera */
+    border-radius: 8px !important;
+    border: 1px solid #e5e7eb !important; /* borde sutil */
+}
+
+/* 🔧 Ítems del Select */
+.p-select-item {
+    background-color: transparent !important;
+    color: #374151 !important;
+    border-radius: 6px !important;
+    margin: 0.15rem 0 !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+    border: none !important;
+    padding: 0.4rem 0.75rem !important; /* menos alto y menos ancho */
+    font-size: 0.85rem !important;
+}
+
+/* 🔧 Ítem seleccionado */
+.p-select-item.p-highlight {
+    background-color: transparent !important;
+    color: #1e3a8a !important;
+    font-weight: 600 !important;
+    box-shadow: none !important;
+}
+
+/* 🔧 Hover visual */
+.p-select-item:hover {
+    background-color: #eef2ff !important;
+    color: #1e3a8a !important;
+}
+
+/* 🔧 Elimina fondo y bordes del contenedor principal */
+.p-select {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    height: 2rem !important;
+    line-height: 1.2rem !important;
+    font-size: 0.85rem !important;
+    padding-left: 0.4rem !important; /* antes era 0.5rem */
+    padding-right: 0.4rem !important;
+    border-radius: 6px !important;
+}
+
+/* 🔧 Alinea el texto dentro del ítem seleccionado */
+.p-select .p-select-label {
+    padding-left: 0 !important;
 }
