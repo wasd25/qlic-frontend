@@ -3,11 +3,12 @@
     <div class="filter-box">
       <label>Time Period</label>
       <div class="input-box">
-        <Dropdown
+        <Select
             v-model="filters.period"
             :options="periods"
             placeholder="Select"
-            class="custom-dropdown"
+
+            class="select-full"
         />
       </div>
     </div>
@@ -15,11 +16,11 @@
     <div class="filter-box">
       <label>Report Type</label>
       <div class="input-box">
-        <Dropdown
+        <Select
             v-model="filters.type"
             :options="types"
             placeholder="Select"
-            class="custom-dropdown"
+            class="select-full"
         />
       </div>
     </div>
@@ -27,11 +28,11 @@
     <div class="filter-box">
       <label>Location</label>
       <div class="input-box">
-        <Dropdown
+        <Select
             v-model="filters.location"
             :options="locations"
             placeholder="Select"
-            class="custom-dropdown"
+            class="select-full"
         />
       </div>
     </div>
@@ -42,8 +43,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import Dropdown from 'primevue/dropdown'
 import Button from 'primevue/button'
+import Select from 'primevue/select'
 
 const emit = defineEmits(['generate'])
 
@@ -56,12 +57,10 @@ const filters = ref({
 const periods = ['Last 7 Days', 'Last 30 Days', 'This Year']
 const types = ['Usage Analytics', 'Cost Analysis', 'Efficiency']
 const locations = ['All Locations', 'Zone A', 'Zone B']
-
 function emitFilters() {
   emit('generate', filters.value)
 }
 </script>
-
 
 <style scoped>
 .report-filter {
@@ -97,6 +96,10 @@ function emitFilters() {
   padding: 0.5rem;
 }
 
+.select-full {
+  width: 100%;
+}
+
 .generate-btn {
   background-color: #3B82F6;
   color: white;
@@ -112,30 +115,12 @@ function emitFilters() {
   background-color: #2563eb;
 }
 
-.dropdown {
-  width: 100%;
+/* 🔧 Elimina fondo del ítem seleccionado */
+::v-deep(.p-select-item.p-highlight),
+::v-deep(.p-select-item:hover),
+::v-deep(.p-select-panel),
+::v-deep(.p-select-items) {
+  background-color: transparent;
+  box-shadow: none;
 }
-
-.full-width .p-dropdown {
-  width: 100%;
-}
-
-.full-width .p-dropdown-panel {
-  z-index: 9999;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.full-width .p-dropdown-item {
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  color: #374151;
-}
-
-.full-width .p-dropdown-item:hover {
-  background-color: #f3f4f6;
-  color: #111827;
-}
-
 </style>
