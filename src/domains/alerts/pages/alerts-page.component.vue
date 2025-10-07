@@ -5,12 +5,19 @@
     <alert-summary-panel :summary="summary" />
 
     <div class="alerts-body">
-      <!-- Columna izquierda -->
+      <!-- Lista de alertas -->
       <div class="left-column">
         <active-alerts-list :alerts="filteredAlerts" />
+        <div class="alert-cards">
+          <alert-card
+              v-for="a in filteredAlerts.slice(0, 3)"
+              :key="a.id"
+              :alert="a"
+          />
+        </div>
       </div>
 
-      <!-- Columna derecha -->
+      <!-- Panel de configuración -->
       <div class="right-column">
         <notification-settings
             :settings="settings"
@@ -27,6 +34,7 @@ import { fetchAlerts, fetchSettings, saveNotificationSettings } from '../service
 import AlertSummaryPanel from '../components/alert-summary-panel.component.vue'
 import ActiveAlertsList from '../components/active-alerts-list.component.vue'
 import NotificationSettings from '../components/notification-settings.component.vue'
+import AlertCard from '../components/alert-card.component.vue'
 
 const alerts = ref([])
 const settings = ref({})
