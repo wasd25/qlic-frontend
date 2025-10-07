@@ -2,7 +2,8 @@
   <div class="panel">
     <h3>Cost Breakdown</h3>
     <div v-if="data.length">
-      <Chart type="pie" :data="chartData" :options="chartOptions" />
+      <Chart id="costChart" type="pie" :data="chartData" :options="chartOptions" />
+
     </div>
     <div v-else class="empty">No data available</div>
   </div>
