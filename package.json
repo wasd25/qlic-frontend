@@ -10,6 +10,9 @@
     "start-api": "json-server --watch server/db.json --port 3000"
   },
   "dependencies": {
+    "@primeuix/themes": "^1.2.5",
+    "@primevue/core": "^4.4.0",
+    "@primevue/themes": "^4.4.0",
     "axios": "^1.12.2",
     "chart.js": "^4.5.0",
     "jspdf": "^3.0.3",
