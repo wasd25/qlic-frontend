@@ -7,11 +7,11 @@ import ProfilePage from "./domains/profile/pages/profile-page.component.vue"
 import ReportPage from "./domains/reports/pages/reports-page.component.vue"
 import AlertPage from "./domains/alerts/pages/alerts-page.component.vue"
 import AnomalyPage from './domains/anomaly-detection/pages/anomaly-page.component.vue'
-import DashboardPage from "./domains/dashboard/pages/dashboard.component.vue"
+import DashboardPage from '@/domains/dashboard/pages/dashboard.component.vue'
 
 const routes = [
     { path: '/', redirect: '/dashboard' },
-    { path: '/dashboard', name: 'Dashboard', component: { template: '<h1>Dashboard Placeholder</h1>' } },
+    { path: '/dashboard', name: 'dashboard', component: DashboardPage },
     { path: '/reports', name: 'Reports', component: ReportPage },
     { path: '/profile', name: 'Profile', component: ProfilePage },
     { path: '/alerts', name: 'Alerts', component: AlertPage },
