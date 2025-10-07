@@ -2,7 +2,7 @@
   <div class="panel">
     <h3>Water Usage Trends</h3>
     <div v-if="data.length">
-      <Chart type="bar" :data="chartData" />
+      <Chart ref="usageChartRef" type="bar" :data="chartData" :options="chartOptions" :plugins="[canvasBackgroundPlugin]" />
     </div>
     <div v-else class="empty">No data available</div>
 
@@ -11,12 +11,17 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import {computed} from 'vue'
 import Chart from 'primevue/chart'
+import {ref, defineExpose} from 'vue'
 
+const usageChartRef = ref(null)
 
-const props = defineProps({ data: Array })
+defineExpose({
+  getCanvas: () => usageChartRef.value?.$el?.querySelector('canvas')
+})
 
+const props = defineProps({data: Array})
 
 
 const chartData = computed(() => ({
@@ -31,8 +36,23 @@ const chartData = computed(() => ({
   ]
 }))
 
+const canvasBackgroundPlugin = {
+  id: 'custom_canvas_background_color',
+  beforeDraw: (chart) => {
+    const {ctx} = chart
+    ctx.save()
+    ctx.globalCompositeOperation = 'destination-over'
+    ctx.fillStyle = 'white'
+    ctx.fillRect(0, 0, chart.width, chart.height)
+    ctx.restore()
+  }
+}
+
+
 const chartOptions = {
+  animation: false,
   plugins: {
+    custom_canvas_background_color: {}, // activa el plugin por ID
     legend: {
       labels: {
         color: '#374151',
@@ -44,15 +64,17 @@ const chartOptions = {
   },
   scales: {
     x: {
-      ticks: { color: '#6b7280' },
-      grid: { color: '#f3f4f6' }
+      ticks: {color: '#6b7280'},
+      grid: {color: '#f3f4f6'}
     },
     y: {
-      ticks: { color: '#6b7280' },
-      grid: { color: '#f3f4f6' }
+      ticks: {color: '#6b7280'},
+      grid: {color: '#f3f4f6'}
     }
   }
 }
+
+
 </script>
 
 <style scoped>
