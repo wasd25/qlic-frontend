@@ -1,38 +1,39 @@
+import axios from 'axios'
+
+const BASE_URL = 'http://localhost:3000'
+
+export async function fetchReports() {
+    return axios.get(`${BASE_URL}/reports`)
+}
+
+export async function fetchReportById(id) {
+    return axios.get(`${BASE_URL}/reports/${id}`)
+}
+
+export async function createReport(reportData) {
+    return axios.post(`${BASE_URL}/reports`, reportData)
+}
+
+export async function updateReport(id, data) {
+    return axios.patch(`${BASE_URL}/reports/${id}`, data)
+}
+
 export async function getReportSummary(filters) {
-    const { type } = filters
+    const params = new URLSearchParams(filters).toString()
+    const response = await axios.get(`${BASE_URL}/reportSummaries?${params}`)
+    const summaries = response.data
 
-    const usageTrends = type === 'Usage Analytics'
-        ? [
-            { day: 'Mon', liters: 120 },
-            { day: 'Tue', liters: 150 },
-            { day: 'Wed', liters: 90 },
-            { day: 'Thu', liters: 180 },
-            { day: 'Fri', liters: 130 },
-            { day: 'Sat', liters: 100 },
-            { day: 'Sun', liters: 160 }
-        ]
-        : []
-
-    const costBreakdown = type === 'Cost Analysis'
-        ? [
-            { category: 'Treatment', cost: 45 },
-            { category: 'Distribution', cost: 30 },
-            { category: 'Maintenance', cost: 20 },
-            { category: 'Monitoring', cost: 15 }
-        ]
-        : []
-
-    const efficiencyMetrics = type === 'Efficiency'
-        ? {
-            score: 87,
-            waterSaved: 2340,
-            costSaved: 156
-        }
-        : {}
-
-    return {
-        usageTrends,
-        costBreakdown,
-        efficiencyMetrics
+    const summary = {
+        usageTrends: [],
+        costBreakdown: [],
+        efficiencyMetrics: {}
     }
+
+    for (const item of summaries) {
+        if (item.usageTrends) summary.usageTrends = item.usageTrends
+        if (item.costBreakdown) summary.costBreakdown = item.costBreakdown
+        if (item.efficiencyMetrics) summary.efficiencyMetrics = item.efficiencyMetrics
+    }
+
+    return summary
 }
