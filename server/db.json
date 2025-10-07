@@ -38,6 +38,59 @@
       "downloaded": true
     }
   ],
+  "reportSummaries": [
+    {
+      "id": 1,
+      "type": "Usage Analytics",
+      "location": "All Locations",
+      "period": "Last 7 Days",
+      "usageTrends": [
+        {
+          "day": "Mon",
+          "liters": 120
+        },
+        {
+          "day": "Tue",
+          "liters": 150
+        },
+        {
+          "day": "Wed",
+          "liters": 130
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "Cost Analysis",
+      "location": "All Locations",
+      "period": "Last 7 Days",
+      "costBreakdown": [
+        {
+          "category": "Pumping",
+          "cost": 400
+        },
+        {
+          "category": "Treatment",
+          "cost": 300
+        },
+        {
+          "category": "Distribution",
+          "cost": 500
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "Efficiency",
+      "location": "All Locations",
+      "period": "Last 7 Days",
+      "efficiencyMetrics": {
+        "score": 87,
+        "waterSaved": 2340,
+        "costSaved": 156
+      }
+    }
+  ],
   "alerts": [
     {
       "id": "1",
