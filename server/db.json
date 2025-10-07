@@ -40,154 +40,154 @@
   ],
   "alerts": [
     {
-      "id": 1,
+      "id": "1",
       "type": "Critical",
       "title": "Water Pressure Critical",
       "message": "Main tank pressure dropped below 15 PSI.",
       "timestamp": "2 minutes ago"
     },
     {
-      "id": 2,
+      "id": "2",
       "type": "Critical",
       "title": "Pump Failure Detected",
       "message": "Pump #2 stopped responding.",
       "timestamp": "5 minutes ago"
     },
     {
-      "id": 3,
+      "id": "3",
       "type": "Critical",
       "title": "Low Reservoir Level",
       "message": "Storage tank is at 15% capacity.",
       "timestamp": "10 minutes ago"
     },
     {
-      "id": 4,
+      "id": "4",
       "type": "Warning",
       "title": "High Water Usage",
       "message": "Usage exceeded 500 gallons in 1 hour.",
       "timestamp": "3 minutes ago"
     },
     {
-      "id": 5,
+      "id": "5",
       "type": "Warning",
       "title": "Abnormal Temperature",
       "message": "Sensor reports 35°C, outside safe range.",
       "timestamp": "6 minutes ago"
     },
     {
-      "id": 6,
+      "id": "6",
       "type": "Warning",
       "title": "Pressure Fluctuation",
       "message": "Pressure dropped and recovered rapidly.",
       "timestamp": "8 minutes ago"
     },
     {
-      "id": 7,
+      "id": "7",
       "type": "Warning",
       "title": "Valve Delay",
       "message": "Valve #4 took longer than expected to close.",
       "timestamp": "12 minutes ago"
     },
     {
-      "id": 8,
+      "id": "8",
       "type": "Warning",
       "title": "Unexpected Flow Pattern",
       "message": "Flow rate inconsistent with schedule.",
       "timestamp": "15 minutes ago"
     },
     {
-      "id": 9,
+      "id": "9",
       "type": "Warning",
       "title": "Sensor Timeout",
       "message": "Sensor #7 failed to report in last cycle.",
       "timestamp": "18 minutes ago"
     },
     {
-      "id": 10,
+      "id": "10",
       "type": "Warning",
       "title": "Usage Spike",
       "message": "Water usage 40% above normal.",
       "timestamp": "20 minutes ago"
     },
     {
-      "id": 11,
+      "id": "11",
       "type": "Info",
       "title": "Scheduled Maintenance Due",
       "message": "Filter replacement scheduled for tomorrow.",
       "timestamp": "10 minutes ago"
     },
     {
-      "id": 12,
+      "id": "12",
       "type": "Info",
       "title": "System Check Completed",
       "message": "Routine diagnostics completed successfully.",
       "timestamp": "15 minutes ago"
     },
     {
-      "id": 13,
+      "id": "13",
       "type": "Info",
       "title": "New Device Connected",
       "message": "Sensor #12 added to monitoring network.",
       "timestamp": "18 minutes ago"
     },
     {
-      "id": 14,
+      "id": "14",
       "type": "Info",
       "title": "Backup Activated",
       "message": "Backup pump engaged during peak usage.",
       "timestamp": "20 minutes ago"
     },
     {
-      "id": 15,
+      "id": "15",
       "type": "Info",
       "title": "Calibration Reminder",
       "message": "Next calibration due in 5 days.",
       "timestamp": "25 minutes ago"
     },
     {
-      "id": 16,
+      "id": "16",
       "type": "Info",
       "title": "Usage Report Generated",
       "message": "Daily usage report is ready.",
       "timestamp": "30 minutes ago"
     },
     {
-      "id": 17,
+      "id": "17",
       "type": "Info",
       "title": "No Anomalies Detected",
       "message": "System running within normal parameters.",
       "timestamp": "35 minutes ago"
     },
     {
-      "id": 18,
+      "id": "18",
       "type": "Info",
       "title": "Subscription Renewed",
       "message": "Your plan has been renewed successfully.",
       "timestamp": "40 minutes ago"
     },
     {
-      "id": 19,
+      "id": "19",
       "type": "Info",
       "title": "New Alert Type Available",
       "message": "You can now enable 'Flow Alerts'.",
       "timestamp": "45 minutes ago"
     },
     {
-      "id": 20,
+      "id": "20",
       "type": "Info",
       "title": "Support Ticket Closed",
       "message": "Issue #102 resolved by technician.",
       "timestamp": "50 minutes ago"
     },
     {
-      "id": 21,
+      "id": "21",
       "type": "Info",
       "title": "Firmware Updated",
       "message": "All devices updated to v2.3.1.",
       "timestamp": "55 minutes ago"
     },
     {
-      "id": 22,
+      "id": "22",
       "type": "Info",
       "title": "New User Added",
       "message": "Alexander Anisimov added as Administrator.",
@@ -196,27 +196,26 @@
   ],
   "notificationSettings": {
     "types": [
-      "Critical Alerts",
-      "Usage Warnings"
+      "Critical Alerts"
     ]
   },
   "payments": [
     {
-      "id": 1,
+      "id": "1",
       "amount": 120.5,
       "date": "2025-10-01",
       "status": "completed",
       "methodId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "amount": 115.75,
       "date": "2025-09-01",
       "status": "completed",
       "methodId": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "amount": 130.25,
       "date": "2025-08-01",
       "status": "completed",
@@ -228,7 +227,7 @@
       "type": "Visa",
       "details": "093840923 ",
       "isDefault": true,
-      "id": 1
+      "id": "1"
     }
   ],
   "billingSettings": [
@@ -238,68 +237,68 @@
       "billingCycle": "yearly",
       "preferredBillingDay": 12,
       "lastUpdate": "2025-10-05T03:18:30.923Z",
-      "id": 1
+      "id": "1"
     }
   ],
   "anomalies": [
     {
-      "id": 1,
+      "id": "1",
       "profile_id": 1,
       "type": "Leak detected",
       "detected_anomaly": "2025-10-03T10:25:00Z",
       "resolved": false
     },
     {
-      "id": 2,
+      "id": "2",
       "profile_id": 2,
       "type": "High temperature",
       "detected_anomaly": "2025-10-02T21:40:00Z",
       "resolved": true
     },
     {
-      "id": 3,
+      "id": "3",
       "profile_id": 3,
       "type": "Unusual consumption",
       "detected_anomaly": "2025-10-02T09:15:00Z",
       "resolved": false
     },
     {
-      "id": 4,
+      "id": "4",
       "profile_id": 4,
       "type": "Low reservoir level",
       "detected_anomaly": "2025-09-30T14:00:00Z",
       "resolved": true
     },
     {
-      "id": 5,
+      "id": "5",
       "profile_id": 5,
       "type": "Sensor offline",
       "detected_anomaly": "2025-09-29T07:50:00Z",
       "resolved": false
     },
     {
-      "id": 6,
+      "id": "6",
       "profile_id": 6,
       "type": "High pressure",
       "detected_anomaly": "2025-10-01T11:30:00Z",
       "resolved": true
     },
     {
-      "id": 7,
+      "id": "7",
       "profile_id": 7,
       "type": "Leak detected",
       "detected_anomaly": "2025-10-04T08:10:00Z",
       "resolved": false
     },
     {
-      "id": 8,
+      "id": "8",
       "profile_id": 8,
       "type": "Unusual consumption",
       "detected_anomaly": "2025-10-04T16:45:00Z",
       "resolved": true
     },
     {
-      "id": 9,
+      "id": "9",
       "profile_id": 9,
       "type": "Low reservoir level",
       "detected_anomaly": "2025-10-05T06:20:00Z",
@@ -308,19 +307,19 @@
   ],
   "subscriptions": [
     {
-      "id": 1,
+      "id": "1",
       "plan": "Basic Plan",
       "price": "$19/month",
       "description": "Access to standard features with limited support."
     },
     {
-      "id": 2,
+      "id": "2",
       "plan": "Pro Plan",
       "price": "$49/month",
       "description": "Includes premium tools and priority support."
     },
     {
-      "id": 3,
+      "id": "3",
       "plan": "Enterprise Plan",
       "price": "Custom",
       "description": "Full access and dedicated account management."
