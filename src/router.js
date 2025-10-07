@@ -7,6 +7,7 @@ import ProfilePage from "./domains/profile/pages/profile-page.component.vue"
 import ReportPage from "./domains/reports/pages/reports-page.component.vue"
 import AlertPage from "./domains/alerts/pages/alerts-page.component.vue"
 import AnomalyPage from './domains/anomaly-detection/pages/anomaly-page.component.vue'
+import DashboardPage from "./domains/dashboard/pages/dashboard.component.vue"
 
 const routes = [
     { path: '/', redirect: '/dashboard' },
