@@ -18,8 +18,10 @@
 
 <script setup>
 import axios from 'axios'
-import { getReportSummary } from '@/domains/reports/services/report.service'
+import { fetchReports } from '@/domains/reports/services/report.service.js'
 import { exportReportToPDF } from '@/domains/reports/services/pdf.service'
+import { getReportSummary } from '@/domains/reports/services/report.service.js'
+
 
 defineProps({ reports: Array })
 
