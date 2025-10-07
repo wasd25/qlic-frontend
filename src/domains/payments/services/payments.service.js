@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000" // change later to .env
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default {
     async getPayments() {

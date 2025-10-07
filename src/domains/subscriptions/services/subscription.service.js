@@ -1,25 +1,26 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/subscriptions"; //change to .env when hosting.
+// Base URL from .env (with a fallback for local development)
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const subscriptionService = {
     async getSubscriptions() {
         try {
-            const response = await axios.get(API_URL);
-            console.log("Subscriptions fetched:", response.data); // Depuración
+            const response = await axios.get(`${API_URL}/subscriptions`);
+            console.log(" Subscriptions fetched:", response.data);
             return response.data;
         } catch (error) {
-            console.error("Error fetching subscriptions: ", error);
+            console.error(" Error fetching subscriptions:", error);
             throw error;
         }
     },
 
     async updateSubscription(id, updatedData) {
         try {
-            const response = await axios.put(`${API_URL}/${id}`, updatedData);
+            const response = await axios.put(`${API_URL}/subscriptions/${id}`, updatedData);
             return response.data;
         } catch (error) {
-            console.error("Error updating subscription: ", error);
+            console.error(" Error updating subscription:", error);
             throw error;
         }
     },
