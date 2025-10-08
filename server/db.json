@@ -19,7 +19,8 @@
       "date": "2 days ago",
       "type": "Usage Analytics",
       "location": "All Locations",
-      "downloaded": true
+      "downloaded": true,
+      "generatedAt": "2025-10-06T10:00:00Z"
     },
     {
       "id": "2",
@@ -27,7 +28,8 @@
       "date": "3 days ago",
       "type": "Cost Analysis",
       "location": "All Locations",
-      "downloaded": true
+      "downloaded": true,
+      "generatedAt": "2025-10-05T10:00:00Z"
     },
     {
       "id": "3",
@@ -35,7 +37,8 @@
       "date": "4 days ago",
       "type": "Efficiency",
       "location": "All Locations",
-      "downloaded": true
+      "downloaded": true,
+      "generatedAt": "2025-10-04T10:00:00Z"
     }
   ],
   "reportSummaries": [

@@ -29,12 +29,7 @@
           <BillingSummaryCard title="Next Payment" :value="nextPaymentDate" />
           <BillingSummaryCard title="Average Payment" :value="monthlyAverage" />
         </section>
-
       </section>
-
-
-
-
 
       <!-- 📄 Recent Reports -->
       <section class="recent-reports">
@@ -49,16 +44,17 @@
 import axios from 'axios'
 import { ref, computed, onMounted } from 'vue'
 
-
-import BillingSummaryCard from '@/domains/payments/components/BillingSummaryCard.vue'
-import paymentsService from '@/domains/payments/services/payments.service.js'
+// ✅ Usar la URL del backend desde .env
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 // 🧩 Componentes
+import BillingSummaryCard from '@/domains/payments/components/BillingSummaryCard.vue'
 import AlertSummaryPanel from '@/domains/alerts/components/alert-summary-panel.component.vue'
 import ReportHistoryList from '@/domains/reports/components/report-history-list.component.vue'
 import AnomalySummaryPanel from '@/domains/anomaly-detection/components/anomaly-summary-panel.component.vue'
 
 // 📡 Servicios
+import paymentsService from '@/domains/payments/services/payments.service.js'
 import { fetchAlerts } from '@/domains/alerts/services/alerts.service.js'
 import { fetchAnomalies } from '@/domains/anomaly-detection/services/anomaly.service.js'
 
@@ -101,12 +97,12 @@ const monthlyAverage = computed(() => {
   return `$${avg.toFixed(2)}`
 })
 
-
-
+// 🔄 Obtener los 3 reportes más recientes
 async function fetchRecentReports() {
   try {
-    const response = await axios.get('http://localhost:3000/reports')
+    const response = await axios.get(`${BASE_URL}/reports`)
     return response.data
+        .filter(r => r.generatedAt) // ✅ Asegurar que tengan fecha válida
         .sort((a, b) => new Date(b.generatedAt) - new Date(a.generatedAt))
         .slice(0, 3)
   } catch (error) {
@@ -115,11 +111,10 @@ async function fetchRecentReports() {
   }
 }
 
-
-
+// 📥 Marcar como descargado y recargar lista
 async function handleDownload(report) {
   try {
-    await axios.patch(`http://localhost:3000/reports/${report.id}`, {
+    await axios.patch(`${BASE_URL}/reports/${report.id}`, {
       downloaded: true
     })
     recentReports.value = await fetchRecentReports()
@@ -128,16 +123,6 @@ async function handleDownload(report) {
   }
 }
 </script>
-
-
-
-
-
-
-
-
-
-
 
 <style scoped>
 .dashboard-page {
@@ -218,6 +203,4 @@ async function handleDownload(report) {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
 }
-
-
 </style>
