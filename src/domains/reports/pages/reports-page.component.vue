@@ -13,8 +13,6 @@
       <!-- Paneles principales -->
       <div class="grid panels">
         <report-usage-chart ref="usageChartComponent" :data="summary.usageTrends" />
-
-
         <report-cost-breakdown :data="summary.costBreakdown" />
       </div>
 
@@ -27,7 +25,6 @@
   </section>
 
   <Button label="Descargar PDF" @click="handleDownload" />
-
 </template>
 
 <script setup>
@@ -41,6 +38,8 @@ import ReportHistoryList from '../components/report-history-list.component.vue'
 import { getReportSummary } from '../services/report.service.js'
 import { exportReportToPDF } from '../services/pdf.service.js'
 
+// ✅ Usar la URL del backend desde .env
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const usageChartComponent = ref(null)
 
@@ -49,7 +48,6 @@ function handleDownload() {
   const canvas = usageChartComponent.value?.getCanvas()
   exportReportToPDF(type, summary.value, canvas)
 }
-
 
 const summary = ref({
   usageTrends: [],
@@ -63,7 +61,7 @@ const currentFilters = ref({})
 // 🔄 Cargar reportes desde db.json y aplicar filtros si existen
 async function fetchReports(filters = {}) {
   try {
-    const response = await axios.get('http://localhost:3000/reports')
+    const response = await axios.get(`${BASE_URL}/reports`)
     const allReports = response.data
 
     const filtered = allReports.filter(report => {
@@ -81,7 +79,7 @@ async function fetchReports(filters = {}) {
 // 📥 Marcar como descargado y recargar lista
 async function downloadReport(report) {
   try {
-    await axios.patch(`http://localhost:3000/reports/${report.id}`, {
+    await axios.patch(`${BASE_URL}/reports/${report.id}`, {
       downloaded: true
     })
     await fetchReports(currentFilters.value)

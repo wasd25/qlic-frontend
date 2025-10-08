@@ -10,7 +10,8 @@
           <span class="report-name">{{ report.name }}</span>
           <span class="report-date">Generated {{ report.date }}</span>
         </div>
-        <i class="pi pi-download download-icon" @click="download(report)"></i>
+        <i class="pi pi-download download-icon" @click.stop="download(report)" />
+
       </div>
     </div>
   </div>
@@ -18,19 +19,22 @@
 
 <script setup>
 import axios from 'axios'
-import { fetchReports } from '@/domains/reports/services/report.service.js'
-import { exportReportToPDF } from '@/domains/reports/services/pdf.service'
 import { getReportSummary } from '@/domains/reports/services/report.service.js'
+import { exportReportToPDF } from '@/domains/reports/services/pdf.service'
 
+// ✅ Usar la URL del backend desde .env
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 defineProps({ reports: Array })
 
 async function download(report) {
   try {
-    await axios.patch(`http://localhost:3000/reports/${report.id}`, {
+    // 1. Marcar como descargado
+    await axios.patch(`${BASE_URL}/reports/${report.id}`, {
       downloaded: true
     })
 
+    // 2. Obtener resumen filtrado
     const filters = {
       type: report.type,
       location: report.location,
@@ -38,6 +42,9 @@ async function download(report) {
     }
 
     const data = await getReportSummary(filters)
+    console.log('📊 Datos para PDF:', data)
+    console.log('📥 Descargando:', report.name)
+
     exportReportToPDF(report.type, data)
   } catch (error) {
     console.error('Error al descargar el reporte:', error)
