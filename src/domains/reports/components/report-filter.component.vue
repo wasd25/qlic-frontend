@@ -1,45 +1,45 @@
 <template>
   <div class="report-filter">
     <div class="filter-box">
-      <label>Time Period</label>
+      <label>{{ $t('reportsSection.timePeriod') }}</label>
       <div class="input-box">
         <Select
             v-model="filters.period"
             :options="periods"
-            placeholder="Select"
-
+            :placeholder="$t('reportsSection.select')"
             class="select-full"
         />
       </div>
     </div>
 
     <div class="filter-box">
-      <label>Report Type</label>
+      <label>{{ $t('reportsSection.reportType') }}</label>
       <div class="input-box">
         <Select
             v-model="filters.type"
             :options="types"
-            placeholder="Select"
+            :placeholder="$t('reportsSection.select')"
             class="select-full"
         />
       </div>
     </div>
 
     <div class="filter-box">
-      <label>Location</label>
+      <label>{{ $t('reportsSection.location') }}</label>
       <div class="input-box">
         <Select
             v-model="filters.location"
             :options="locations"
-            placeholder="Select"
+            :placeholder="$t('reportsSection.select')"
             class="select-full"
         />
       </div>
     </div>
 
-    <Button label="Generate Report" class="generate-btn" @click="emitFilters" />
+    <Button :label="$t('reportsSection.generateReport')" class="generate-btn" @click="emitFilters" />
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue'

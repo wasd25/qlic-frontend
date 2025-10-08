@@ -1,21 +1,25 @@
 <template>
   <div class="report-history">
-    <h3>Recent Reports</h3>
+    <h3>{{ $t('reportsSection.recentReports') }}</h3>
     <div class="report-list">
       <div class="report-card" v-for="report in reports" :key="report.id">
         <div class="icon-wrapper">
           <i class="pi pi-file"></i>
         </div>
         <div class="text-wrapper">
-          <span class="report-name">{{ report.name }}</span>
-          <span class="report-date">Generated {{ report.date }}</span>
+          <span class="report-name">
+            {{ report.key && $t(`reportsSection.${report.key}`) || report.name }}
+          </span>
+          <span class="report-date">
+            {{ $t('reportsSection.generatedDaysAgo', { days: report.date }) }}
+          </span>
         </div>
         <i class="pi pi-download download-icon" @click.stop="download(report)" />
-
       </div>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import axios from 'axios'

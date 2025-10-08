@@ -1,0 +1,91 @@
+{
+  "reportsSection": {
+    "title": "Reportes y Análisis",
+    "subtitle": "Análisis detallado del uso de agua y reportes completos",
+    "trends": "Tendencias de Consumo de Agua",
+    "costBreakdown": "Desglose de Costos",
+    "download": "Descargar PDF",
+    "efficiencyMetrics": "Métricas de Eficiencia",
+    "efficiencyScore": "Índice de Eficiencia Hídrica",
+    "waterSaved": "Agua Ahorrada",
+    "costSaved": "Costo Ahorrado",
+    "noData": "No hay datos disponibles",
+    "timePeriod": "Periodo de Tiempo",
+    "reportType": "Tipo de Reporte",
+    "location": "Ubicación",
+    "generateReport": "Generar Reporte",
+    "select": "Seleccionar",
+    "recentReports": "Reportes Recientes",
+    "generatedDaysAgo": "Generado hace {days} días"
+  },
+  "alertsSection": {
+    "activeAlerts": "Alertas Activas",
+    "noActiveAlerts": "No hay alertas activas",
+    "leakDetected": "Fuga detectada en la zona A",
+    "highUsageWarning": "Consumo de agua inusualmente alto",
+    "lowPressure": "Alerta de baja presión",
+    "sensorOffline": "Sensor fuera de línea",
+    "warnings": "Advertencias",
+    "infoAlerts": "Alertas Informativas",
+    "resolvedToday": "Resueltas Hoy",
+    "alertTypes": "Tipos de Alerta",
+    "applyFilter": "Aplicar Filtro",
+    "pageTitle": "Alertas y Notificaciones",
+    "waterPressureCritical": "Presión de agua crítica",
+    "mainTankLowPressure": "La presión del tanque principal cayó por debajo de 15 PSI.",
+    "criticalAlerts": "Alertas Críticas",
+    "pumpFailureDetected": "Falla de bomba detectada",
+    "pumpNotResponding": "La bomba #2 dejó de responder.",
+    "lowReservoirLevel": "Nivel bajo del reservorio",
+    "lowTankCapacity": "El tanque de almacenamiento está al 15% de capacidad.",
+
+    "types": {
+      "critical": "Alertas Críticas",
+      "usage": "Advertencias de Consumo",
+      "maintenance": "Recordatorios de Mantenimiento",
+      "warning": "Advertencia",
+      "info": "Informativa",
+      "resolved": "Resuelta"
+    }
+  },
+  "anomalySection": {
+    "pageTitle": "Detección de Anomalías",
+    "recentTitle": "Anomalías Recientes",
+    "detectedToday": "Detectadas Hoy",
+    "resolvedToday": "Resueltas Hoy",
+    "activeAnomalies": "Anomalías Activas",
+    "noAnomalies": "No se encontraron anomalías",
+    "profileId": "ID de Perfil",
+    "type": {
+      "leakDetected": "Fuga detectada",
+      "highTemperature": "Alta temperatura",
+      "unusualConsumption": "Consumo inusual",
+      "lowReservoir": "Nivel bajo del reservorio",
+      "sensorOffline": "Sensor fuera de línea",
+      "highPressure": "Alta presión"
+    },
+    "status": {
+      "active": "Sin resolver",
+      "resolved": "Resuelta",
+      "critical": "Crítica",
+      "warning": "Advertencias",
+      "info": "Informativa"
+    },
+    "tableTitle": "Anomalías Detectadas",
+    "table": {
+      "id": "ID",
+      "profile": "Perfil",
+      "type": "Tipo",
+      "date": "Fecha",
+      "status": "Estado"
+    },
+    "chart": {
+      "title": "Tendencia de Anomalías",
+      "label": "Anomalías por Día",
+      "yAxis": "Anomalías",
+      "xAxis": "Fecha"
+    }
+  }
+
+
+}

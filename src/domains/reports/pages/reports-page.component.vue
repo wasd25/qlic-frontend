@@ -3,8 +3,8 @@
     <div class="container">
       <!-- Encabezado -->
       <header class="header">
-        <h1>Reports & Analytics</h1>
-        <p>Comprehensive water usage analytics and detailed reporting</p>
+        <h1>{{ $t('reportsSection.title') }}</h1>
+        <p>{{ $t('reportsSection.subtitle') }}</p>
       </header>
 
       <!-- Filtros -->
@@ -12,20 +12,34 @@
 
       <!-- Paneles principales -->
       <div class="grid panels">
-        <report-usage-chart ref="usageChartComponent" :data="summary.usageTrends" />
-        <report-cost-breakdown :data="summary.costBreakdown" />
+        <report-usage-chart
+            ref="usageChartComponent"
+            :data="summary.usageTrends"
+            :title="$t('reportsSection.trends')"
+        />
+        <report-cost-breakdown
+            :data="summary.costBreakdown"
+            :title="$t('reportsSection.costBreakdown')"
+        />
       </div>
 
       <!-- Paneles inferiores -->
       <div class="grid bottom-panels">
-        <report-efficiency-metrics :metrics="summary.efficiencyMetrics" />
-        <report-history-list :reports="reports" @download="downloadReport" />
+        <report-efficiency-metrics
+            :metrics="summary.efficiencyMetrics"
+            :title="$t('reportsSection.efficiencyMetrics')"
+        />
+        <report-history-list
+            :reports="reports"
+            @download="downloadReport"
+        />
       </div>
     </div>
   </section>
 
-  <Button label="Descargar PDF" @click="handleDownload" />
+  <Button :label="$t('reportsSection.download')" @click="handleDownload" />
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue'

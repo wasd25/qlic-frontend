@@ -1,16 +1,15 @@
 <template>
   <div class="efficiency-panel">
-    <h3>Efficiency Metrics</h3>
+    <h3>{{ $t('reportsSection.efficiencyMetrics') }}</h3>
 
     <div v-if="metrics && Object.keys(metrics).length">
       <!-- Mostrar score y barras -->
     </div>
-    <div v-else class="empty">No data available</div>
-
+    <div v-else class="empty">{{ $t('reportsSection.noData') }}</div>
 
     <!-- Water Efficiency Score -->
     <div class="score-block">
-      <label>Water Efficiency Score</label>
+      <label>{{ $t('reportsSection.efficiencyScore') }}</label>
       <div class="score-value">{{ metrics.score }}%</div>
       <div class="progress-bar">
         <div class="fill" :style="{ width: metrics.score + '%' }"></div>
@@ -21,11 +20,11 @@
     <div class="metrics-row">
       <div class="metric-box water">
         <div class="metric-value">{{ metrics.waterSaved }}L</div>
-        <div class="metric-label">Water Saved</div>
+        <div class="metric-label">{{ $t('reportsSection.waterSaved') }}</div>
       </div>
       <div class="metric-box cost">
         <div class="metric-value">${{ metrics.costSaved }}</div>
-        <div class="metric-label">Cost Saved</div>
+        <div class="metric-label">{{ $t('reportsSection.costSaved') }}</div>
       </div>
     </div>
   </div>

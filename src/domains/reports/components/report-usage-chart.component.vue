@@ -1,14 +1,19 @@
 <template>
   <div class="panel">
-    <h3>Water Usage Trends</h3>
+    <h3>{{ $t('reportsSection.trends') }}</h3>
     <div v-if="data.length">
-      <Chart ref="usageChartRef" type="bar" :data="chartData" :options="chartOptions" :plugins="[canvasBackgroundPlugin]" />
+      <Chart
+          ref="usageChartRef"
+          type="bar"
+          :data="chartData"
+          :options="chartOptions"
+          :plugins="[canvasBackgroundPlugin]"
+      />
     </div>
-    <div v-else class="empty">No data available</div>
-
+    <div v-else class="empty">{{ $t('reportsSection.noData') }}</div>
   </div>
-
 </template>
+
 
 <script setup>
 import {computed} from 'vue'
@@ -52,7 +57,7 @@ const canvasBackgroundPlugin = {
 const chartOptions = {
   animation: false,
   plugins: {
-    custom_canvas_background_color: {}, // activa el plugin por ID
+    custom_canvas_background_color: {},
     legend: {
       labels: {
         color: '#374151',

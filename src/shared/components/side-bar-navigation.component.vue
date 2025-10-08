@@ -62,29 +62,51 @@
         </li>
       </ul>
     </nav>
+
+    <!-- Selector de idioma -->
+    <div class="language-switch">
+      <button class="lang-btn" @click="toggleLanguage">
+        <i class="pi pi-globe  "></i>
+        <span>{{ languageLabel }}</span>
+      </button>
+    </div>
+
   </aside>
 </template>
 
+<script setup>
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
+
+const { locale } = useI18n()
+
+const toggleLanguage = () => {
+  locale.value = locale.value === 'en' ? 'es' : 'en'
+  localStorage.setItem('lang', locale.value)
+}
+
+const languageLabel = computed(() =>
+    locale.value === 'en' ? 'Español' : 'English'
+)
+</script>
+
 <style scoped>
-/* Sidebar contenedor */
 .sidebar {
   width: 220px;
-  background-color: #ffffff; /* Fondo blanco */
-  color: #000000; /* Texto negro */
+  background-color: #ffffff;
+  color: #000000;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* Borde lateral derecho */
   border-right: 2px solid #a5a9b2;
 }
 
 .sidebar-logo {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #a5a9b2; /* línea separadora */
-  width: 100%; /* OBLIGA al contenedor a medir el ancho */
+  border-bottom: 2px solid #a5a9b2;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
@@ -95,7 +117,6 @@
   object-fit: contain;
 }
 
-/* Lista de navegación */
 .sidebar ul {
   list-style: none;
   padding: 0;
@@ -110,7 +131,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  color: #000000; /* Negro para íconos y texto */
+  color: #000000;
   text-decoration: none;
   font-size: 1rem;
   padding: 0.5rem;
@@ -118,15 +139,50 @@
   transition: background-color 0.2s, color 0.2s;
 }
 
-/* Hover */
 .sidebar a:hover {
-  background-color: #e5e7eb; /* gris claro al pasar */
+  background-color: #e5e7eb;
 }
 
-/* Active */
 .sidebar a.router-link-active {
   font-weight: bold;
-  color: #378aa1; /* blue chill */
-  background-color: #e6f4ef; /* verde muy clarito */
+  color: #378aa1;
+  background-color: #e6f4ef;
 }
+
+/* Estilo del selector de idioma */
+.language-switch {
+  margin-top: 1.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #378aa1;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lang-btn:hover {
+  background-color: #2e748a;
+  transform: translateY(-1px);
+}
+
+.lang-btn i {
+  font-size: 1rem;
+  color: #d0f0f7;
+}
+
 </style>

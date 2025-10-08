@@ -1,13 +1,13 @@
 <template>
   <div class="panel">
-    <h3>Cost Breakdown</h3>
+    <h3>{{ $t('reportsSection.costBreakdown') }}</h3>
     <div v-if="data.length">
       <Chart id="costChart" type="pie" :data="chartData" :options="chartOptions" />
-
     </div>
-    <div v-else class="empty">No data available</div>
+    <div v-else class="empty">{{ $t('reportsSection.noData') }}</div>
   </div>
 </template>
+
 
 <script setup>
 import { computed } from 'vue'
