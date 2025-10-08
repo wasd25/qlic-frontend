@@ -1,4 +1,15 @@
 {
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "reports": "Reports",
+    "profile": "Profile",
+    "alerts": "Alerts",
+    "usageManagement": "Usage Management",
+    "anomalyDetection": "Anomaly Detection",
+    "payments": "Payments",
+    "subscription": "Subscription"
+  },
+
   "reportsSection": {
     "title": "Reports & Analytics",
     "subtitle": "Comprehensive water usage analytics and detailed reporting",
@@ -17,76 +28,6 @@
     "select": "Select",
     "recentReports": "Recent Reports",
     "generatedDaysAgo": "Generated {days} days ago"
-  },
-  "alertsSection": {
-    "activeAlerts": "Active Alerts",
-    "noActiveAlerts": "No active alerts",
-    "leakDetected": "Leak detected in zone A",
-    "highUsageWarning": "Unusually high water usage",
-    "lowPressure": "Low pressure alert",
-    "sensorOffline": "Sensor offline",
-    "warnings": "Warnings",
-    "infoAlerts": "Info Alerts",
-    "resolvedToday": "Resolved Today",
-    "alertTypes": "Alert Types",
-    "applyFilter": "Apply Filter",
-    "pageTitle": "Alerts & Notifications",
-    "criticalAlerts": "Critical Alerts",
-    "waterPressureCritical": "Water Pressure Critical",
-    "mainTankLowPressure": "Main tank pressure dropped below 15 PSI.",
-    "pumpFailureDetected": "Pump Failure Detected",
-    "pumpNotResponding": "Pump #2 stopped responding.",
-    "lowReservoirLevel": "Low Reservoir Level",
-    "lowTankCapacity": "Storage tank is at 15% capacity.",
-    "types": {
-      "critical": "Critical Alerts",
-      "usage": "Usage Warnings",
-      "maintenance": "Maintenance Reminders",
-      "warning": "Warning",
-      "info": "Informational",
-      "resolved": "Resolved"
-    },
-
-    "anomalySection": {
-      "pageTitle": "Anomaly Detection",
-      "recentTitle": "Recent Anomalies",
-      "detectedToday": "Detected Today",
-      "resolvedToday": "Resolved Today",
-      "activeAnomalies": "Active Anomalies",
-      "noAnomalies": "No anomalies found",
-      "profileId": "Profile ID",
-      "type": {
-        "leakDetected": "Leak detected",
-        "highTemperature": "High temperature",
-        "unusualConsumption": "Unusual consumption",
-        "lowReservoir": "Low reservoir level",
-        "sensorOffline": "Sensor offline",
-        "highPressure": "High pressure"
-      },
-
-      "status": {
-        "active": "Unresolved",
-        "resolved": "Resolved",
-        "critical": "Critical",
-        "warning": "Warnings",
-        "info": "Info"
-      },
-      "tableTitle": "Detected Anomalies",
-      "table": {
-        "id": "ID",
-        "profile": "Profile",
-        "type": "Type",
-        "date": "Date",
-        "status": "Status"
-      },
-      "chart": {
-        "title": "Anomaly Trend",
-        "label": "Anomalies per Day",
-        "yAxis": "Anomalies",
-        "xAxis": "Date"
-      }
-    }
-
   }
 
 }

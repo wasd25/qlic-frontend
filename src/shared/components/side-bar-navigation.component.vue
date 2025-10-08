@@ -15,49 +15,49 @@
         <li>
           <router-link to="/dashboard">
             <i class="pi pi-home"></i>
-            <span>Dashboard</span>
+            <span>{{ $t('sidebar.dashboard') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/reports">
             <i class="pi pi-chart-bar"></i>
-            <span>Reports</span>
+            <span>{{ $t('sidebar.reports') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/profile">
             <i class="pi pi-user"></i>
-            <span>Profile</span>
+            <span>{{ $t('sidebar.profile') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/alerts">
             <i class="pi pi-bell"></i>
-            <span>Alerts</span>
+            <span>{{ $t('sidebar.alerts') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/usage-management">
             <i class="pi pi-sliders-h"></i>
-            <span>Usage Management</span>
+            <span>{{ $t('sidebar.usageManagement') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/anomaly-detection">
             <i class="pi pi-exclamation-circle"></i>
-            <span>Anomaly Detection</span>
+            <span>{{ $t('sidebar.anomalyDetection') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/payments">
             <i class="pi pi-credit-card"></i>
-            <span>Payments</span>
+            <span>{{ $t('sidebar.payments') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/subscription">
             <i class="pi pi-wallet"></i>
-            <span>Subscription</span>
+            <span>{{ $t('sidebar.subscription') }}</span>
           </router-link>
         </li>
       </ul>
@@ -66,13 +66,13 @@
     <!-- Selector de idioma -->
     <div class="language-switch">
       <button class="lang-btn" @click="toggleLanguage">
-        <i class="pi pi-globe  "></i>
+        <i class="pi pi-globe"></i>
         <span>{{ languageLabel }}</span>
       </button>
     </div>
-
   </aside>
 </template>
+
 
 <script setup>
 import { useI18n } from 'vue-i18n'
