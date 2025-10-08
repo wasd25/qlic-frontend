@@ -97,19 +97,24 @@ const monthlyAverage = computed(() => {
   return `$${avg.toFixed(2)}`
 })
 
-// 🔄 Obtener los 3 reportes más recientes
 async function fetchRecentReports() {
   try {
     const response = await axios.get(`${BASE_URL}/reports`)
     return response.data
-        .filter(r => r.generatedAt) // ✅ Asegurar que tengan fecha válida
-        .sort((a, b) => new Date(b.generatedAt) - new Date(a.generatedAt))
+        .sort((a, b) => {
+          // Extraer número de días desde el campo "date"
+          const daysA = parseInt(a.date)
+          const daysB = parseInt(b.date)
+          return daysA - daysB // Menor número = más reciente
+        })
         .slice(0, 3)
   } catch (error) {
     console.error('Error al cargar reportes recientes:', error)
     return []
   }
 }
+
+
 
 // 📥 Marcar como descargado y recargar lista
 async function handleDownload(report) {
