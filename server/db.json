@@ -1,15 +1,66 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "username": "usuario",
+      "email": "usuario@qlic.com",
+      "password": "Usuario123",
+      "isActive": true,
+      "createdAt": "2024-01-10T00:00:00.000Z",
+      "lastLogin": "2025-10-24T01:11:45.340Z"
+    },
+    {
+      "id": 2,
+      "username": "testuser",
+      "email": "test@qlic.com",
+      "password": "Test12345",
+      "isActive": true,
+      "createdAt": "2024-01-12T00:00:00.000Z",
+      "lastLogin": "2025-10-24T01:11:56.705Z"
+    },
+    {
+      "username": "usuariopro",
+      "email": "test@gmail.com",
+      "password": "Test1234",
+      "id": 1761266035357,
+      "isActive": true,
+      "createdAt": "2025-10-24T00:33:55.357Z",
+      "lastLogin": "2025-10-24T01:12:15.680Z"
+    }
+  ],
   "profile": [
     {
-      "id": "1",
-      "name": "John",
-      "lastName": "Doe",
-      "email": "john@gmail.com",
-      "age": 22,
-      "phone": "+020020222",
-      "address": "Calle real 12",
-      "avatar": "blob:http://localhost:5174/9d526c97-3d98-4f7e-87e6-05570091ab14",
-      "password": "Prueba123"
+      "id": 1,
+      "userId": 1761266035357,
+      "name": "Nuevo",
+      "email": "generic@gmail.com",
+      "lastName": "Test",
+      "age": 21,
+      "phone": "+51 999578122",
+      "address": "Av Peru xd",
+      "avatar": "blob:http://localhost:5173/b34e3cee-2794-427a-931e-87a817cb0069"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "name": "María",
+      "lastName": "González",
+      "email": "test@qlic.com",
+      "age": 28,
+      "phone": "+1234567892",
+      "address": "Avenida Central 456",
+      "avatar": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 1761266035357,
+      "userId": 1761266035357,
+      "name": "usuariopro",
+      "email": "test@gmail.com",
+      "lastName": "",
+      "age": null,
+      "phone": "",
+      "address": "",
+      "avatar": "https://via.placeholder.com/150"
     }
   ],
   "reports": [
@@ -20,7 +71,6 @@
       "type": "Usage Analytics",
       "location": "All Locations",
       "downloaded": true
-
     },
     {
       "id": "2",
