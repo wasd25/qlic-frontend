@@ -9,65 +9,77 @@
       />
     </div>
 
+    <!-- Información del Usuario -->
+    <div class="user-info" v-if="currentUser">
+      <div class="user-avatar">
+        <img :src="currentUser.avatar || 'https://via.placeholder.com/40'" alt="Avatar" />
+      </div>
+      <div class="user-details">
+        <div class="user-name">{{ currentUser.name || currentUser.username }}</div>
+        <div class="user-email">{{ currentUser.email }}</div>
+        <!-- Eliminamos la línea del rol -->
+      </div>
+    </div>
+
     <!-- Navegación -->
     <nav>
       <ul>
         <li>
           <router-link to="/dashboard">
             <i class="pi pi-home"></i>
-            <span>{{ $t('sidebar.dashboard') }}</span>
+            <span>Dashboard</span>
           </router-link>
         </li>
         <li>
           <router-link to="/reports">
             <i class="pi pi-chart-bar"></i>
-            <span>{{ $t('sidebar.reports') }}</span>
+            <span>Reports</span>
           </router-link>
         </li>
         <li>
           <router-link to="/profile">
             <i class="pi pi-user"></i>
-            <span>{{ $t('sidebar.profile') }}</span>
+            <span>Profile</span>
           </router-link>
         </li>
         <li>
           <router-link to="/alerts">
             <i class="pi pi-bell"></i>
-            <span>{{ $t('sidebar.alerts') }}</span>
+            <span>Alerts</span>
           </router-link>
         </li>
         <li>
           <router-link to="/usage-management">
             <i class="pi pi-sliders-h"></i>
-            <span>{{ $t('sidebar.usageManagement') }}</span>
+            <span>Usage Management</span>
           </router-link>
         </li>
         <li>
           <router-link to="/anomaly-detection">
             <i class="pi pi-exclamation-circle"></i>
-            <span>{{ $t('sidebar.anomalyDetection') }}</span>
+            <span>Anomaly Detection</span>
           </router-link>
         </li>
         <li>
           <router-link to="/payments">
             <i class="pi pi-credit-card"></i>
-            <span>{{ $t('sidebar.payments') }}</span>
+            <span>Payments</span>
           </router-link>
         </li>
         <li>
           <router-link to="/subscription">
             <i class="pi pi-wallet"></i>
-            <span>{{ $t('sidebar.subscription') }}</span>
+            <span>Subscription</span>
           </router-link>
         </li>
       </ul>
     </nav>
 
-    <!-- Selector de idioma -->
-    <div class="language-switch">
-      <button class="lang-btn" @click="toggleLanguage">
-        <i class="pi pi-globe"></i>
-        <span>{{ languageLabel }}</span>
+    <!-- Logout Button -->
+    <div class="sidebar-footer">
+      <button @click="handleLogout" class="logout-btn">
+        <i class="pi pi-sign-out"></i>
+        <span>Cerrar Sesión</span>
       </button>
     </div>
   </aside>
@@ -75,20 +87,58 @@
 
 
 <script setup>
-import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import { profileService } from '../../domains/profile/services/profile.service.js'
+import { authService } from '../../domains/iam/services/auth.service.js'
 
-const { locale } = useI18n()
+const router = useRouter()
+const emit = defineEmits(['logout'])
 
-const toggleLanguage = () => {
-  locale.value = locale.value === 'en' ? 'es' : 'en'
-  localStorage.setItem('lang', locale.value)
+const currentUser = ref(null)
+
+const loadUserProfile = async () => {
+  try {
+    console.log('🔄 Loading user profile for sidebar...')
+    // Forzar recarga siempre, sin cache
+    currentUser.value = await profileService.getCurrentUserProfile()
+    console.log('✅ Sidebar user profile loaded:', currentUser.value.name)
+  } catch (error) {
+    console.error('Error loading user profile, using basic info:', error)
+    // Fallback a información básica del usuario auth
+    const authUser = authService.getCurrentUser()
+    if (authUser) {
+      currentUser.value = {
+        username: authUser.username,
+        email: authUser.email,
+        name: authUser.username,
+        avatar: 'https://via.placeholder.com/150'
+      }
+    }
+  }
 }
 
-const languageLabel = computed(() =>
-    locale.value === 'en' ? 'Español' : 'English'
+const handleLogout = () => {
+  currentUser.value = null // Limpiar cache al logout
+  emit('logout')
+}
+
+// Recargar perfil cuando cambie la ruta (por si cambia el usuario)
+watch(
+    () => router.currentRoute.value,
+    () => {
+      if (authService.isAuthenticated()) {
+        loadUserProfile()
+      }
+    }
 )
+
+onMounted(() => {
+  loadUserProfile()
+})
 </script>
+
+
 
 <style scoped>
 .sidebar {
@@ -115,6 +165,54 @@ const languageLabel = computed(() =>
   width: 120px;
   max-height: 80px;
   object-fit: contain;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  width: 100%;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-email {
+  font-size: 0.75rem;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar ul {
@@ -149,40 +247,29 @@ const languageLabel = computed(() =>
   background-color: #e6f4ef;
 }
 
-/* Estilo del selector de idioma */
-.language-switch {
-  margin-top: 1.5rem;
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
-.lang-btn {
+.logout-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  background-color: #378aa1;
-  color: white;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
   width: 100%;
-  transition: background-color 0.3s, transform 0.2s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.75rem;
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+  font-size: 0.875rem;
 }
 
-.lang-btn:hover {
-  background-color: #2e748a;
-  transform: translateY(-1px);
+.logout-btn:hover {
+  background: #fef2f2;
 }
-
-.lang-btn i {
-  font-size: 1rem;
-  color: #d0f0f7;
-}
-
 </style>
