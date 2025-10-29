@@ -2,17 +2,17 @@
   <div class="login-form">
     <div class="login-card">
       <div class="login-header">
-        <h2>Iniciar Sesión</h2>
-        <p>Ingresa a tu cuenta QLIC</p>
+        <h2>{{ $t('login.title') }}</h2>
+        <p>{{ $t('login.subtitle') }}</p>
       </div>
 
       <form @submit.prevent="handleLogin" class="form">
         <div class="form-group">
-          <label for="username">Usuario o Email</label>
+          <label for="username">{{ $t('login.username') }}</label>
           <InputText
               id="username"
               v-model="formData.username"
-              placeholder="usuario@ejemplo.com"
+              :placeholder="$t('login.username')"
               :class="{ 'p-invalid': errors.username }"
               class="w-full"
           />
@@ -20,12 +20,12 @@
         </div>
 
         <div class="form-group">
-          <label for="password">Contraseña</label>
+          <label for="password">{{ $t('login.password') }}</label>
           <div class="password-input-wrapper">
             <InputText
                 id="password"
                 v-model="formData.password"
-                placeholder="Tu contraseña"
+                :placeholder="$t('login.password')"
                 :type="showPassword ? 'text' : 'password'"
                 :class="{ 'p-invalid': errors.password }"
                 class="w-full"
@@ -43,17 +43,16 @@
 
         <Button
             type="submit"
-            label="Iniciar Sesión"
+            :label="$t('login.signIn')"
             :loading="isLoading"
             class="w-full"
         />
 
         <div class="login-links">
-          <a href="#" @click.prevent="$emit('show-register')">¿No tienes cuenta? Regístrate</a>
+          <a href="#" @click.prevent="$emit('show-register')">{{ $t('login.noAccount') }}</a>
         </div>
       </form>
 
-      <!-- Mensajes -->
       <Message v-if="errorMessage" severity="error" :closable="true" @close="errorMessage = ''">
         {{ errorMessage }}
       </Message>
@@ -85,11 +84,11 @@ const validateForm = () => {
   errors.value = {}
 
   if (!formData.value.username?.trim()) {
-    errors.value.username = 'Usuario o email es requerido'
+    errors.value.username = $t('common.required')
   }
 
   if (!formData.value.password) {
-    errors.value.password = 'Contraseña es requerida'
+    errors.value.password = $t('common.required')
   }
 
   return Object.keys(errors.value).length === 0
@@ -109,7 +108,7 @@ const handleLogin = async () => {
 
   } catch (error) {
     console.error('Login error:', error)
-    errorMessage.value = error.message || 'Error al iniciar sesión'
+    errorMessage.value = error.message || $t('login.invalidCredentials')
   } finally {
     isLoading.value = false
   }

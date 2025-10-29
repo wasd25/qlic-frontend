@@ -1,10 +1,10 @@
 <template>
   <aside class="sidebar">
-    <!-- Logo -->
+    <!-- Logo solamente -->
     <div class="sidebar-logo">
       <img
           src="https://i.imgur.com/FCYH4sj.png"
-          alt="App Logo"
+          alt="QLIC"
           class="logo"
       />
     </div>
@@ -17,9 +17,11 @@
       <div class="user-details">
         <div class="user-name">{{ currentUser.name || currentUser.username }}</div>
         <div class="user-email">{{ currentUser.email }}</div>
-        <!-- Eliminamos la línea del rol -->
       </div>
     </div>
+
+    <!-- Language Switcher -->
+    <language-switcher-component />
 
     <!-- Navegación -->
     <nav>
@@ -27,49 +29,49 @@
         <li>
           <router-link to="/dashboard">
             <i class="pi pi-home"></i>
-            <span>Dashboard</span>
+            <span>{{ $t('sidebar.dashboard') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/reports">
             <i class="pi pi-chart-bar"></i>
-            <span>Reports</span>
+            <span>{{ $t('sidebar.reports') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/profile">
             <i class="pi pi-user"></i>
-            <span>Profile</span>
+            <span>{{ $t('sidebar.profile') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/alerts">
             <i class="pi pi-bell"></i>
-            <span>Alerts</span>
+            <span>{{ $t('sidebar.alerts') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/usage-management">
             <i class="pi pi-sliders-h"></i>
-            <span>Usage Management</span>
+            <span>{{ $t('sidebar.usageManagement') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/anomaly-detection">
             <i class="pi pi-exclamation-circle"></i>
-            <span>Anomaly Detection</span>
+            <span>{{ $t('sidebar.anomalyDetection') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/payments">
             <i class="pi pi-credit-card"></i>
-            <span>Payments</span>
+            <span>{{ $t('sidebar.payments') }}</span>
           </router-link>
         </li>
         <li>
           <router-link to="/subscription">
             <i class="pi pi-wallet"></i>
-            <span>Subscription</span>
+            <span>{{ $t('sidebar.subscription') }}</span>
           </router-link>
         </li>
       </ul>
@@ -79,20 +81,18 @@
     <div class="sidebar-footer">
       <button @click="handleLogout" class="logout-btn">
         <i class="pi pi-sign-out"></i>
-        <span>Cerrar Sesión</span>
+        <span>{{ $t('sidebar.logout') }}</span>
       </button>
     </div>
   </aside>
 </template>
 
-
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
 import { profileService } from '../../domains/profile/services/profile.service.js'
 import { authService } from '../../domains/iam/services/auth.service.js'
+import LanguageSwitcherComponent from './language-switcher.component.vue'
 
-const router = useRouter()
 const emit = defineEmits(['logout'])
 
 const currentUser = ref(null)
@@ -100,12 +100,10 @@ const currentUser = ref(null)
 const loadUserProfile = async () => {
   try {
     console.log('🔄 Loading user profile for sidebar...')
-    // Forzar recarga siempre, sin cache
     currentUser.value = await profileService.getCurrentUserProfile()
     console.log('✅ Sidebar user profile loaded:', currentUser.value.name)
   } catch (error) {
     console.error('Error loading user profile, using basic info:', error)
-    // Fallback a información básica del usuario auth
     const authUser = authService.getCurrentUser()
     if (authUser) {
       currentUser.value = {
@@ -119,30 +117,18 @@ const loadUserProfile = async () => {
 }
 
 const handleLogout = () => {
-  currentUser.value = null // Limpiar cache al logout
+  currentUser.value = null
   emit('logout')
 }
-
-// Recargar perfil cuando cambie la ruta (por si cambia el usuario)
-watch(
-    () => router.currentRoute.value,
-    () => {
-      if (authService.isAuthenticated()) {
-        loadUserProfile()
-      }
-    }
-)
 
 onMounted(() => {
   loadUserProfile()
 })
 </script>
 
-
-
 <style scoped>
 .sidebar {
-  width: 220px;
+  width: 250px;
   background-color: #ffffff;
   color: #000000;
   padding: 1rem;

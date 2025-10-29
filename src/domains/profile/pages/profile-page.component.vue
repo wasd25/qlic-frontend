@@ -1,33 +1,30 @@
 <template>
   <div class="profile-page">
     <div class="profile-header">
-      <h1>Mi Perfil</h1>
-      <p>Gestiona tu información personal y preferencias</p>
+      <h1>{{ $t('profile.title') }}</h1>
+      <p>{{ $t('profile.subtitle') }}</p>
     </div>
 
-    <!-- Estado de loading -->
+    <!-- Estados de carga/error -->
     <div v-if="isLoading" class="loading-state">
       <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
-      <p>Cargando perfil...</p>
+      <p>{{ $t('common.loading') }}</p>
     </div>
 
-    <!-- Estado de error -->
     <div v-else-if="loadError" class="error-state">
       <i class="pi pi-exclamation-triangle" style="font-size: 2rem; color: #ef4444"></i>
-      <p>Error al cargar el perfil</p>
-      <Button label="Reintentar" @click="loadProfile" />
+      <p>{{ $t('common.error') }}</p>
+      <Button :label="$t('common.retry')" @click="loadProfile" />
     </div>
 
     <!-- Contenido normal -->
     <div v-else-if="profile && Object.keys(profile).length > 0" class="profile-content">
-      <!-- US31: Visualización del perfil -->
       <profile-view-component
           :profile="profile"
           @edit="isEditing = true"
           @change-avatar="isAvatarModalOpen = true"
       />
 
-      <!-- US32: Edición de información -->
       <profile-edit-component
           v-if="isEditing"
           :profile="profile"
@@ -35,7 +32,6 @@
           @cancel="isEditing = false"
       />
 
-      <!-- US33: Modal de cambio de avatar -->
       <profile-avatar-component
           :is-open="isAvatarModalOpen"
           :current-avatar="profile.avatar"
@@ -43,16 +39,14 @@
           @close="isAvatarModalOpen = false"
       />
 
-      <!-- US34: Cambio de contraseña -->
       <profile-password-component
           @change-password="handleChangePassword"
       />
     </div>
 
-    <!-- Estado vacío -->
     <div v-else class="empty-state">
-      <p>No se pudo cargar la información del perfil</p>
-      <Button label="Intentar de nuevo" @click="loadProfile" />
+      <p>{{ $t('common.error') }}</p>
+      <Button :label="$t('common.retry')" @click="loadProfile" />
     </div>
   </div>
 </template>

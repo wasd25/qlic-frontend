@@ -3,17 +3,18 @@
     <div class="register-card">
       <div class="register-header">
         <div class="header-top">
-          <h2>Crear Cuenta</h2>
+          <h2>{{ $t('register.title') }}</h2>
           <button @click="handleClose" class="close-btn">
             <i class="pi pi-times"></i>
           </button>
         </div>
-        <p>Regístrate en QLIC</p>
+        <p>{{ $t('register.subtitle') }}</p>
       </div>
+
 
       <form @submit.prevent="handleRegister" class="form">
         <div class="form-group">
-          <label for="username">Nombre de Usuario *</label>
+          <label for="username">{{ $t('register.username') }}</label>
           <InputText
               id="username"
               v-model="formData.username"
@@ -25,7 +26,7 @@
         </div>
 
         <div class="form-group">
-          <label for="email">Email *</label>
+          <label for="email">{{ $t('register.email') }}</label>
           <InputText
               id="email"
               v-model="formData.email"
@@ -38,7 +39,7 @@
         </div>
 
         <div class="form-group">
-          <label for="password">Contraseña *</label>
+          <label for="password">{{ $t('register.password') }}</label>
           <div class="password-input-wrapper">
             <InputText
                 id="password"
@@ -61,7 +62,7 @@
         </div>
 
         <div class="form-group">
-          <label for="confirmPassword">Confirmar Contraseña *</label>
+          <label for="confirmPassword">{{ $t('register.confirmPassword') }}</label>
           <div class="password-input-wrapper">
             <InputText
                 id="confirmPassword"
@@ -84,13 +85,13 @@
 
         <Button
             type="submit"
-            label="Crear Cuenta"
+            :label="$t('register.createAccount')"
             :loading="isLoading"
             class="w-full"
         />
 
         <div class="register-links">
-          <a href="#" @click.prevent="$emit('show-login')">¿Ya tienes cuenta? Inicia sesión</a>
+          <a href="#" @click.prevent="$emit('show-login')">{{ $t('register.haveAccount') }}</a>
         </div>
       </form>
 
@@ -196,7 +197,7 @@ const handleRegister = async () => {
 
   } catch (error) {
     console.error('Register error:', error)
-    errorMessage.value = error.message || 'Error al crear la cuenta'
+    errorMessage.value = $t('register.userExists')
   } finally {
     isLoading.value = false
   }

@@ -5,45 +5,49 @@
       <div class="avatar-section">
         <div class="avatar-container">
           <img
-              :src="profile.avatar || 'https://via.placeholder.com/150'"
-              :alt="profile.fullName || 'Usuario'"
+              :src="profile.avatar || defaultAvatar"
+              :alt="fullName"
               class="avatar"
           />
           <button
               @click="$emit('change-avatar')"
               class="avatar-change-btn"
-              title="Cambiar foto de perfil"
+              :title="$t('avatar.changePhoto')"
           >
             <i class="pi pi-camera"></i>
           </button>
         </div>
-        <h2>{{ profile.fullName || 'Nombre completo' }}</h2>
-        <p class="email">{{ profile.email || 'email@ejemplo.com' }}</p>
+        <h2>{{ fullName }}</h2>
+        <p class="email">{{ profile.email }}</p>
       </div>
 
       <!-- Información Personal -->
       <div class="info-section">
-        <h3>Información Personal</h3>
+        <h3>{{ $t('profile.personalInfo') }}</h3>
         <div class="info-grid">
           <div class="info-item">
-            <label>Nombre</label>
-            <p>{{ profile.name || 'No especificado' }}</p>
+            <label>{{ $t('profile.firstName') }}</label>
+            <p>{{ profile.name || $t('profile.notSpecified') }}</p>
           </div>
           <div class="info-item">
-            <label>Apellido</label>
-            <p>{{ profile.lastName || 'No especificado' }}</p>
+            <label>{{ $t('profile.lastName') }}</label>
+            <p>{{ profile.lastName || $t('profile.notSpecified') }}</p>
           </div>
           <div class="info-item">
-            <label>Edad</label>
-            <p>{{ profile.age ? `${profile.age} años` : 'No especificado' }}</p>
+            <label>{{ $t('profile.email') }}</label>
+            <p class="email-field">{{ profile.email || $t('profile.notSpecified') }}</p>
           </div>
           <div class="info-item">
-            <label>Teléfono</label>
-            <p>{{ profile.phone || 'No especificado' }}</p>
+            <label>{{ $t('profile.age') }}</label>
+            <p>{{ profile.age ? `${profile.age} ${$t('profile.years')}` : $t('profile.notSpecified') }}</p>
+          </div>
+          <div class="info-item">
+            <label>{{ $t('profile.phone') }}</label>
+            <p>{{ profile.phone || $t('profile.notSpecified') }}</p>
           </div>
           <div class="info-item full-width">
-            <label>Dirección</label>
-            <p>{{ profile.address || 'No especificado' }}</p>
+            <label>{{ $t('profile.address') }}</label>
+            <p>{{ profile.address || $t('profile.notSpecified') }}</p>
           </div>
         </div>
       </div>
@@ -55,7 +59,7 @@
             class="edit-btn"
         >
           <i class="pi pi-pencil"></i>
-          Editar Información
+          {{ $t('profile.editInfo') }}
         </button>
       </div>
     </div>
@@ -63,7 +67,9 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   profile: {
     type: Object,
     required: true,
@@ -72,6 +78,28 @@ defineProps({
 })
 
 defineEmits(['edit', 'change-avatar'])
+
+// Computed properties para datos derivados
+const fullName = computed(() => {
+  if (props.profile.name && props.profile.lastName) {
+    return `${props.profile.name} ${props.profile.lastName}`
+  }
+  if (props.profile.name) {
+    return props.profile.name
+  }
+  if (props.profile.lastName) {
+    return props.profile.lastName
+  }
+  return props.profile.username || 'Usuario' // Fallback al username si no hay nombre
+})
+
+const defaultAvatar = computed(() => {
+  const initials = (props.profile.name?.charAt(0) || props.profile.username?.charAt(0) || 'U').toUpperCase()
+  const colors = ['#3B82F6', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6']
+  const color = colors[(props.profile.name?.length || props.profile.username?.length || 0) % colors.length]
+
+  return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><rect width="150" height="150" fill="${color}" rx="75"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="60" font-family="Arial, sans-serif">${initials}</text></svg>`
+})
 </script>
 
 <style scoped>
@@ -132,17 +160,20 @@ defineEmits(['edit', 'change-avatar'])
   margin: 0.5rem 0 0.25rem 0;
   color: #1f2937;
   font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .email {
   color: #6b7280;
   margin: 0;
+  font-size: 1rem;
 }
 
 .info-section h3 {
   color: #374151;
   margin-bottom: 1.5rem;
   font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .info-grid {
@@ -174,6 +205,10 @@ defineEmits(['edit', 'change-avatar'])
   background: #f9fafb;
   border-radius: 6px;
   border: 1px solid #e5e7eb;
+}
+
+.email-field {
+  word-break: break-all;
 }
 
 .actions-section {
