@@ -7,27 +7,70 @@
     "usageManagement": "Usage Management",
     "anomalyDetection": "Anomaly Detection",
     "payments": "Payments",
-    "subscription": "Subscription"
+    "subscription": "Subscription",
+    "logout": "Logout"
   },
-
-  "reportsSection": {
-    "title": "Reports & Analytics",
-    "subtitle": "Comprehensive water usage analytics and detailed reporting",
-    "trends": "Water Usage Trends",
-    "costBreakdown": "Cost Breakdown",
-    "efficiencyMetrics": "Efficiency Metrics",
-    "download": "Download PDF",
-    "efficiencyScore": "Water Efficiency Score",
-    "waterSaved": "Water Saved",
-    "costSaved": "Cost Saved",
-    "noData": "No data available",
-    "timePeriod": "Time Period",
-    "reportType": "Report Type",
-    "location": "Location",
-    "generateReport": "Generate Report",
-    "select": "Select",
-    "recentReports": "Recent Reports",
-    "generatedDaysAgo": "Generated {days} days ago"
+  "login": {
+    "title": "Sign In",
+    "subtitle": "Sign in to your QLIC account",
+    "username": "Username or Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "noAccount": "Don't have an account? Sign up",
+    "invalidCredentials": "Invalid credentials",
+    "userNotFound": "User not found",
+    "inactiveUser": "Inactive user"
+  },
+  "register": {
+    "title": "Create Account",
+    "subtitle": "Sign up for QLIC",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "createAccount": "Create Account",
+    "haveAccount": "Already have an account? Sign in",
+    "userExists": "Username or email already exists"
+  },
+  "profile": {
+    "title": "My Profile",
+    "subtitle": "Manage your personal information and preferences",
+    "personalInfo": "Personal Information",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "age": "Age",
+    "phone": "Phone",
+    "address": "Address",
+    "editInfo": "Edit Information",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel",
+    "years": "years",
+    "notSpecified": "Not specified"
+  },
+  "security": {
+    "title": "Security",
+    "subtitle": "Change your password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm New Password",
+    "changePassword": "Change Password",
+    "passwordHint": "Minimum 8 characters, with uppercase, lowercase and numbers"
+  },
+  "avatar": {
+    "changePhoto": "Change Profile Photo",
+    "selectImage": "Select Image",
+    "updatePhoto": "Update Photo",
+    "preview": "Preview",
+    "supportedFormats": "Supported formats: JPG, PNG, GIF. Maximum size: 5MB"
+  },
+  "common": {
+    "required": "Required",
+    "invalidEmail": "Invalid email",
+    "passwordsDontMatch": "Passwords don't match",
+    "success": "Success",
+    "error": "Error",
+    "loading": "Loading...",
+    "retry": "Retry"
   }
-
 }
