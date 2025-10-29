@@ -131,38 +131,47 @@ export class ProfileService {
     }
 
     /**
-     * US34: Cambiar contraseña
+     * US34: Cambiar contraseña - VERSIÓN CORREGIDA
      */
     async changePassword(passwordData) {
         try {
             console.log('🔄 CHANGE PASSWORD - Sending:', passwordData);
 
-            // Primero obtenemos el perfil actual para verificar la contraseña actual
-            const currentProfile = await this.getCurrentUserProfile();
-            console.log('🔄 CHANGE PASSWORD - Current profile:', currentProfile);
+            const currentUser = authService.getCurrentUser();
+            if (!currentUser) {
+                throw new Error('Usuario no autenticado');
+            }
+
+            // Obtener el usuario actual de la base de datos
+            const userResponse = await fetch(`${this.baseURL}/users/${currentUser.id}`);
+            const currentUserData = await userResponse.json();
+
+            console.log('🔄 CHANGE PASSWORD - Current user data:', currentUserData);
 
             // Verificar que la contraseña actual sea correcta
-            if (currentProfile.password !== passwordData.currentPassword) {
+            if (currentUserData.password !== passwordData.currentPassword) {
                 console.log('❌ CHANGE PASSWORD - Password mismatch:', {
-                    stored: currentProfile.password,
+                    stored: currentUserData.password,
                     provided: passwordData.currentPassword
                 });
                 throw new Error('La contraseña actual es incorrecta');
             }
 
-            // Actualizar la contraseña
-            const updatedProfile = {
-                ...currentProfile,
+            // Actualizar la contraseña en el USUARIO, no en el perfil
+            const updatedUser = {
+                ...currentUserData,
                 password: passwordData.newPassword
             };
 
-            // Guardar en JSON Server
-            const response = await fetch(`${this.baseURL}/profile/1`, {
+            console.log('🔄 CHANGE PASSWORD - Updating user with new password');
+
+            // Guardar en JSON Server en la tabla users
+            const response = await fetch(`${this.baseURL}/users/${currentUser.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(updatedProfile)
+                body: JSON.stringify(updatedUser)
             });
 
             if (!response.ok) {
@@ -170,14 +179,14 @@ export class ProfileService {
             }
 
             const data = await response.json();
-            console.log('✅ CHANGE PASSWORD - Success');
+            console.log('✅ CHANGE PASSWORD - Success - Password updated in users table');
             return data;
+
         } catch (error) {
             console.error('❌ CHANGE PASSWORD - Error:', error);
             throw error;
         }
     }
-
     /**
      * Generar avatar por defecto
      */

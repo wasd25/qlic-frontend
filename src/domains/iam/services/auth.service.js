@@ -4,9 +4,6 @@ export class AuthService {
         this.currentUser = null;
     }
 
-    /**
-     * Login de usuario - VERSIÓN CORREGIDA
-     */
     async login(credentials) {
         try {
             console.log('🔄 AUTH - Login attempt:', { username: credentials.username });
@@ -29,6 +26,7 @@ export class AuthService {
                 throw new Error('Usuario no encontrado');
             }
 
+            // VERIFICAR CONTRASEÑA ACTUALIZADA
             if (user.password !== credentials.password) {
                 throw new Error('Contraseña incorrecta');
             }
