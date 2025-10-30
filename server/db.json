@@ -20,7 +20,6 @@
       "type": "Usage Analytics",
       "location": "All Locations",
       "downloaded": true
-
     },
     {
       "id": "2",
@@ -41,7 +40,7 @@
   ],
   "reportSummaries": [
     {
-      "id": 1,
+      "id": "1",
       "type": "Usage Analytics",
       "location": "All Locations",
       "period": "Last 7 Days",
@@ -61,7 +60,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "type": "Cost Analysis",
       "location": "All Locations",
       "period": "Last 7 Days",
@@ -81,7 +80,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "type": "Efficiency",
       "location": "All Locations",
       "period": "Last 7 Days",
@@ -249,9 +248,7 @@
     }
   ],
   "notificationSettings": {
-    "types": [
-      "Critical Alerts"
-    ]
+    "types": []
   },
   "payments": [
     {
@@ -357,6 +354,31 @@
       "type": "Low reservoir level",
       "detected_anomaly": "2025-10-05T06:20:00Z",
       "resolved": false
+    }
+  ],
+  "usageSummary": {
+    "current": 320,
+    "dailyLimit": 500,
+    "monthlyTotal": 12400
+  },
+  "usageEvents": [
+    {
+      "id": "1",
+      "time": "08:00",
+      "amount": 45,
+      "source": "Kitchen"
+    },
+    {
+      "id": "2",
+      "time": "09:30",
+      "amount": 30,
+      "source": "Bathroom"
+    },
+    {
+      "id": "3",
+      "time": "11:00",
+      "amount": 60,
+      "source": "Garden"
     }
   ],
   "subscriptions": [
