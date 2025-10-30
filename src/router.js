@@ -8,6 +8,8 @@ import ReportPage from "./domains/reports/pages/reports-page.component.vue"
 import AlertPage from "./domains/alerts/pages/alerts-page.component.vue"
 import AnomalyPage from './domains/anomaly-detection/pages/anomaly-page.component.vue'
 import DashboardPage from '@/domains/dashboard/pages/dashboard.component.vue'
+import UsageManagementPage from './domains/usage-management/pages/usage-management-page.component.vue'
+
 
 const routes = [
     { path: '/', redirect: '/dashboard' },
@@ -15,7 +17,7 @@ const routes = [
     { path: '/reports', name: 'Reports', component: ReportPage },
     { path: '/profile', name: 'Profile', component: ProfilePage },
     { path: '/alerts', name: 'Alerts', component: AlertPage },
-    { path: '/usage-management', name: 'UsageManagement', component: { template: '<h1>Usage Management Placeholder</h1>' } },
+    { path: '/usage-management', name: 'UsageManagement', component: UsageManagementPage },
     { path: '/payments', name: 'Payments', component: BillingPage},
     { path: '/anomaly-detection', name: 'AnomalyDetection', component: AnomalyPage },
     { path: '/subscription', name: 'Subscription', component: SubscriptionPage},
