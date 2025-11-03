@@ -1,16 +1,16 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "usuario",
       "email": "usuario@qlic.com",
       "password": "Usuario123",
       "isActive": true,
       "createdAt": "2024-01-10T00:00:00.000Z",
-      "lastLogin": "2025-10-24T01:11:45.340Z"
+      "lastLogin": "2025-10-29T19:53:49.601Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "testuser",
       "email": "test@qlic.com",
       "password": "Test12345",
@@ -22,7 +22,7 @@
       "username": "usuariopro",
       "email": "test@gmail.com",
       "password": "Test1234",
-      "id": 1761266035357,
+      "id": "1761266035357",
       "isActive": true,
       "createdAt": "2025-10-24T00:33:55.357Z",
       "lastLogin": "2025-10-24T01:12:15.680Z"
@@ -30,7 +30,7 @@
   ],
   "profile": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 1761266035357,
       "name": "Nuevo",
       "email": "generic@gmail.com",
@@ -38,10 +38,10 @@
       "age": 21,
       "phone": "+51 999578122",
       "address": "Av Peru xd",
-      "avatar": "blob:http://localhost:5173/b34e3cee-2794-427a-931e-87a817cb0069"
+      "avatar": "blob:http://localhost:5173/a016dd66-2aaf-4037-8ed0-76c247349a50"
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": 2,
       "name": "María",
       "lastName": "González",
@@ -52,7 +52,7 @@
       "avatar": "https://via.placeholder.com/150"
     },
     {
-      "id": 1761266035357,
+      "id": "1761266035357",
       "userId": 1761266035357,
       "name": "usuariopro",
       "email": "test@gmail.com",
@@ -91,7 +91,7 @@
   ],
   "reportSummaries": [
     {
-      "id": 1,
+      "id": "1",
       "type": "Usage Analytics",
       "location": "All Locations",
       "period": "Last 7 Days",
@@ -111,7 +111,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "type": "Cost Analysis",
       "location": "All Locations",
       "period": "Last 7 Days",
@@ -131,7 +131,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "type": "Efficiency",
       "location": "All Locations",
       "period": "Last 7 Days",
