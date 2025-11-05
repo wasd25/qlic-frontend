@@ -1,35 +1,76 @@
 {
   "sidebar": {
-    "dashboard": "Panel",
+    "dashboard": "Dashboard",
     "reports": "Reportes",
     "profile": "Perfil",
     "alerts": "Alertas",
-    "usageManagement": "Gestión de Consumo",
+    "usageManagement": "Gestión de Uso",
     "anomalyDetection": "Detección de Anomalías",
     "payments": "Pagos",
-    "subscription": "Suscripción"
+    "subscription": "Suscripción",
+    "logout": "Cerrar Sesión"
   },
-
-
-  "reportsSection": {
-    "title": "Reportes y Análisis",
-    "subtitle": "Análisis detallado del uso de agua y reportes completos",
-    "trends": "Tendencias de Consumo de Agua",
-    "costBreakdown": "Desglose de Costos",
-    "download": "Descargar PDF",
-    "efficiencyMetrics": "Métricas de Eficiencia",
-    "efficiencyScore": "Índice de Eficiencia Hídrica",
-    "waterSaved": "Agua Ahorrada",
-    "costSaved": "Costo Ahorrado",
-    "noData": "No hay datos disponibles",
-    "timePeriod": "Periodo de Tiempo",
-    "reportType": "Tipo de Reporte",
-    "location": "Ubicación",
-    "generateReport": "Generar Reporte",
-    "select": "Seleccionar",
-    "recentReports": "Reportes Recientes",
-    "generatedDaysAgo": "Generado hace {days} días"
+  "login": {
+    "title": "Iniciar Sesión",
+    "subtitle": "Ingresa a tu cuenta QLIC",
+    "username": "Usuario o Email",
+    "password": "Contraseña",
+    "signIn": "Iniciar Sesión",
+    "noAccount": "¿No tienes cuenta? Regístrate",
+    "invalidCredentials": "Credenciales inválidas",
+    "userNotFound": "Usuario no encontrado",
+    "inactiveUser": "Usuario inactivo"
+  },
+  "register": {
+    "title": "Crear Cuenta",
+    "subtitle": "Regístrate en QLIC",
+    "username": "Nombre de Usuario",
+    "email": "Email",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "createAccount": "Crear Cuenta",
+    "haveAccount": "¿Ya tienes cuenta? Inicia sesión",
+    "userExists": "Usuario o email ya existen"
+  },
+  "profile": {
+    "title": "Mi Perfil",
+    "subtitle": "Gestiona tu información personal y preferencias",
+    "personalInfo": "Información Personal",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo Electrónico",
+    "age": "Edad",
+    "phone": "Teléfono",
+    "address": "Dirección",
+    "editInfo": "Editar Información",
+    "saveChanges": "Guardar Cambios",
+    "cancel": "Cancelar",
+    "years": "años",
+    "notSpecified": "No especificado"
+  },
+  "security": {
+    "title": "Seguridad",
+    "subtitle": "Cambia tu contraseña",
+    "currentPassword": "Contraseña Actual",
+    "newPassword": "Nueva Contraseña",
+    "confirmPassword": "Confirmar Nueva Contraseña",
+    "changePassword": "Cambiar Contraseña",
+    "passwordHint": "Mínimo 8 caracteres, con mayúsculas, minúsculas y números"
+  },
+  "avatar": {
+    "changePhoto": "Cambiar Foto de Perfil",
+    "selectImage": "Seleccionar Imagen",
+    "updatePhoto": "Actualizar Foto",
+    "preview": "Vista Previa",
+    "supportedFormats": "Formatos soportados: JPG, PNG, GIF. Tamaño máximo: 5MB"
+  },
+  "common": {
+    "required": "Requerido",
+    "invalidEmail": "Email no válido",
+    "passwordsDontMatch": "Las contraseñas no coinciden",
+    "success": "Éxito",
+    "error": "Error",
+    "loading": "Cargando...",
+    "retry": "Reintentar"
   }
-
-
 }
