@@ -8,6 +8,7 @@ import ReportPage from "./domains/reports/pages/reports-page.component.vue"
 import AlertPage from "./domains/alerts/pages/alerts-page.component.vue"
 import AnomalyPage from './domains/anomaly-detection/pages/anomaly-page.component.vue'
 import DashboardPage from '@/domains/dashboard/pages/dashboard.component.vue'
+import UsageManagementPage from './domains/usage-management/pages/usage-management-page.component.vue'
 
 // Lazy load para IAM
 const LoginPage = () => import('./domains/iam/pages/login-page.component.vue')
@@ -47,7 +48,7 @@ const routes = [
     {
         path: '/usage-management',
         name: 'UsageManagement',
-        component: { template: '<h1>Usage Management Placeholder</h1>' },
+        component: UsageManagementPage,
         meta: { requiresAuth: true }
     },
     {

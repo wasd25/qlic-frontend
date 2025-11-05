@@ -299,9 +299,7 @@
     }
   ],
   "notificationSettings": {
-    "types": [
-      "Critical Alerts"
-    ]
+    "types": []
   },
   "payments": [
     {
@@ -407,6 +405,31 @@
       "type": "Low reservoir level",
       "detected_anomaly": "2025-10-05T06:20:00Z",
       "resolved": false
+    }
+  ],
+  "usageSummary": {
+    "current": 320,
+    "dailyLimit": 500,
+    "monthlyTotal": 12400
+  },
+  "usageEvents": [
+    {
+      "id": "1",
+      "time": "08:00",
+      "amount": 45,
+      "source": "Kitchen"
+    },
+    {
+      "id": "2",
+      "time": "09:30",
+      "amount": 30,
+      "source": "Bathroom"
+    },
+    {
+      "id": "3",
+      "time": "11:00",
+      "amount": 60,
+      "source": "Garden"
     }
   ],
   "subscriptions": [
