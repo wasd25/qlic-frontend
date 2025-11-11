@@ -7,7 +7,7 @@
       "password": "Usuario123",
       "isActive": true,
       "createdAt": "2024-01-10T00:00:00.000Z",
-      "lastLogin": "2025-10-29T19:53:49.601Z"
+      "lastLogin": "2025-11-11T15:39:15.540Z"
     },
     {
       "id": "2",
@@ -26,6 +26,14 @@
       "isActive": true,
       "createdAt": "2025-10-24T00:33:55.357Z",
       "lastLogin": "2025-10-24T01:12:15.680Z"
+    },
+    {
+      "id": 1762875381923,
+      "username": "pedrogc",
+      "email": "pedrogc@gmail.com",
+      "password": "$Pgc12345",
+      "isActive": true,
+      "createdAt": "2025-11-11T15:36:21.923Z"
     }
   ],
   "profile": [
@@ -61,6 +69,17 @@
       "phone": "",
       "address": "",
       "avatar": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 1762875381923,
+      "userId": 1762875381923,
+      "name": "pedrogc",
+      "email": "pedrogc@gmail.com",
+      "lastName": "",
+      "age": null,
+      "phone": "",
+      "address": "",
+      "avatar": "data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"150\" height=\"150\" viewBox=\"0 0 150 150\"><rect width=\"150\" height=\"150\" fill=\"#10B981\" rx=\"75\"/><text x=\"50%\" y=\"50%\" dominant-baseline=\"middle\" text-anchor=\"middle\" fill=\"white\" font-size=\"60\" font-family=\"Arial, sans-serif\">P</text></svg>"
     }
   ],
   "reports": [
