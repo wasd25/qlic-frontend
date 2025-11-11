@@ -36,10 +36,7 @@
       </div>
     </div>
   </section>
-
-  <Button :label="$t('reportsSection.download')" @click="handleDownload" />
 </template>
-
 
 <script setup>
 import { ref, onMounted } from 'vue'
@@ -50,18 +47,11 @@ import ReportCostBreakdown from '../components/report-cost-breakdown.component.v
 import ReportEfficiencyMetrics from '../components/report-efficiency-metrics.component.vue'
 import ReportHistoryList from '../components/report-history-list.component.vue'
 import { getReportSummary } from '../services/report.service.js'
-import { exportReportToPDF } from '../services/pdf.service.js'
 
 // ✅ Usar la URL del backend desde .env
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 const usageChartComponent = ref(null)
-
-function handleDownload() {
-  const type = currentFilters.value.type || 'Usage Analytics'
-  const canvas = usageChartComponent.value?.getCanvas()
-  exportReportToPDF(type, summary.value, canvas)
-}
 
 const summary = ref({
   usageTrends: [],
