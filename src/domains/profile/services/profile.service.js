@@ -2,8 +2,9 @@ import { authService } from '../../iam/services/auth.service.js'
 
 export class ProfileService {
     constructor() {
-        this.baseURL = 'http://localhost:3000';
+        this.baseURL = import.meta.env.VITE_API_BASE_URL
     }
+
 
     /**
      * Obtener perfil del usuario actual
