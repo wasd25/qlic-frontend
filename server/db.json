@@ -7,7 +7,7 @@
       "password": "Usuario123",
       "isActive": true,
       "createdAt": "2024-01-10T00:00:00.000Z",
-      "lastLogin": "2025-11-11T15:39:15.540Z"
+      "lastLogin": "2025-11-12T02:26:47.974Z"
     },
     {
       "id": "2",
@@ -28,7 +28,7 @@
       "lastLogin": "2025-10-24T01:12:15.680Z"
     },
     {
-      "id": 1762875381923,
+      "id": "1762875381923",
       "username": "pedrogc",
       "email": "pedrogc@gmail.com",
       "password": "$Pgc12345",
@@ -71,7 +71,7 @@
       "avatar": "https://via.placeholder.com/150"
     },
     {
-      "id": 1762875381923,
+      "id": "1762875381923",
       "userId": 1762875381923,
       "name": "pedrogc",
       "email": "pedrogc@gmail.com",
