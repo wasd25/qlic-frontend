@@ -1,8 +1,9 @@
 export class AuthService {
     constructor() {
-        this.baseURL = 'http://localhost:3000';
+        this.baseURL = import.meta.env.VITE_API_BASE_URL
         this.currentUser = null;
     }
+
 
     async login(credentials) {
         try {
