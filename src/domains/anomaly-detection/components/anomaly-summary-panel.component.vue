@@ -1,9 +1,9 @@
 <template>
   <div class="summary-panel">
-    <div class="box critical"><i class="pi pi-exclamation-triangle icon red"></i><div><p>{{ critical }}</p><span>Critical</span></div></div>
-    <div class="box warning"><i class="pi pi-exclamation-circle icon yellow"></i><div><p>{{ warning }}</p><span>Warnings</span></div></div>
-    <div class="box info"><i class="pi pi-info-circle icon blue"></i><div><p>{{ info }}</p><span>Info</span></div></div>
-    <div class="box resolved"><i class="pi pi-check-circle icon green"></i><div><p>{{ resolved }}</p><span>Resolved</span></div></div>
+    <div class="box critical"><i class="pi pi-exclamation-triangle icon red"></i><div><p>{{ critical }}</p><span>{{ $t('anomalySection.critical') }}</span></div></div>
+    <div class="box warning"><i class="pi pi-exclamation-circle icon yellow"></i><div><p>{{ warning }}</p><span>{{ $t('anomalySection.warning') }}</span></div></div>
+    <div class="box info"><i class="pi pi-info-circle icon blue"></i><div><p>{{ info }}</p><span>{{ $t('anomalySection.info') }}</span></div></div>
+    <div class="box resolved"><i class="pi pi-check-circle icon green"></i><div><p>{{ resolved }}</p><span>{{ $t('anomalySection.resolved') }}</span></div></div>
   </div>
 </template>
 

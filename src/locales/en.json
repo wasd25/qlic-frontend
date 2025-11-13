@@ -137,6 +137,20 @@
     "source": "Source",
     "settings": "Usage Settings",
     "edit": "Edit Limits"
+  },
+  "anomalySection": {
+    "title": "Anomaly Detection",
+    "recent": "Recent Anomalies",
+    "critical": "Critical",
+    "warning": "Warnings",
+    "info": "Info",
+    "resolved": "Resolved",
+    "trend": "Anomaly Trend",
+    "detected": "Detected Anomalies",
+    "id": "ID",
+    "profile": "Profile",
+    "type": "Type",
+    "date": "Date",
+    "status": "Status"
   }
-
 }

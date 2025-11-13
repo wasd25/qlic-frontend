@@ -1,14 +1,14 @@
 <template>
   <div class="anomaly-table">
-    <h2>Detected Anomalies</h2>
+    <h2>{{ $t('anomalySection.detected') }}</h2>
     <table>
       <thead>
       <tr>
-        <th>ID</th>
-        <th>Profile</th>
-        <th>Type</th>
-        <th>Date</th>
-        <th>Status</th>
+        <th>{{ $t('anomalySection.id') }}</th>
+        <th>{{ $t('anomalySection.profile') }}</th>
+        <th>{{ $t('anomalySection.type') }}</th>
+        <th>{{ $t('anomalySection.date') }}</th>
+        <th>{{ $t('anomalySection.status') }}</th>
       </tr>
       </thead>
       <tbody>

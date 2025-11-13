@@ -1,6 +1,6 @@
 <template>
   <div class="trend-chart">
-    <h2>Anomaly Trend</h2>
+    <h2>{{ $t('anomalySection.trend') }}</h2>
     <canvas ref="chartCanvas"></canvas>
   </div>
 </template>

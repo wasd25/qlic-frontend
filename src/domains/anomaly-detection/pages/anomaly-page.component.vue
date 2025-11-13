@@ -1,13 +1,13 @@
 <template>
   <div class="anomaly-page">
-    <h1>Anomaly Detection</h1>
+    <h1>{{ $t('anomalySection.title') }}</h1>
     <anomaly-summary-panel :anomalies="anomalies" />
     <div class="anomaly-body">
       <anomaly-trend-chart :anomalies="anomalies" />
       <anomaly-table :anomalies="anomalies" />
     </div>
     <div class="anomaly-cards">
-      <h2>Recent Anomalies</h2>
+      <h2>{{ $t('anomalySection.recent') }}</h2>
       <anomaly-card
           v-for="a in anomalies.slice(0, 3)"
           :key="a.id"

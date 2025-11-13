@@ -131,5 +131,20 @@
     "source": "Fuente",
     "settings": "Configuración de uso",
     "edit": "Editar límites"
+  },
+  "anomalySection": {
+    "title": "Detección de anomalías",
+    "recent": "Anomalías recientes",
+    "critical": "Crítico",
+    "warning": "Peligros",
+    "info": "Info",
+    "resolved": "Resueltos",
+    "trend": "Tendencia de anomalía",
+    "detected": "Anomalías detectadas",
+    "id": "ID",
+    "profile": "Perfil",
+    "type": "Tipo",
+    "date": "Dia",
+    "status": "Estado"
   }
 }
