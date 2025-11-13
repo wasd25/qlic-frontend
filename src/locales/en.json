@@ -178,5 +178,14 @@
     "yearly": "Yearly",
     "preferred": "Preferred Billing Day",
     "save-settings": "Save Settings"
+  },
+  "subscriptionSection": {
+    "title": "Subscription",
+    "description": "Check, manage and change your subscription profile",
+    "membership-plan": "Membership Plan",
+    "loading": "Loading...",
+    "select": "Select your plan",
+    "price": "Price",
+    "description-plan": "Description"
   }
 }

@@ -172,5 +172,14 @@
     "yearly": "Anual",
     "preferred": "Día de facturación preferido",
     "save-settings": "Guardar configuración"
+  },
+  "subscriptionSection": {
+    "title": "Subscripción",
+    "description": "Consulta, gestiona y modifica tu perfil de suscripción",
+    "membership-plan": "Plan de membresía",
+    "loading": "Cargando...",
+    "select": "Selecciona tu plan",
+    "price": "Precio",
+    "description-plan": "Descripción"
   }
 }

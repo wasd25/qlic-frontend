@@ -50,22 +50,22 @@ export default {
 
 <template>
   <div class="membership-plan">
-    <h2>Membership Plan</h2>
-    <div v-if="loading">Cargando...</div>
+    <h2>{{ $t('subscriptionSection.membership-plan') }}</h2>
+    <div v-if="loading">{{ $t('subscriptionSection.loading') }}</div>
     <div v-else-if="error">{{ error }}</div>
     <div v-else>
       <div class="card">
-        <label>Selecciona tu plan</label>
+        <label>{{ $t('subscriptionSection.select') }}</label>
         <select v-model="selectedPlan.plan" @change="onPlanChange">
           <option v-for="plan in subscriptions" :key="plan.id" :value="plan.plan">
             {{ plan.plan }}
           </option>
         </select>
 
-        <label>Precio</label>
+        <label>{{ $t('subscriptionSection.price') }}</label>
         <input v-model="selectedPlan.price" type="text" disabled />
 
-        <label>Descripción</label>
+        <label>{{ $t('subscriptionSection.description-plan') }}</label>
         <textarea v-model="selectedPlan.description" disabled></textarea>
 
         <button :disabled="saving" @click="savePlan">

@@ -4,8 +4,8 @@ import MembershipPlan from "../components/membership-plan.component.vue";
 
 <template>
   <section class="subscription-page">
-    <h1>Subscription</h1>
-    <p>Check, manage and change your subscription profile</p>
+    <h1>{{ $t('subscriptionSection.title') }}</h1>
+    <p>{{ $t('subscriptionSection.description') }}</p>
 
     <MembershipPlan />
   </section>
