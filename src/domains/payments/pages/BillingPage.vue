@@ -1,8 +1,8 @@
 <template>
   <section class="billing-page">
     <header class="billing-header">
-      <h1>Billing & Payments</h1>
-      <p>Manage your billing information, payment methods, and transaction history.</p>
+      <h1>{{ $t('paymentSection.title') }}</h1>
+      <p>{{ $t('paymentSection.description') }}</p>
     </header>
 
     <!-- Summary cards -->

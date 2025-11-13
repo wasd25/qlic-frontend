@@ -1,7 +1,7 @@
 <template>
   <div class="transactions-card card-root">
     <div class="transactions-header">
-      <h2>Recent Transactions</h2>
+      <h2>{{ $t('paymentSection.transaction') }}</h2>
       <a href="#" class="view-all">View All</a>
     </div>
 

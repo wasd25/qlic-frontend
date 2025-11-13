@@ -152,5 +152,31 @@
     "type": "Type",
     "date": "Date",
     "status": "Status"
+  },
+  "paymentSection": {
+    "title": "Billing & Payments",
+    "description": "Manage your billing information, payment methods, and transaction history.",
+    "methods": "Payment Methods",
+    "default": "Default method",
+    "delete": "Delete",
+    "new_method": "Add New Payment Method",
+    "select_type": "Select type",
+    "visa": "Visa",
+    "paypal": "PayPal",
+    "details": "Details",
+    "set_default": "Set as default",
+    "save": "Save",
+    "cancel": "Cancel",
+    "add_method": "Add Payment Method",
+    "transaction": "Recent Transactions",
+    "settings": "Billing Settings",
+    "last": "Last updated: ",
+    "auto-pay": "Auto-pay",
+    "email-notifications": "Email notifications",
+    "cycle": "Billing Cycle",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "preferred": "Preferred Billing Day",
+    "save-settings": "Save Settings"
   }
 }

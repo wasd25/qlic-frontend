@@ -146,5 +146,31 @@
     "type": "Tipo",
     "date": "Dia",
     "status": "Estado"
+  },
+  "paymentSection": {
+    "title": "Facturación y pagos",
+    "description": "Gestiona tu información de facturación, métodos de pago e historial de transacciones.",
+    "methods": "Métodos de pago",
+    "default": "Método predeterminado",
+    "delete": "Eliminar",
+    "new_method": "Agregar nuevo método de pago",
+    "select_type": "Seleccionar tipo",
+    "visa": "Visa",
+    "paypal": "PayPal",
+    "details": "Detalles",
+    "set_default": "Establecer como predeterminado",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "add_method": "Agregar método de pago",
+    "transaction": "Transacciones recientes",
+    "settings": "Configuración de facturación",
+    "last": "Última actualización: ",
+    "auto-pay": "Pago automático",
+    "email-notifications": "Notificaciones por correo electrónico",
+    "cycle": "Ciclo de facturación",
+    "monthly": "Mensual",
+    "yearly": "Anual",
+    "preferred": "Día de facturación preferido",
+    "save-settings": "Guardar configuración"
   }
 }

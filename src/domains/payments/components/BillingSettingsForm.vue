@@ -1,33 +1,33 @@
 <template>
   <div class="billing-settings-card card-root">
     <header class="billing-settings-header">
-      <h2>Billing Settings</h2>
-      <span>Last updated: {{ formattedDate }}</span>
+      <h2>{{ $t('paymentSection.settings') }}</h2>
+      <span>{{ $t('paymentSection.last') }} {{ formattedDate }}</span>
     </header>
 
     <form @submit.prevent="handleSave" class="billing-settings-form">
       <div class="form-section">
         <label class="switch-row">
-          <span>Auto-pay</span>
+          <span>{{ $t('paymentSection.auto-pay') }}</span>
           <input type="checkbox" v-model="form.autopay" />
         </label>
 
         <label class="switch-row">
-          <span>Email notifications</span>
+          <span>{{ $t('paymentSection.email-notifications') }}</span>
           <input type="checkbox" v-model="form.emailNotifications" />
         </label>
       </div>
 
       <div class="form-section">
-        <label>Billing Cycle</label>
+        <label>{{ $t('paymentSection.cycle') }}</label>
         <select v-model="form.billingCycle">
-          <option value="monthly">Monthly</option>
-          <option value="yearly">Yearly</option>
+          <option value="monthly">{{ $t('paymentSection.monthly') }}</option>
+          <option value="yearly">{{ $t('paymentSection.yearly') }}</option>
         </select>
       </div>
 
       <div class="form-section">
-        <label>Preferred Billing Day</label>
+        <label>{{ $t('paymentSection.preferred') }}</label>
         <input
             v-model.number="form.preferredBillingDay"
             type="number"
@@ -37,7 +37,7 @@
       </div>
 
       <div class="actions">
-        <button type="submit">Save Settings</button>
+        <button type="submit">{{ $t('paymentSection.save-settings') }}</button>
       </div>
     </form>
   </div>

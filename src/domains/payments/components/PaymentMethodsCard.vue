@@ -1,37 +1,37 @@
 <template>
   <div class="payment-methods-card card-root">
-    <h2>Payment Methods</h2>
+    <h2>{{ $t('paymentSection.methods') }}</h2>
 
     <ul class="methods-list">
       <li v-for="method in methods" :key="method.id" class="method-item">
         <div class="method-info">
           <p class="method-type">{{ method.type }}</p>
           <p class="method-details">{{ method.details }}</p>
-          <p v-if="method.isDefault" class="default-label">Default method</p>
+          <p v-if="method.isDefault" class="default-label">{{ $t('paymentSection.default') }}</p>
         </div>
 
         <button class="btn-delete" @click="deleteMethod(method.id)">
-          Delete
+          {{ $t('paymentSection.delete') }}
         </button>
       </li>
     </ul>
 
     <!-- Add new payment method form -->
     <div v-if="adding" class="add-form">
-      <h3>Add New Payment Method</h3>
+      <h3>{{ $t('paymentSection.new_method') }}</h3>
 
       <div class="form-fields">
         <div class="form-group">
           <label>Type</label>
           <select v-model="newMethod.type">
-            <option disabled value="">Select type</option>
-            <option value="Visa">Visa</option>
-            <option value="PayPal">PayPal</option>
+            <option disabled value="">{{ $t('paymentSection.select_type') }}</option>
+            <option value="Visa">{{ $t('paymentSection.visa') }}</option>
+            <option value="PayPal">{{ $t('paymentSection.paypal') }}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label>Details</label>
+          <label>{{ $t('paymentSection.details') }}</label>
           <input
               v-model="newMethod.details"
               type="text"
@@ -41,19 +41,19 @@
 
         <label class="checkbox-label">
           <input type="checkbox" v-model="newMethod.isDefault" />
-          <span>Set as default</span>
+          <span>{{ $t('paymentSection.set_default') }}</span>
         </label>
       </div>
 
       <div class="actions">
-        <button class="btn-primary" @click="saveNewMethod">Save</button>
-        <button class="btn-secondary" @click="cancelAdd">Cancel</button>
+        <button class="btn-primary" @click="saveNewMethod">{{ $t('paymentSection.save') }}</button>
+        <button class="btn-secondary" @click="cancelAdd">{{ $t('paymentSection.cancel') }}</button>
       </div>
     </div>
 
     <!-- Add button -->
     <div v-else>
-      <button class="btn-primary" @click="startAdd">Add Payment Method</button>
+      <button class="btn-primary" @click="startAdd">{{ $t('paymentSection.add_method') }}</button>
     </div>
   </div>
 </template>
