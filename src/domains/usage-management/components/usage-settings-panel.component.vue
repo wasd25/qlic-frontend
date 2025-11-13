@@ -14,11 +14,12 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const alertsEnabled = ref(false)
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get('http://localhost:3000/notificationSettings')
+    const { data } = await axios.get(`${BASE_URL}/notificationSettings`)
     alertsEnabled.value = data.types.includes('Critical Alerts')
   } catch (error) {
     console.error('Error loading notification settings:', error)

@@ -26,11 +26,12 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const events = ref([])
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get('http://localhost:3000/usageEvents')
+    const { data } = await axios.get(`${BASE_URL}/usageEvents`)
     events.value = data
   } catch (error) {
     console.error('Error fetching usage events:', error)

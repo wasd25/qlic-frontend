@@ -12,11 +12,12 @@ import { ref, onMounted } from 'vue'
 import Chart from 'chart.js/auto'
 import axios from 'axios'
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const chartRef = ref(null)
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get('http://localhost:3000/reportSummaries/1')
+    const { data } = await axios.get(`${BASE_URL}/reportSummaries/1`)
     const labels = data.usageTrends.map(item => item.day)
     const values = data.usageTrends.map(item => item.liters)
 

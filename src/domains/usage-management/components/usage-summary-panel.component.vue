@@ -19,11 +19,12 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const summary = ref({ current: 0, dailyLimit: 0, monthlyTotal: 0 })
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get('http://localhost:3000/usageSummary')
+    const { data } = await axios.get(`${BASE_URL}/usageSummary`)
     summary.value = data
   } catch (error) {
     console.error('Error fetching usage summary:', error)
