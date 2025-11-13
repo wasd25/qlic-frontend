@@ -2,9 +2,9 @@
   <div class="usage-management-page">
     <!-- Encabezado tipo Reports -->
     <section class="page-header">
-      <h1 class="page-title">Usage Management</h1>
+      <h1 class="page-title">{{$t('usageSection.title')}}</h1>
       <p class="page-description">
-        Comprehensive water usage tracking and optimization tools.
+        {{ $t('usageSection.description') }}
       </p>
     </section>
 

@@ -4,28 +4,28 @@
       <i class="pi pi-exclamation-triangle icon red"></i>
       <div class="text">
         <p class="count">{{ summary.critical }}</p>
-        <p class="label">Critical Alerts</p>
+        <p class="label">{{ $t('alertsSection.critical')}}</p>
       </div>
     </div>
     <div class="box warning">
       <i class="pi pi-exclamation-circle icon yellow"></i>
       <div class="text">
         <p class="count">{{ summary.warning }}</p>
-        <p class="label">Warnings</p>
+        <p class="label">{{ $t('alertsSection.warning')}}</p>
       </div>
     </div>
     <div class="box info">
       <i class="pi pi-info-circle icon blue"></i>
       <div class="text">
         <p class="count">{{ summary.info }}</p>
-        <p class="label">Info Alerts</p>
+        <p class="label">{{ $t('alertsSection.info')}}</p>
       </div>
     </div>
     <div class="box resolved">
       <i class="pi pi-check-circle icon green"></i>
       <div class="text">
         <p class="count">{{ summary.resolvedToday }}</p>
-        <p class="label">Resolved Today</p>
+        <p class="label">{{ $t('alertsSection.resolved')}}</p>
       </div>
     </div>
   </div>

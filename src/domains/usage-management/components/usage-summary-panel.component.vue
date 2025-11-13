@@ -1,16 +1,16 @@
 <template>
   <section class="metrics">
     <div class="metric-card">
-      <h4>Current Usage</h4>
-      <p>{{ summary.current }} gallons</p>
+      <h4>{{$t('usageSection.current')}}</h4>
+      <p>{{ summary.current }} {{$t('usageSection.gallon')}}</p>
     </div>
     <div class="metric-card">
-      <h4>Daily Limit</h4>
-      <p>{{ summary.dailyLimit }} gallons</p>
+      <h4>{{$t('usageSection.daily')}}</h4>
+      <p>{{ summary.dailyLimit }} {{$t('usageSection.gallon')}}</p>
     </div>
     <div class="metric-card">
-      <h4>Monthly Total</h4>
-      <p>{{ summary.monthlyTotal }} gallons</p>
+      <h4>{{$t('usageSection.monthly')}}</h4>
+      <p>{{ summary.monthlyTotal }} {{$t('usageSection.gallon')}}</p>
     </div>
   </section>
 </template>

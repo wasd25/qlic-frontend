@@ -112,5 +112,31 @@
     "zoneA": "Zone A",
     "zoneB": "Zone B",
     "costAnalysis": "Cost Analysis"
+  },
+  "alertsSection": {
+    "title": "Alerts & Notifications",
+    "critical": "Critical Alerts",
+    "warning": "Warning",
+    "info": "Info Alerts",
+    "resolved": "Resolved Today",
+    "active": "Active Alerts",
+    "no_active": "No active alerts",
+    "types": "Alert Types"
+  },
+  "usageSection": {
+    "title": "Usage Management",
+    "description": "Comprehensive water usage tracking and optimization tools.",
+    "current": "Current Usage",
+    "daily": "Daily Limit",
+    "monthly": "Monthly Total",
+    "chart": "Daily Usage (Last 7 Days)",
+    "gallon": "gallons",
+    "events": "Recent Usage Events",
+    "time": "Time",
+    "amount": "Amount",
+    "source": "Source",
+    "settings": "Usage Settings",
+    "edit": "Edit Limits"
   }
+
 }

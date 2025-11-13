@@ -1,8 +1,8 @@
 <template>
   <section class="settings-section">
-    <h3>Usage Settings</h3>
+    <h3>{{ $t('usageSection.settings') }}</h3>
     <div class="controls">
-      <button @click="editLimits">Edit Limits</button>
+      <button @click="editLimits">{{ $t('usageSection.edit') }}</button>
       <button @click="toggleAlerts">
         {{ alertsEnabled ? 'Disable Alerts' : 'Enable Alerts' }}
       </button>

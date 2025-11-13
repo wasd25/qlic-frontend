@@ -1,6 +1,6 @@
 <template>
   <div class="settings-panel">
-    <h2>Alert Types</h2>
+    <h2>{{ $t('alertsSection.types')}}</h2>
     <div class="checkbox-group">
       <label v-for="type in alertTypes" :key="type">
         <input type="checkbox" v-model="selectedTypes" :value="type" />

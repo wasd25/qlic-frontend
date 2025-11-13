@@ -1,7 +1,7 @@
 <template>
   <div class="active-alerts">
-    <h2>Active Alerts</h2>
-    <div v-if="alerts.length === 0" class="empty">No active alerts</div>
+    <h2>{{ $t('alertsSection.active')}}</h2>
+    <div v-if="alerts.length === 0" class="empty">{{ $t('alertsSection.no_active')}}</div>
     <div v-else class="alert-list">
       <alert-card
           v-for="alert in alerts"

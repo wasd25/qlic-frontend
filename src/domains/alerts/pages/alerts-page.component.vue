@@ -1,6 +1,6 @@
 <template>
   <div class="alerts-page">
-    <h1>Alerts & Notifications</h1>
+    <h1>{{ $t('alertsSection.title')}}</h1>
 
     <alert-summary-panel :summary="summary" />
 

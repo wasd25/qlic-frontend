@@ -1,19 +1,19 @@
 <template>
   <section class="events-section">
-    <h3>Recent Usage Events</h3>
+    <h3>{{$t('usageSection.events')}}</h3>
     <div class="table-wrapper">
       <table>
         <thead>
         <tr>
-          <th>Time</th>
-          <th>Amount</th>
-          <th>Source</th>
+          <th>{{$t('usageSection.time')}}</th>
+          <th>{{$t('usageSection.amount')}}</th>
+          <th>{{$t('usageSection.source')}}</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="event in events" :key="event.id">
           <td>{{ event.time }}</td>
-          <td>{{ event.amount }} gallons</td>
+          <td>{{ event.amount }} {{$t('usageSection.gallon')}}</td>
           <td>{{ event.source }}</td>
         </tr>
         </tbody>

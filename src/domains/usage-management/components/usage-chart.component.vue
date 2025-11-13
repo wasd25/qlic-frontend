@@ -1,6 +1,6 @@
 <template>
   <section class="chart-section">
-    <h3>Daily Usage (Last 7 Days)</h3>
+    <h3>{{$t('usageSection.chart')}}</h3>
     <div class="chart-wrapper">
       <canvas ref="chartRef"></canvas>
     </div>

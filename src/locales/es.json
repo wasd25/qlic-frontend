@@ -106,5 +106,30 @@
     "liters": "litros",
     "gallons": "galones",
     "currency": "USD"
+  },
+  "alertsSection": {
+    "title": "Alertas & Notificaciones",
+    "critical": "Alertas Criticas",
+    "warning": "Peligro",
+    "info": "Alertas Informadas",
+    "resolved": "Resueltas",
+    "active": "Alertas Activas",
+    "no_active": "Ningunas alertas activadas",
+    "types": "Tipos de alertas"
+  },
+  "usageSection": {
+    "title": "Gestión de uso",
+    "description": "Herramientas integrales para el seguimiento y la optimización del consumo de agua.",
+    "current": "Uso actual",
+    "daily": "Límite diario",
+    "monthly": "Total Mensual",
+    "chart": "Consumo diario (últimos 7 días)",
+    "gallon": "galones",
+    "events": "Eventos de uso recientes",
+    "time": "Tiempo",
+    "amount": "Cantidad",
+    "source": "Fuente",
+    "settings": "Configuración de uso",
+    "edit": "Editar límites"
   }
 }
