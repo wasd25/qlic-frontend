@@ -152,7 +152,7 @@ const filteredAlerts = computed(() =>
 
 /* --- COLUMNA IZQUIERDA (Alertas) --- */
 .left-column {
-  width: 100%; /* Ocupa todo en móvil */
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -167,7 +167,7 @@ const filteredAlerts = computed(() =>
 
 /* --- COLUMNA DERECHA (Configuración) --- */
 .right-column {
-  width: 100%; /* Ocupa todo en móvil */
+  width: 100%;
   /* min-width eliminado para evitar desbordes en celulares muy pequeños */
 }
 
