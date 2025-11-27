@@ -6,7 +6,6 @@
     </main>
   </div>
 
-  <!-- Mostrar solo el router-view para login/register -->
   <router-view v-else />
 </template>
 
@@ -50,11 +49,32 @@ watch(
 .layout {
   display: flex;
   min-height: 100vh;
+  width: 100%; /* Asegura ancho completo */
   background-color: var(--app-bg, #f5f5f5);
+  position: relative;
 }
 
 .main-content {
-  flex: 1;
+  flex: 1; /* Ocupa el espacio restante */
   padding: 2rem;
+
+  /* --- REGLA DE ORO PARA GRÁFICOS --- */
+  min-width: 0; /* Esto evita que los gráficos (Chart.js/ApexCharts) rompan el flex y se salgan de la pantalla */
+  width: 100%;  /* Asegura consistencia */
+  transition: margin 0.3s ease;
+}
+
+/* --- AJUSTES PARA MÓVIL --- */
+@media (max-width: 768px) {
+  .layout {
+    /* En móvil, el sidebar es 'fixed' (flotante), así que no ocupa espacio en el flujo normal.
+       El contenido se estirará al 100% automáticamente. */
+    display: block;
+  }
+
+  .main-content {
+    padding: 1rem; /* Menos padding lateral en móvil */
+    padding-top: 4rem; /* IMPORTANTE: Empuja el contenido hacia abajo para que el botón hamburguesa no tape el título */
+  }
 }
 </style>
