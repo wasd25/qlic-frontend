@@ -1,38 +1,42 @@
 <template>
   <section class="reports-page">
     <div class="container">
-      <!-- Encabezado -->
       <header class="header">
         <h1>{{ $t('reportsSection.title') }}</h1>
         <p>{{ $t('reportsSection.subtitle') }}</p>
       </header>
 
-      <!-- Filtros -->
       <report-filter @generate="loadData" />
 
-      <!-- Paneles principales -->
       <div class="grid panels">
-        <report-usage-chart
-            ref="usageChartComponent"
-            :data="summary.usageTrends"
-            :title="$t('reportsSection.trends')"
-        />
-        <report-cost-breakdown
-            :data="summary.costBreakdown"
-            :title="$t('reportsSection.costBreakdown')"
-        />
+        <div class="chart-wrapper">
+          <report-usage-chart
+              ref="usageChartComponent"
+              :data="summary.usageTrends"
+              :title="$t('reportsSection.trends')"
+          />
+        </div>
+        <div class="chart-wrapper">
+          <report-cost-breakdown
+              :data="summary.costBreakdown"
+              :title="$t('reportsSection.costBreakdown')"
+          />
+        </div>
       </div>
 
-      <!-- Paneles inferiores -->
       <div class="grid bottom-panels">
-        <report-efficiency-metrics
-            :metrics="summary.efficiencyMetrics"
-            :title="$t('reportsSection.efficiencyMetrics')"
-        />
-        <report-history-list
-            :reports="reports"
-            @download="downloadReport"
-        />
+        <div class="panel-wrapper">
+          <report-efficiency-metrics
+              :metrics="summary.efficiencyMetrics"
+              :title="$t('reportsSection.efficiencyMetrics')"
+          />
+        </div>
+        <div class="panel-wrapper">
+          <report-history-list
+              :reports="reports"
+              @download="downloadReport"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -48,9 +52,7 @@ import ReportEfficiencyMetrics from '../components/report-efficiency-metrics.com
 import ReportHistoryList from '../components/report-history-list.component.vue'
 import { getReportSummary } from '../services/report.service.js'
 
-// ✅ Usar la URL del backend desde .env
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
-
 const usageChartComponent = ref(null)
 
 const summary = ref({
@@ -62,37 +64,30 @@ const summary = ref({
 const reports = ref([])
 const currentFilters = ref({})
 
-// 🔄 Cargar reportes desde db.json y aplicar filtros si existen
 async function fetchReports(filters = {}) {
   try {
     const response = await axios.get(`${BASE_URL}/reports`)
     const allReports = response.data
-
     const filtered = allReports.filter(report => {
       const matchType = filters.type ? report.type === filters.type : true
       const matchLocation = filters.location ? report.location === filters.location : true
       return matchType && matchLocation
     })
-
     reports.value = filtered
   } catch (error) {
     console.error('Error al cargar los reportes:', error)
   }
 }
 
-// 📥 Marcar como descargado y recargar lista
 async function downloadReport(report) {
   try {
-    await axios.patch(`${BASE_URL}/reports/${report.id}`, {
-      downloaded: true
-    })
+    await axios.patch(`${BASE_URL}/reports/${report.id}`, { downloaded: true })
     await fetchReports(currentFilters.value)
   } catch (error) {
     console.error('Error al marcar como descargado:', error)
   }
 }
 
-// 🔄 Generar resumen y cargar reportes filtrados
 async function loadData(filters = {}) {
   currentFilters.value = filters
   const data = await getReportSummary(filters)
@@ -100,7 +95,6 @@ async function loadData(filters = {}) {
   await fetchReports(filters)
 }
 
-// 🟢 Cargar datos iniciales sin filtros
 onMounted(() => {
   loadData()
 })
@@ -110,19 +104,28 @@ onMounted(() => {
 .reports-page {
   background-color: var(--body-bg);
   padding-bottom: 2rem;
+  min-height: 100%;
 }
 
+/* CONTAINER RESPONSIVO */
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem; /* Padding reducido para móvil */
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
+/* Ajuste padding desktop */
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
 .header h1 {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #1f2937;
   margin-bottom: 0.25rem;
@@ -133,14 +136,37 @@ onMounted(() => {
   color: #6b7280;
 }
 
+/* --- GRID SYSTEM ARREGLADO --- */
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* POR DEFECTO: 1 Columna (Móvil) */
+  grid-template-columns: 1fr;
   gap: 1.5rem;
+  width: 100%;
+}
+
+/* MEDIA QUERY: Solo en pantallas grandes pasa a 2 columnas */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr; /* 50% - 50% */
+  }
 }
 
 .panels,
 .bottom-panels {
   margin-top: 1rem;
+}
+
+/* Wrappers para asegurar que los gráficos no rompan el layout */
+.chart-wrapper, .panel-wrapper {
+  background: transparent;
+  min-width: 0; /* CRUCIAL: Evita que Chart.js empuje el ancho más allá del límite */
+  width: 100%;
+}
+
+/* Estilos profundos para forzar comportamiento en hijos si es necesario */
+:deep(.card), :deep(.panel) {
+  width: 100% !important;
+  box-sizing: border-box;
 }
 </style>
