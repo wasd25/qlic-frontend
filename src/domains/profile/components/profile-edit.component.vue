@@ -2,40 +2,40 @@
   <div class="profile-edit">
     <div class="edit-card">
       <div class="edit-header">
-        <h3>Editar Información Personal</h3>
-        <p>Actualiza tus datos básicos</p>
+        <h3>{{ $t('profile.editTitle') }}</h3>
+        <p>{{ $t('profile.editSubtitle') }}</p>
       </div>
 
       <form @submit.prevent="handleSubmit" class="edit-form">
         <div class="form-grid">
           <div class="form-group">
-            <label for="name">Nombre *</label>
+            <label for="name">{{ $t('profile.firstName') }} *</label>
             <InputText
                 id="name"
                 v-model="formData.name"
-                placeholder="Tu nombre"
+                :placeholder="$t('profile.yourName')"
                 :class="{ 'p-invalid': errors.name }"
             />
             <small v-if="errors.name" class="error-message">{{ errors.name }}</small>
           </div>
 
           <div class="form-group">
-            <label for="lastName">Apellido *</label>
+            <label for="lastName">{{ $t('profile.lastName') }} *</label>
             <InputText
                 id="lastName"
                 v-model="formData.lastName"
-                placeholder="Tu apellido"
+                :placeholder="$t('profile.yourLastName')"
                 :class="{ 'p-invalid': errors.lastName }"
             />
             <small v-if="errors.lastName" class="error-message">{{ errors.lastName }}</small>
           </div>
 
           <div class="form-group">
-            <label for="email">Email *</label>
+            <label for="email">{{ $t('profile.email') }} *</label>
             <InputText
                 id="email"
                 v-model="formData.email"
-                placeholder="tu@email.com"
+                :placeholder="$t('profile.yourEmail')"
                 type="email"
                 :class="{ 'p-invalid': errors.email }"
             />
@@ -43,7 +43,7 @@
           </div>
 
           <div class="form-group">
-            <label for="age">Edad</label>
+            <label for="age">{{ $t('profile.age') }}</label>
             <InputNumber
                 id="age"
                 v-model="formData.age"
@@ -55,20 +55,20 @@
           </div>
 
           <div class="form-group">
-            <label for="phone">Teléfono</label>
+            <label for="phone">{{ $t('profile.phone') }}</label>
             <InputText
                 id="phone"
                 v-model="formData.phone"
-                placeholder="+1234567890"
+                :placeholder="$t('profile.yourPhone')"
             />
           </div>
 
           <div class="form-group full-width">
-            <label for="address">Dirección</label>
+            <label for="address">{{ $t('profile.address') }}</label>
             <Textarea
                 id="address"
                 v-model="formData.address"
-                placeholder="Tu dirección completa"
+                :placeholder="$t('profile.yourAddress')"
                 :autoResize="true"
                 rows="3"
             />
@@ -78,14 +78,14 @@
         <div class="form-actions">
           <Button
               type="button"
-              label="Cancelar"
+              :label="$t('profile.cancel')"
               severity="secondary"
               @click="$emit('cancel')"
               :disabled="isLoading"
           />
           <Button
               type="submit"
-              label="Guardar Cambios"
+              :label="$t('profile.saveChanges')"
               :loading="isLoading"
               :disabled="!hasChanges"
           />
@@ -97,6 +97,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import InputText from 'primevue/inputtext'
 import InputNumber from 'primevue/inputnumber'
 import Textarea from 'primevue/textarea'
@@ -110,6 +111,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['save', 'cancel'])
+const { t } = useI18n()
 
 // Estado reactivo
 const formData = ref({ ...props.profile })
@@ -126,17 +128,17 @@ const validateForm = () => {
   errors.value = {}
 
   if (!formData.value.name?.trim()) {
-    errors.value.name = 'El nombre es requerido'
+    errors.value.name = t('profile.nameRequired')
   }
 
   if (!formData.value.lastName?.trim()) {
-    errors.value.lastName = 'El apellido es requerido'
+    errors.value.lastName = t('profile.lastNameRequired')
   }
 
   if (!formData.value.email?.trim()) {
-    errors.value.email = 'El email es requerido'
+    errors.value.email = t('profile.emailRequired')
   } else if (!/\S+@\S+\.\S+/.test(formData.value.email)) {
-    errors.value.email = 'El email no es válido'
+    errors.value.email = t('profile.emailInvalid')
   }
 
   return Object.keys(errors.value).length === 0
