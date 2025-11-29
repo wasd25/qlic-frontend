@@ -42,6 +42,7 @@
     "age": "Age",
     "phone": "Phone",
     "address": "Address",
+    "avatarUrl": "Avatar URL",
     "editInfo": "Edit Information",
     "saveChanges": "Save Changes",
     "cancel": "Cancel",
