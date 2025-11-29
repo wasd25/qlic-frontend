@@ -4,9 +4,9 @@
       <i :class="iconClass" class="main-icon"></i>
     </div>
     <div class="content">
-      <h4>{{ alert.title }}</h4>
-      <p>{{ alert.message }}</p>
-      <small>{{ alert.timestamp }}</small>
+      <h4>{{ translatedTitle }}</h4>
+      <p>{{ translatedMessage }}</p>
+      <small>{{ translatedTimestamp }}</small>
     </div>
     <div class="dismiss">
       <i :class="dismissIconClass"></i>
@@ -15,7 +15,11 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+import { computed } from 'vue'
+
 const props = defineProps({ alert: Object })
+const { t, te, locale } = useI18n()
 
 const iconClass = {
   Critical: 'pi pi-exclamation-triangle text-red-500',
@@ -28,6 +32,40 @@ const dismissIconClass = {
   Warning: 'pi pi-times text-yellow-500',
   Info: 'pi pi-times text-blue-500'
 }[props.alert.type] || 'pi pi-times'
+
+// Use computed properties for reactive translations
+const translatedTitle = computed(() => {
+  if (!props.alert?.title) return ''
+  const key = `alertTitles.${props.alert.title}`
+  const hasTranslation = te(key)
+
+  if (hasTranslation) {
+    return t(key)
+  }
+  return props.alert.title
+})
+
+const translatedMessage = computed(() => {
+  if (!props.alert?.message) return ''
+  const key = `alertMessages.${props.alert.message}`
+  const hasTranslation = te(key)
+
+  if (hasTranslation) {
+    return t(key)
+  }
+  return props.alert.message
+})
+
+const translatedTimestamp = computed(() => {
+  if (!props.alert?.timestamp) return ''
+  const key = `alertTimestamps.${props.alert.timestamp}`
+  const hasTranslation = te(key)
+
+  if (hasTranslation) {
+    return t(key)
+  }
+  return props.alert.timestamp
+})
 </script>
 
 <style scoped>
