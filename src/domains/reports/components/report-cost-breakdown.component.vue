@@ -12,11 +12,13 @@
 <script setup>
 import { computed } from 'vue'
 import Chart from 'primevue/chart'
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps({ data: Array })
+const { t } = useI18n()
 
 const chartData = computed(() => ({
-  labels: props.data.map(d => d.category),
+  labels: props.data.map(d => t(`costCategories.${d.category}`)),
   datasets: [
     {
       data: props.data.map(d => d.cost),
