@@ -2,19 +2,19 @@
   <section class="dashboard-page">
     <div class="container">
       <header class="header">
-        <h1>Dashboard</h1>
-        <p>Resumen general y accesos rápidos</p>
+        <h1>{{ $t('sidebar.dashboard') }}</h1>
+        <p>{{ $t('dashboard.subtitle') }}</p>
       </header>
 
       <section class="bounded-context alerts-summary">
-        <h2>Alerts & Notifications</h2>
+        <h2>{{ $t('dashboard.alertsAndNotifications') }}</h2>
         <div class="component-wrapper">
           <AlertSummaryPanel :summary="summary" />
         </div>
       </section>
 
       <section class="bounded-context anomaly-summary">
-        <h2>Anomaly Detection</h2>
+        <h2>{{ $t('dashboard.anomalyDetection') }}</h2>
         <div class="component-wrapper">
           <AnomalySummaryPanel :anomalies="anomalies" />
         </div>
@@ -22,19 +22,19 @@
 
       <section class="bounded-context billing-summary-section">
         <header class="section-header">
-          <h2 class="billing-title">Billing & Payments</h2>
-          <p class="billing-subtext">Manage your billing information and history.</p>
+          <h2 class="billing-title">{{ $t('dashboard.billingAndPayments') }}</h2>
+          <p class="billing-subtext">{{ $t('dashboard.manageBilling') }}</p>
         </header>
 
         <section class="billing-summary">
-          <BillingSummaryCard title="Current Balance" :value="balanceDisplay" />
-          <BillingSummaryCard title="Next Payment" :value="nextPaymentDate" />
-          <BillingSummaryCard title="Average Payment" :value="monthlyAverage" />
+          <BillingSummaryCard :title="$t('dashboard.currentBalance')" :value="balanceDisplay" />
+          <BillingSummaryCard :title="$t('dashboard.nextPayment')" :value="nextPaymentDate" />
+          <BillingSummaryCard :title="$t('dashboard.averagePayment')" :value="monthlyAverage" />
         </section>
       </section>
 
       <section class="bounded-context recent-reports">
-        <h2>Recent Reports</h2>
+        <h2>{{ $t('dashboard.recentReports') }}</h2>
         <ReportHistoryList :reports="recentReports" @download="handleDownload" />
       </section>
     </div>
