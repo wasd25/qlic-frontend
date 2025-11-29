@@ -22,7 +22,7 @@
 
       <div class="form-fields">
         <div class="form-group">
-          <label>Type</label>
+          <label>{{ $t('paymentMethods.type') }}</label>
           <select v-model="newMethod.type">
             <option disabled value="">{{ $t('paymentSection.select_type') }}</option>
             <option value="Visa">{{ $t('paymentSection.visa') }}</option>
@@ -35,7 +35,7 @@
           <input
               v-model="newMethod.details"
               type="text"
-              placeholder="VISA ****1234 or paypal@example.com"
+              :placeholder="$t('paymentMethods.placeholder')"
           />
         </div>
 
@@ -61,6 +61,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import paymentsService from '../services/payments.service.js'
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
   methods: { type: Array, default: () => [] }
@@ -69,6 +70,7 @@ const props = defineProps({
 const emit = defineEmits(['refresh'])
 const adding = ref(false)
 const localMethods = ref([])
+const { t } = useI18n()
 
 const newMethod = ref({
   type: '',
@@ -88,7 +90,7 @@ const cancelAdd = () => {
 
 const saveNewMethod = async () => {
   if (!newMethod.value.type || !newMethod.value.details) {
-    alert('Please fill in all fields')
+    alert(t('paymentMethods.fillAllFields'))
     return
   }
 
@@ -103,7 +105,7 @@ const saveNewMethod = async () => {
 }
 
 const deleteMethod = async (id) => {
-  if (confirm('Are you sure you want to delete this payment method?')) {
+  if (confirm(t('paymentMethods.deleteConfirm'))) {
     try {
       await paymentsService.deletePaymentMethod(id)
       localMethods.value = localMethods.value.filter(m => m.id !== id)
