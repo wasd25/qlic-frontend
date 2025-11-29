@@ -68,6 +68,7 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
   profile: {
@@ -78,6 +79,7 @@ const props = defineProps({
 })
 
 defineEmits(['edit', 'change-avatar'])
+const { t } = useI18n()
 
 // Computed properties para datos derivados
 const fullName = computed(() => {
@@ -90,7 +92,7 @@ const fullName = computed(() => {
   if (props.profile.lastName) {
     return props.profile.lastName
   }
-  return props.profile.username || 'Usuario' // Fallback al username si no hay nombre
+  return props.profile.username || t('profile.defaultUser')
 })
 
 const defaultAvatar = computed(() => {
