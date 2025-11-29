@@ -19,8 +19,10 @@
 import {computed} from 'vue'
 import Chart from 'primevue/chart'
 import {ref, defineExpose} from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const usageChartRef = ref(null)
+const { t } = useI18n()
 
 defineExpose({
   getCanvas: () => usageChartRef.value?.$el?.querySelector('canvas')
@@ -33,7 +35,7 @@ const chartData = computed(() => ({
   labels: props.data.map(d => d.day),
   datasets: [
     {
-      label: 'Liters Used',
+      label: t('reportsSection.liters'),
       data: props.data.map(d => d.liters),
       backgroundColor: '#3B82F6',
       borderRadius: 6
