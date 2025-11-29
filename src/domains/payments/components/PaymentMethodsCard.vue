@@ -103,9 +103,14 @@ const saveNewMethod = async () => {
     }
 
     const created = await paymentsService.addPaymentMethod(dataToSend)
-    localMethods.value.push(created)
+
+    // Si la API devolvió el objeto creado, agregarlo localmente
+    if (created && typeof created === 'object' && created.id) {
+      localMethods.value.push(created)
+    }
+
     cancelAdd()
-    emit('refresh') // Sync with backend
+    emit('refresh') // Sync with backend - esto recargará los métodos de todos modos
   } catch (err) {
     console.error('Error adding method:', err)
     alert(t('paymentMethods.error') || 'Error al agregar método de pago')
