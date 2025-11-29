@@ -20,7 +20,34 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import { authService } from '@/domains/iam/services/auth.service.js';
+
 const router = useRouter();
+
+
+onMounted(() => {
+  console.log('Success page loaded');
+  console.log('Is authenticated:', authService.isAuthenticated());
+});
+
+const goToSubscription = () => {
+  console.log('📍 Navigating to subscription page');
+  if (authService.isAuthenticated()) {
+    router.push('/subscription');
+  } else {
+    router.push('/login');
+  }
+};
+
+const goToDashboard = () => {
+  console.log('📍 Navigating to dashboard page');
+  if (authService.isAuthenticated()) {
+    router.push('/dashboard');
+  } else {
+    router.push('/login');
+  }
+};
 </script>
 
 <style scoped>
