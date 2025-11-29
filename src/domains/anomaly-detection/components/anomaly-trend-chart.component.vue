@@ -1,6 +1,5 @@
 <template>
   <div class="trend-chart">
-    <h2>{{ $t('anomalySection.trend') }}</h2>
     <canvas ref="chartCanvas"></canvas>
   </div>
 </template>
@@ -8,10 +7,12 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import Chart from 'chart.js/auto'
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps({ anomalies: Array })
 const chartCanvas = ref(null)
 let chartInstance = null
+const { t } = useI18n()
 
 function buildChart() {
   if (!props.anomalies || props.anomalies.length === 0) return
@@ -33,7 +34,7 @@ function buildChart() {
     data: {
       labels,
       datasets: [{
-        label: 'Anomalies per Day',
+        label: t('anomalyChart.anomaliesPerDay'),
         data,
         backgroundColor: '#3b82f6'
       }]
@@ -71,9 +72,5 @@ watch(() => props.anomalies, () => {
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   flex: 1;
-}
-.trend-chart h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
 }
 </style>
