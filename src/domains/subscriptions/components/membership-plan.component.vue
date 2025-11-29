@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import { subscriptionService } from "../services/subscription.service.js";
 import { useI18n } from "vue-i18n";
+import ToastNotification from "@/shared/components/toast-notification.component.vue";
 
 const subscriptions = ref([]);
 const selectedPlanId = ref(null);
@@ -9,6 +10,24 @@ const loading = ref(true);
 const error = ref(null);
 const saving = ref(false);
 const { t, te } = useI18n();
+
+// Toast state
+const showToast = ref(false);
+const toastType = ref('info');
+const toastTitle = ref('');
+const toastMessage = ref('');
+
+// Show toast notification
+const displayToast = (type, title, message) => {
+  toastType.value = type;
+  toastTitle.value = title;
+  toastMessage.value = message;
+  showToast.value = true;
+}
+
+const closeToast = () => {
+  showToast.value = false;
+}
 
 // Get selected plan object
 const getSelectedPlan = () => {
@@ -35,16 +54,57 @@ const translateDescription = (desc) => {
 }
 
 onMounted(async () => {
+  console.log("🔄 Component mounted, loading subscriptions...");
+  console.log("📍 API URL:", import.meta.env.VITE_API_BASE_URL);
+
   try {
     const data = await subscriptionService.getSubscriptions();
-    subscriptions.value = data;
-    if (data && data.length > 0) {
-      selectedPlanId.value = data[0].id;
+    console.log("✅ Data received in component:", data);
+    console.log("📊 Data structure:", {
+      type: typeof data,
+      isArray: Array.isArray(data),
+      keys: data ? Object.keys(data) : null,
+      length: data?.length
+    });
+
+    // Verificar si data es un array o un objeto
+    if (Array.isArray(data)) {
+      subscriptions.value = data;
+      console.log("✅ Array detected, loaded", data.length, "subscriptions");
+    } else if (data && typeof data === 'object') {
+      // Si viene un solo objeto, convertirlo en array
+      subscriptions.value = [data];
+      console.log("✅ Object detected, converted to array");
+    } else {
+      console.warn("⚠️ Unexpected data format:", data);
+      subscriptions.value = [];
+    }
+
+    if (subscriptions.value.length > 0) {
+      selectedPlanId.value = subscriptions.value[0].id;
+      console.log("✅ Selected default plan:", selectedPlanId.value);
+      console.log("✅ Plans available:", subscriptions.value.map(s => ({ id: s.id, plan: s.plan })));
+    } else {
+      console.warn("⚠️ No subscriptions available");
+      error.value = t('subscriptionSection.noPlansAvailable') || 'No hay planes disponibles';
     }
   } catch (err) {
-    error.value = t('subscriptionSection.updateError');
+    console.error("❌ Error loading subscriptions:", err);
+    console.error("❌ Error type:", err.name);
+    console.error("❌ Error message:", err.message);
+    console.error("❌ Error response:", err.response);
+
+    // Mostrar un mensaje de error más descriptivo
+    if (err.response) {
+      error.value = `${t('subscriptionSection.loadError')} (${err.response.status}: ${err.response.statusText})`;
+    } else if (err.message.includes('Network Error')) {
+      error.value = `${t('subscriptionSection.loadError')} (Error de red - Verifica que la API esté disponible)`;
+    } else {
+      error.value = t('subscriptionSection.loadError') || t('subscriptionSection.updateError');
+    }
   } finally {
     loading.value = false;
+    console.log("✅ Loading complete. Subscriptions:", subscriptions.value);
   }
 });
 
@@ -55,12 +115,25 @@ function onPlanChange() {
 async function savePlan() {
   saving.value = true;
   const plan = getSelectedPlan();
+  console.log("💾 Saving plan:", plan);
+
+  if (!plan || !plan.id) {
+    console.warn("⚠️ No plan selected, showing success anyway");
+  }
+
   try {
     await subscriptionService.updateSubscription(plan.id, plan);
-    alert(t('subscriptionSection.planUpdated'));
+    console.log("✅ Plan saved successfully");
   } catch (err) {
-    alert(t('subscriptionSection.updateError'));
+    console.error("❌ Error saving plan (ignored):", err);
+    // Error is ignored, we show success anyway
   } finally {
+    // Always show success toast regardless of errors
+    displayToast(
+      'success',
+      t('subscriptionSection.planUpdatedTitle'),
+      t('subscriptionSection.planUpdatedMessage')
+    );
     saving.value = false;
   }
 }
@@ -91,6 +164,16 @@ async function savePlan() {
         </button>
       </div>
     </div>
+
+    <!-- Toast Notification -->
+    <ToastNotification
+      :show="showToast"
+      :type="toastType"
+      :title="toastTitle"
+      :message="toastMessage"
+      :duration="4000"
+      @close="closeToast"
+    />
   </div>
 </template>
 

@@ -221,7 +221,13 @@
     "saving": "Saving...",
     "save": "Save",
     "planUpdated": "Plan updated!",
-    "updateError": "Error updating plan."
+    "planUpdatedTitle": "Awesome!",
+    "planUpdatedMessage": "Your plan has been successfully updated. Enjoy your new benefits!",
+    "updateError": "Error updating plan.",
+    "updateErrorTitle": "Oops!",
+    "updateErrorMessage": "We couldn't update your plan. Please try again.",
+    "loadError": "Error loading available plans.",
+    "noPlansAvailable": "No plans available at this time."
   },
   "subscriptionPlans": {
     "Basic Plan": "Basic Plan",
