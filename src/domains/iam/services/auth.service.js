@@ -4,56 +4,39 @@ export class AuthService {
         this.currentUser = null;
     }
 
-
     async login(credentials) {
         try {
             console.log('🔄 AUTH - Login attempt:', { username: credentials.username });
 
-            // Obtener TODOS los usuarios y buscar manualmente
-            const response = await fetch(`${this.baseURL}/users`);
-            const users = await response.json();
-
-            console.log('📋 AUTH - All users:', users);
-
-            // Buscar usuario por username o email
-            const user = users.find(u =>
-                u.username === credentials.username ||
-                u.email === credentials.username
-            );
-
-            console.log('🔍 AUTH - Found user:', user);
-
-            if (!user) {
-                throw new Error('Usuario no encontrado');
-            }
-
-            // VERIFICAR CONTRASEÑA ACTUALIZADA
-            if (user.password !== credentials.password) {
-                throw new Error('Contraseña incorrecta');
-            }
-
-            if (!user.isActive) {
-                throw new Error('Usuario inactivo');
-            }
-
-            // Actualizar lastLogin
-            const updatedUser = {
-                ...user,
-                lastLogin: new Date().toISOString()
-            };
-
-            await fetch(`${this.baseURL}/users/${user.id}`, {
-                method: 'PUT',
+            // POST a /authentication/sign-in con username y password
+            const response = await fetch(`${this.baseURL}/authentication/sign-in`, {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(updatedUser)
+                body: JSON.stringify({
+                    username: credentials.username,
+                    password: credentials.password
+                })
             });
 
-            // Guardar usuario en localStorage
-            localStorage.setItem('currentUser', JSON.stringify(updatedUser));
-            this.currentUser = updatedUser;
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.message || 'Error en login');
+            }
 
-            console.log('✅ AUTH - Login success:', updatedUser.username);
-            return updatedUser;
+            const data = await response.json();
+            // data = { id: 1, username: "queso", token: "eyJhb..." }
+
+            const userWithToken = {
+                id: data.id,
+                username: data.username,
+                token: data.token
+            };
+
+            localStorage.setItem('currentUser', JSON.stringify(userWithToken));
+            this.currentUser = userWithToken;
+
+            console.log('✅ AUTH - Login success, token:', userWithToken.token.substring(0, 20) + '...');
+            return userWithToken;
 
         } catch (error) {
             console.error('❌ AUTH - Login error:', error);
@@ -61,23 +44,43 @@ export class AuthService {
         }
     }
 
-    /**
-     * Logout - LIMPIAR TODO EL CACHE
-     */
+    async register(userData) {
+        try {
+            console.log('🔄 AUTH - Register attempt:', userData.username);
+
+            // POST a /authentication/sign-up
+            const response = await fetch(`${this.baseURL}/authentication/sign-up`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: userData.username,
+                    password: userData.password
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.message || 'Error en registro');
+            }
+
+            const createdUser = await response.json();
+            console.log('✅ AUTH - Register success:', createdUser.username);
+            return createdUser;
+
+        } catch (error) {
+            console.error('❌ AUTH - Register error:', error);
+            throw error;
+        }
+    }
+
     logout() {
         localStorage.removeItem('currentUser');
         this.currentUser = null;
-        console.log('✅ AUTH - Logout success - ALL CACHE CLEARED');
-
-        // Forzar recarga de la página para limpiar cualquier caché de Vue
+        console.log('✅ AUTH - Logout success');
     }
 
-    /**
-     * Obtener usuario actual
-     */
     getCurrentUser() {
         if (this.currentUser) return this.currentUser;
-
         const stored = localStorage.getItem('currentUser');
         if (stored) {
             this.currentUser = JSON.parse(stored);
@@ -86,56 +89,12 @@ export class AuthService {
         return null;
     }
 
-    /**
-     * Verificar si está autenticado
-     */
-    isAuthenticated() {
-        return !!this.getCurrentUser();
+    getToken() {
+        return this.getCurrentUser()?.token || null;
     }
 
-    /**
-     * Registrar nuevo usuario - VERSIÓN CORREGIDA
-     */
-    async register(userData) {
-        try {
-            console.log('🔄 AUTH - Register attempt:', userData.username);
-
-            // Obtener todos los usuarios para verificar duplicados
-            const response = await fetch(`${this.baseURL}/users`);
-            const existingUsers = await response.json();
-
-            // Verificar si usuario ya existe
-            const userExists = existingUsers.find(u =>
-                u.username === userData.username ||
-                u.email === userData.email
-            );
-
-            if (userExists) {
-                throw new Error('Usuario o email ya existen');
-            }
-
-            // Crear nuevo usuario
-            const newUser = {
-                ...userData,
-                id: Date.now(), // ID temporal
-                isActive: true,
-                createdAt: new Date().toISOString()
-            };
-
-            const createResponse = await fetch(`${this.baseURL}/users`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newUser)
-            });
-
-            const createdUser = await createResponse.json();
-            console.log('✅ AUTH - Register success:', createdUser.username);
-            return createdUser;
-
-        } catch (error) {
-            console.error('❌ AUTH - Register error:', error);
-            throw error;
-        }
+    isAuthenticated() {
+        return !!this.getToken();
     }
 }
 

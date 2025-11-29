@@ -1,3 +1,4 @@
+// javascript
 import { authService } from '../../iam/services/auth.service.js'
 
 export class ProfileService {
@@ -5,6 +6,16 @@ export class ProfileService {
         this.baseURL = import.meta.env.VITE_API_BASE_URL
     }
 
+    // Helper para construir headers con Bearer token
+    getAuthHeaders(contentType = 'application/json') {
+        const token = (authService.getToken && authService.getToken()) || (authService.getCurrentUser && authService.getCurrentUser()?.token);
+        if (!token) {
+            throw new Error('Usuario no autenticado (token faltante)');
+        }
+        const headers = { Authorization: `Bearer ${token}` };
+        if (contentType) headers['Content-Type'] = contentType;
+        return headers;
+    }
 
     /**
      * Obtener perfil del usuario actual
@@ -18,44 +29,44 @@ export class ProfileService {
 
             console.log('🔄 Getting profile for user ID:', currentUser.id);
 
-            // Obtener TODOS los perfiles y buscar el correcto
-            const response = await fetch(`${this.baseURL}/profile`);
-            const allProfiles = await response.json();
+            // Obtener perfil del usuario actual (con Bearer token)
+            const response = await fetch(`${this.baseURL}/profiles/${currentUser.id}`, {
+                headers: this.getAuthHeaders(null)
+            });
 
-            console.log('📋 All profiles:', allProfiles);
+            if (!response.ok) {
+                if (response.status === 404) {
+                    // Si no existe perfil, crear uno nuevo
+                    console.log('ℹ️ No profile found, CREATING NEW PROFILE');
+                    const newProfile = {
+                        userId: currentUser.id,
+                        name: currentUser.username,
+                        email: currentUser.email || '',
+                        lastName: '',
+                        age: null,
+                        phone: '',
+                        address: '',
+                        avatar: this.generateDefaultAvatar(currentUser.username)
+                    };
 
-            // Buscar perfil por userId O por id (para compatibilidad)
-            let profile = allProfiles.find(p =>
-                p.userId === currentUser.id || p.id === currentUser.id
-            );
+                    const createResponse = await fetch(`${this.baseURL}/profiles`, {
+                        method: 'POST',
+                        headers: this.getAuthHeaders('application/json'),
+                        body: JSON.stringify(newProfile)
+                    });
 
-            console.log('🔍 Found profile:', profile);
+                    if (!createResponse.ok) {
+                        throw new Error(`Error creating profile: ${createResponse.status}`);
+                    }
 
-            // Si no existe perfil, crear uno nuevo
-            if (!profile) {
-                console.log('ℹ️ No profile found, CREATING NEW PROFILE');
-                const newProfile = {
-                    id: currentUser.id,
-                    userId: currentUser.id,
-                    name: currentUser.username,
-                    email: currentUser.email,
-                    lastName: '',
-                    age: null,
-                    phone: '',
-                    address: '',
-                    avatar: this.generateDefaultAvatar(currentUser.username)
-                };
-
-                const createResponse = await fetch(`${this.baseURL}/profile`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newProfile)
-                });
-
-                profile = await createResponse.json();
-                console.log('✅ NEW PROFILE CREATED:', profile);
+                    const profile = await createResponse.json();
+                    console.log('✅ NEW PROFILE CREATED:', profile);
+                    return profile;
+                }
+                throw new Error(`Error getting profile: ${response.status}`);
             }
 
+            const profile = await response.json();
             console.log('✅ Current user profile loaded:', profile);
             return profile;
 
@@ -78,20 +89,15 @@ export class ProfileService {
             console.log('🔄 UPDATE Profile - User ID:', currentUser.id);
             console.log('🔄 UPDATE Profile - Data:', profileData);
 
-            // Usar el ID del perfil encontrado, no hardcodeado
-            const currentProfile = await this.getCurrentUserProfile();
-            const profileId = currentProfile.id;
-
-            const response = await fetch(`${this.baseURL}/profile/${profileId}`, {
+            // Usar el ID del usuario actual
+            const response = await fetch(`${this.baseURL}/profiles/${currentUser.id}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: this.getAuthHeaders('application/json'),
                 body: JSON.stringify(profileData)
             });
 
             if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
+                throw new Error(`Error updating profile: ${response.status}`);
             }
 
             const data = await response.json();
@@ -132,7 +138,7 @@ export class ProfileService {
     }
 
     /**
-     * US34: Cambiar contraseña - VERSIÓN CORREGIDA
+     * US34: Cambiar contraseña
      */
     async changePassword(passwordData) {
         try {
@@ -143,44 +149,23 @@ export class ProfileService {
                 throw new Error('Usuario no autenticado');
             }
 
-            // Obtener el usuario actual de la base de datos
-            const userResponse = await fetch(`${this.baseURL}/users/${currentUser.id}`);
-            const currentUserData = await userResponse.json();
-
-            console.log('🔄 CHANGE PASSWORD - Current user data:', currentUserData);
-
-            // Verificar que la contraseña actual sea correcta
-            if (currentUserData.password !== passwordData.currentPassword) {
-                console.log('❌ CHANGE PASSWORD - Password mismatch:', {
-                    stored: currentUserData.password,
-                    provided: passwordData.currentPassword
-                });
-                throw new Error('La contraseña actual es incorrecta');
-            }
-
-            // Actualizar la contraseña en el USUARIO, no en el perfil
-            const updatedUser = {
-                ...currentUserData,
-                password: passwordData.newPassword
-            };
-
-            console.log('🔄 CHANGE PASSWORD - Updating user with new password');
-
-            // Guardar en JSON Server en la tabla users
-            const response = await fetch(`${this.baseURL}/users/${currentUser.id}`, {
+            // Actualizar la contraseña del usuario usando la API real
+            const response = await fetch(`${this.baseURL}/users/${currentUser.id}/password`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedUser)
+                headers: this.getAuthHeaders('application/json'),
+                body: JSON.stringify({
+                    currentPassword: passwordData.currentPassword,
+                    newPassword: passwordData.newPassword
+                })
             });
 
             if (!response.ok) {
-                throw new Error(`Error: ${response.status}`);
+                const error = await response.json();
+                throw new Error(error.message || `Error: ${response.status}`);
             }
 
             const data = await response.json();
-            console.log('✅ CHANGE PASSWORD - Success - Password updated in users table');
+            console.log('✅ CHANGE PASSWORD - Success');
             return data;
 
         } catch (error) {
@@ -188,6 +173,7 @@ export class ProfileService {
             throw error;
         }
     }
+
     /**
      * Generar avatar por defecto
      */
