@@ -8,7 +8,7 @@
         </div>
         <div class="text-wrapper">
           <span class="report-name">
-            {{ report.key && $t(`reportsSection.${report.key}`) || report.name }}
+            {{ $t(`reportTypes.${report.type}`) }}
           </span>
           <span class="report-date">
             {{ $t('reportsSection.generatedDaysAgo', { days: report.date }) }}
