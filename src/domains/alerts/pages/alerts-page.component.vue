@@ -11,7 +11,7 @@
 
       <div class="alerts-body">
         <div class="left-column">
-          <h2 class="section-title">Active Alerts</h2>
+          <h2 class="section-title">{{ $t('alertsSection.active') }}</h2>
 
           <active-alerts-list :alerts="filteredAlerts" />
 
