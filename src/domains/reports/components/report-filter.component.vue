@@ -8,7 +8,14 @@
             :options="periods"
             :placeholder="$t('reportsSection.select')"
             class="select-full"
-        />
+        >
+          <template #option="slotProps">
+            {{ $t(`periods.${slotProps.option}`) }}
+          </template>
+          <template #value="slotProps">
+            {{ $t(`periods.${slotProps.value}`) }}
+          </template>
+        </Select>
       </div>
     </div>
 
@@ -20,7 +27,14 @@
             :options="types"
             :placeholder="$t('reportsSection.select')"
             class="select-full"
-        />
+        >
+          <template #option="slotProps">
+            {{ $t(`reportTypes.${slotProps.option}`) }}
+          </template>
+          <template #value="slotProps">
+            {{ $t(`reportTypes.${slotProps.value}`) }}
+          </template>
+        </Select>
       </div>
     </div>
 
@@ -32,7 +46,14 @@
             :options="locations"
             :placeholder="$t('reportsSection.select')"
             class="select-full"
-        />
+        >
+          <template #option="slotProps">
+            {{ $t(`locations.${slotProps.option}`) }}
+          </template>
+          <template #value="slotProps">
+            {{ $t(`locations.${slotProps.value}`) }}
+          </template>
+        </Select>
       </div>
     </div>
 
@@ -45,8 +66,10 @@
 import { ref } from 'vue'
 import Button from 'primevue/button'
 import Select from 'primevue/select'
+import { useI18n } from 'vue-i18n'
 
 const emit = defineEmits(['generate'])
+const { t } = useI18n()
 
 const filters = ref({
   period: 'Last 7 Days',
@@ -57,6 +80,7 @@ const filters = ref({
 const periods = ['Last 7 Days', 'Last 30 Days', 'This Year']
 const types = ['Usage Analytics', 'Cost Analysis', 'Efficiency']
 const locations = ['All Locations', 'Zone A', 'Zone B']
+
 function emitFilters() {
   emit('generate', filters.value)
 }
