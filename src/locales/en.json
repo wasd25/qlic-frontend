@@ -46,7 +46,19 @@
     "saveChanges": "Save Changes",
     "cancel": "Cancel",
     "years": "years",
-    "notSpecified": "Not specified"
+    "notSpecified": "Not specified",
+    "editTitle": "Edit Personal Information",
+    "editSubtitle": "Update your basic information",
+    "yourName": "Your name",
+    "yourLastName": "Your last name",
+    "yourEmail": "your@email.com",
+    "yourPhone": "+1234567890",
+    "yourAddress": "Your complete address",
+    "nameRequired": "Name is required",
+    "lastNameRequired": "Last name is required",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Email is not valid",
+    "defaultUser": "User"
   },
   "security": {
     "title": "Security",
@@ -55,14 +67,33 @@
     "newPassword": "New Password",
     "confirmPassword": "Confirm New Password",
     "changePassword": "Change Password",
-    "passwordHint": "Minimum 8 characters, with uppercase, lowercase and numbers"
+    "passwordHint": "Minimum 8 characters, with uppercase, lowercase and numbers",
+    "currentPasswordRequired": "Current password is required",
+    "newPasswordRequired": "New password is required",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "passwordComplexity": "Must contain uppercase, lowercase and numbers",
+    "confirmPasswordRequired": "Confirm your new password",
+    "passwordsDontMatch": "Passwords don't match",
+    "passwordChangedSuccess": "Password changed successfully!",
+    "passwordChangeError": "Error changing password. Please try again.",
+    "currentPasswordIncorrect": "Current password is incorrect. Please verify and try again.",
+    "incorrectPassword": "Incorrect password",
+    "enterCurrent": "Enter your current password",
+    "enterNew": "Enter your new password",
+    "confirmNew": "Confirm your new password"
   },
   "avatar": {
     "changePhoto": "Change Profile Photo",
     "selectImage": "Select Image",
     "updatePhoto": "Update Photo",
     "preview": "Preview",
-    "supportedFormats": "Supported formats: JPG, PNG, GIF. Maximum size: 5MB"
+    "supportedFormats": "Supported formats: JPG, PNG, GIF. Maximum size: 5MB",
+    "cancel": "Cancel",
+    "file": "File",
+    "size": "Size",
+    "invalidImage": "Please select a valid image file",
+    "fileTooLarge": "Image must not exceed 5MB",
+    "uploadError": "Error updating profile photo"
   },
   "common": {
     "required": "Required",
@@ -186,6 +217,174 @@
     "loading": "Loading...",
     "select": "Select your plan",
     "price": "Price",
-    "description-plan": "Description"
+    "description-plan": "Description",
+    "saving": "Saving...",
+    "save": "Save",
+    "planUpdated": "Plan updated!",
+    "updateError": "Error updating plan."
+  },
+  "subscriptionPlans": {
+    "Basic Plan": "Basic Plan",
+    "Pro Plan": "Pro Plan",
+    "Enterprise Plan": "Enterprise Plan"
+  },
+  "subscriptionPrices": {
+    "$19/month": "$19/month",
+    "$49/month": "$49/month",
+    "Custom": "Custom"
+  },
+  "subscriptionDescriptions": {
+    "Access to standard features with limited support.": "Access to standard features with limited support.",
+    "Includes premium tools and priority support.": "Includes premium tools and priority support.",
+    "Full access and dedicated account management.": "Full access and dedicated account management."
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "General overview and quick access",
+    "alertsAndNotifications": "Alerts & Notifications",
+    "anomalyDetection": "Anomaly Detection",
+    "billingAndPayments": "Billing & Payments",
+    "manageBilling": "Manage your billing information and history.",
+    "currentBalance": "Current Balance",
+    "nextPayment": "Next Payment",
+    "averagePayment": "Average Payment",
+    "recentReports": "Recent Reports"
+  },
+  "notificationSettings": {
+    "applyFilter": "Apply Filter",
+    "criticalAlerts": "Critical Alerts",
+    "usageWarnings": "Usage Warnings",
+    "maintenanceReminders": "Maintenance Reminders"
+  },
+  "anomalyCard": {
+    "profileId": "Profile ID",
+    "resolved": "Resolved",
+    "unresolved": "Unresolved"
+  },
+  "anomalyTable": {
+    "resolved": "Resolved",
+    "unresolved": "Unresolved"
+  },
+  "anomalyChart": {
+    "anomaliesPerDay": "Anomalies per Day"
+  },
+  "reportFilter": {
+    "typeOptions": {
+      "usageAnalytics": "Usage Analytics",
+      "costAnalysis": "Cost Analysis",
+      "efficiency": "Efficiency"
+    },
+    "periodOptions": {
+      "last7Days": "Last 7 Days",
+      "last30Days": "Last 30 Days",
+      "thisYear": "This Year"
+    },
+    "locationOptions": {
+      "allLocations": "All Locations",
+      "zoneA": "Zone A",
+      "zoneB": "Zone B"
+    }
+  },
+  "paymentMethods": {
+    "deleteConfirm": "Are you sure you want to delete this payment method?",
+    "fillAllFields": "Please fill in all fields",
+    "placeholder": "VISA ****1234 or paypal@example.com",
+    "type": "Type"
+  },
+  "transactions": {
+    "viewAll": "View All",
+    "payment": "Payment"
+  },
+  "usageChart": {
+    "title": "Daily Usage (Last 7 Days)",
+    "gallons": "Gallons"
+  },
+  "usageSettings": {
+    "enableAlerts": "Enable Alerts",
+    "disableAlerts": "Disable Alerts",
+    "editLimitsModal": "Edit limits modal would open here."
+  },
+  "alertTypes": {
+    "Critical": "Critical",
+    "Warning": "Warning",
+    "Info": "Info"
+  },
+  "anomalyTypes": {
+    "Leak detected": "Leak Detected",
+    "High temperature": "High Temperature",
+    "Unusual consumption": "Unusual Consumption",
+    "Low reservoir level": "Low Reservoir Level",
+    "Sensor offline": "Sensor Offline",
+    "High pressure": "High Pressure"
+  },
+  "reportTypes": {
+    "Usage Analytics": "Usage Analytics",
+    "Cost Analysis": "Cost Analysis",
+    "Efficiency": "Efficiency"
+  },
+  "locations": {
+    "All Locations": "All Locations",
+    "Zone A": "Zone A",
+    "Zone B": "Zone B"
+  },
+  "periods": {
+    "Last 7 Days": "Last 7 Days",
+    "Last 30 Days": "Last 30 Days",
+    "This Year": "This Year"
+  },
+  "costCategories": {
+    "Pumping": "Pumping",
+    "Treatment": "Treatment",
+    "Distribution": "Distribution",
+    "Maintenance": "Maintenance"
+  },
+  "alertTitles": {
+    "Water Pressure Critical": "Water Pressure Critical",
+    "Pump Failure Detected": "Pump Failure Detected",
+    "Low Reservoir Level": "Low Reservoir Level",
+    "High Water Usage": "High Water Usage",
+    "Abnormal Temperature": "Abnormal Temperature",
+    "Pressure Fluctuation": "Pressure Fluctuation",
+    "Valve Delay": "Valve Delay",
+    "Unexpected Flow Pattern": "Unexpected Flow Pattern",
+    "Sensor Timeout": "Sensor Timeout",
+    "Usage Spike": "Usage Spike",
+    "Scheduled Maintenance Due": "Scheduled Maintenance Due",
+    "System Check Completed": "System Check Completed",
+    "New Device Connected": "New Device Connected",
+    "Backup Activated": "Backup Activated",
+    "Maintenance Due": "Maintenance Due",
+    "Sensor Calibration Needed": "Sensor Calibration Needed"
+  },
+  "alertMessages": {
+    "Main tank pressure dropped below 15 PSI.": "Main tank pressure dropped below 15 PSI.",
+    "Pump #2 stopped responding.": "Pump #2 stopped responding.",
+    "Storage tank is at 15% capacity.": "Storage tank is at 15% capacity.",
+    "Usage exceeded 500 gallons in 1 hour.": "Usage exceeded 500 gallons in 1 hour.",
+    "Sensor reports 35°C, outside safe range.": "Sensor reports 35°C, outside safe range.",
+    "Pressure dropped and recovered rapidly.": "Pressure dropped and recovered rapidly.",
+    "Valve #4 took longer than expected to close.": "Valve #4 took longer than expected to close.",
+    "Flow rate inconsistent with schedule.": "Flow rate inconsistent with schedule.",
+    "Sensor #7 failed to report in last cycle.": "Sensor #7 failed to report in last cycle.",
+    "Water usage 40% above normal.": "Water usage 40% above normal.",
+    "Filter replacement scheduled for tomorrow.": "Filter replacement scheduled for tomorrow.",
+    "Routine diagnostics completed successfully.": "Routine diagnostics completed successfully.",
+    "Sensor #12 added to monitoring network.": "Sensor #12 added to monitoring network.",
+    "Backup pump engaged during peak usage.": "Backup pump engaged during peak usage.",
+    "Scheduled maintenance in 48 hours.": "Scheduled maintenance in 48 hours.",
+    "Sensor #3 readings may be inaccurate.": "Sensor #3 readings may be inaccurate."
+  },
+  "alertTimestamps": {
+    "2 minutes ago": "2 minutes ago",
+    "3 minutes ago": "3 minutes ago",
+    "5 minutes ago": "5 minutes ago",
+    "6 minutes ago": "6 minutes ago",
+    "8 minutes ago": "8 minutes ago",
+    "10 minutes ago": "10 minutes ago",
+    "12 minutes ago": "12 minutes ago",
+    "15 minutes ago": "15 minutes ago",
+    "18 minutes ago": "18 minutes ago",
+    "20 minutes ago": "20 minutes ago",
+    "25 minutes ago": "25 minutes ago"
   }
 }
