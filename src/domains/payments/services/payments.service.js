@@ -1,3 +1,5 @@
+// javascript
+// File: `src/domains/payments/services/payments.service.js`
 import { authService } from '../../iam/services/auth.service.js'
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
@@ -11,6 +13,17 @@ function getAuthHeaders(contentType = 'application/json') {
     const headers = { Authorization: `Bearer ${token}` };
     if (contentType) headers['Content-Type'] = contentType;
     return headers;
+}
+
+// Parseo seguro de respuesta: intenta JSON, si no devuelve texto o null
+async function parseResponseSafe(res) {
+    const text = await res.text();
+    if (!text) return null;
+    try {
+        return JSON.parse(text);
+    } catch (e) {
+        return text;
+    }
 }
 
 export default {
@@ -40,7 +53,8 @@ export default {
             body: JSON.stringify(paymentData)
         })
         if (!res.ok) throw new Error(`Error creating payment: ${res.status}`);
-        return res.json()
+        // usar parse seguro por si la API devuelve texto o vacío
+        return await parseResponseSafe(res)
     },
 
     // PUT /api/v1/payments/{id} - Actualizar un pago
@@ -51,7 +65,7 @@ export default {
             body: JSON.stringify(paymentData)
         })
         if (!res.ok) throw new Error(`Error updating payment: ${res.status}`);
-        return res.json()
+        return await parseResponseSafe(res)
     },
 
     // DELETE /api/v1/payments/{id} - Eliminar un pago
@@ -81,7 +95,7 @@ export default {
         return res.json()
     },
 
-    // POST /api/v1/payment-methods - Agregar nuevo método de pago
+    // POST /api/v1/payment-methods -
     async addPaymentMethod(newMethod) {
         const res = await fetch(`${API_URL}/payment-methods`, {
             method: "POST",
@@ -89,10 +103,11 @@ export default {
             body: JSON.stringify(newMethod),
         })
         if (!res.ok) throw new Error(`Error adding payment method: ${res.status}`);
-        return res.json()
+        // parseo seguro: si la API devuelve JSON lo retornamos, si devuelve texto lo retornamos también
+        return await parseResponseSafe(res)
     },
 
-    // DELETE /api/v1/payment-methods/{id} - Borrar método de pago por id
+    // DELETE /api/v1/payment-methods/{id}
     async deletePaymentMethod(id) {
         const res = await fetch(`${API_URL}/payment-methods/${id}`, {
             method: "DELETE",
@@ -101,7 +116,7 @@ export default {
         return res.ok
     },
 
-    // PUT /api/v1/payment-methods/{id} - Actualizar método de pago
+    // PUT /api/v1/payment-methods/{id}
     async updatePaymentMethod(id, updatedData) {
         const res = await fetch(`${API_URL}/payment-methods/${id}`, {
             method: "PUT",
@@ -112,7 +127,7 @@ export default {
         return res.json()
     },
 
-    // GET /api/v1/billing-settings - Obtener configuración de facturación
+    // GET /api/v1/billing-settings
     async getBillingSettings() {
         const res = await fetch(`${API_URL}/billing-settings`, {
             headers: getAuthHeaders(null)
@@ -121,7 +136,7 @@ export default {
         return res.json()
     },
 
-    // PUT /api/v1/billing-settings/{id} - Actualizar configuración de facturación
+    // PUT /api/v1/billing-settings/{id}
     async updateBillingSettings(id, updatedSettings) {
         const res = await fetch(`${API_URL}/billing-settings/${id}`, {
             method: "PUT",
