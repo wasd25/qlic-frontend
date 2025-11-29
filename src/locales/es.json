@@ -298,7 +298,7 @@
   "paymentMethods": {
     "deleteConfirm": "¿Estás seguro de que deseas eliminar este método de pago?",
     "fillAllFields": "Por favor completa todos los campos",
-    "placeholder": "VISA ****1234 o paypal@ejemplo.com",
+    "placeholder": "VISA ****1234 o paypal(at)ejemplo.com",
     "type": "Tipo"
   },
   "transactions": {
