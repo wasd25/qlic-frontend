@@ -218,10 +218,20 @@
     "planUpdatedTitle": "¡Súper!",
     "planUpdatedMessage": "Tu plan ha sido actualizado exitosamente. ¡Disfruta de tus nuevos beneficios!",
     "updateError": "Error al actualizar el plan.",
-    "updateErrorTitle": "¡Error!",
+    "updateErrorTitle": "Error",
     "updateErrorMessage": "No pudimos actualizar tu plan. Por favor, intenta nuevamente.",
     "loadError": "Error al cargar los planes disponibles.",
-    "noPlansAvailable": "No hay planes disponibles en este momento."
+    "noPlansAvailable": "No hay planes disponibles en este momento.",
+    "securePayment": "Pago Seguro",
+    "readyToUpgrade": "¿Listo para actualizar tu plan? Procesa el pago de forma segura con Stripe.",
+    "selectedPlan": "Plan seleccionado:",
+    "payWithStripe": "Pagar con Stripe",
+    "processing": "Procesando...",
+    "securePaymentBadge": "Pago seguro",
+    "sslCertificate": "Certificado SSL",
+    "selectPlanFirst": "Por favor selecciona un plan primero",
+    "planNotAvailable": "Este plan no está disponible para pago en línea.",
+    "paymentError": "Hubo un problema al procesar el pago. Por favor intenta nuevamente."
   },
   "subscriptionPlans": {
     "Basic Plan": "Plan Básico",
