@@ -2,13 +2,13 @@
   <div class="settings-panel">
     <h2>{{ $t('alertsSection.types')}}</h2>
     <div class="checkbox-group">
-      <label v-for="type in alertTypes" :key="type">
-        <input type="checkbox" v-model="selectedTypes" :value="type" />
-        {{ type }}
+      <label v-for="type in alertTypes" :key="type.value">
+        <input type="checkbox" v-model="selectedTypes" :value="type.value" />
+        {{ $t(type.label) }}
       </label>
     </div>
 
-    <button class="save-btn" @click="save">Apply Filter</button>
+    <button class="save-btn" @click="save">{{ $t('notificationSettings.applyFilter') }}</button>
   </div>
 </template>
 
@@ -25,15 +25,15 @@ const props = defineProps({
 const emit = defineEmits(['save'])
 
 const alertTypes = [
-  'Critical Alerts',
-  'Usage Warnings',
-  'Maintenance Reminders'
+  { value: 'Critical Alerts', label: 'notificationSettings.criticalAlerts' },
+  { value: 'Usage Warnings', label: 'notificationSettings.usageWarnings' },
+  { value: 'Maintenance Reminders', label: 'notificationSettings.maintenanceReminders' }
 ]
 
 const selectedTypes = ref(
     props.settings?.types?.length
         ? [...props.settings.types]
-        : [...alertTypes]
+        : alertTypes.map(t => t.value)
 )
 
 function save() {
