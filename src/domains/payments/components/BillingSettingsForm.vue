@@ -59,17 +59,35 @@ const form = reactive({
 
 watch(
     () => props.settings,
-    (val) => Object.assign(form, val || {}),
+    (val) => {
+      if (!val) return
+
+      Object.assign(form, {
+        autopay: !!(val.autopay ?? val.auto_pay ?? 0),
+        emailNotifications: !!(val.emailNotifications ?? val.email_notifications ?? 1),
+        billingCycle: val.billingCycle ?? val.billing_cycle ?? 'monthly',
+        preferredBillingDay: val.preferredBillingDay ?? val.preferred_billing_day ?? 1,
+        lastUpdate: val.lastUpdate ?? val.last_update ?? null,
+      })
+    },
     { immediate: true }
 )
 
 const handleSave = () => {
-  emit('save', { ...form, lastUpdate: new Date().toISOString() })
+  const dataToSave = {
+    autopay: form.autopay,
+    emailNotifications: form.emailNotifications,
+    billingCycle: form.billingCycle,
+    preferredBillingDay: parseInt(form.preferredBillingDay, 10),
+  }
+
+  emit('save', dataToSave)
 }
 
 const formattedDate = computed(() => {
-  if (!form.lastUpdate) return '—'
-  const d = new Date(form.lastUpdate)
+  const lastUpdate = form.lastUpdate || form.last_update
+  if (!lastUpdate) return '—'
+  const d = new Date(lastUpdate)
   return d.toLocaleDateString(undefined, {
     year: 'numeric',
     month: 'short',

@@ -22,53 +22,106 @@
         <BillingSettingsForm :settings="settings" @save="saveSettings" />
       </div>
     </div>
+
+    <!-- Toast Notification -->
+    <ToastNotification
+      :show="toast.show"
+      :type="toast.type"
+      :title="toast.title"
+      :message="toast.message"
+      @close="toast.show = false"
+    />
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, reactive } from 'vue'
 import BillingSummaryCard from '../components/BillingSummaryCard.vue'
 import PaymentMethodsCard from '../components/PaymentMethodsCard.vue'
 import RecentTransactionsCard from '../components/RecentTransactionsCard.vue'
 import BillingSettingsForm from '../components/BillingSettingsForm.vue'
+import ToastNotification from '../../../shared/components/toast-notification.component.vue'
 import paymentsService from '../services/payments.service.js'
 
 const payments = ref([])
 const paymentMethods = ref([])
 const settings = ref({})
 
-const balanceDisplay = computed(() =>
-    `$${payments.value.reduce((sum, p) => sum + p.amount, 0).toFixed(2)}`
-)
+const toast = reactive({
+  show: false,
+  type: 'info',
+  title: '',
+  message: ''
+})
+
+const showToast = (type, title, message = '') => {
+  toast.type = type
+  toast.title = title
+  toast.message = message
+  toast.show = true
+}
+
+const balanceDisplay = computed(() => {
+  if (!Array.isArray(payments.value) || payments.value.length === 0) return '$0.00'
+  const total = payments.value.reduce((sum, p) => sum + (Number(p.amount) || 0), 0)
+  return `$${total.toFixed(2)}`
+})
 
 const nextPaymentDate = computed(() => {
-  const next = settings.value?.preferredBillingDay ?? 1
+  const next = settings.value?.preferredBillingDay ?? settings.value?.preferred_billing_day ?? 1
   const month = new Date().getMonth() + 2
   const year = new Date().getFullYear()
   return `${String(next).padStart(2, '0')}-${String(month).padStart(2, '0')}-${year}`
 })
 
 const monthlyAverage = computed(() => {
-  if (payments.value.length === 0) return '$0.00'
-  const avg = payments.value.reduce((sum, p) => sum + p.amount, 0) / payments.value.length
+  if (!Array.isArray(payments.value) || payments.value.length === 0) return '$0.00'
+  const avg = payments.value.reduce((sum, p) => sum + (Number(p.amount) || 0), 0) / payments.value.length
   return `$${avg.toFixed(2)}`
 })
 
 const loadData = async () => {
-  [payments.value, paymentMethods.value, settings.value] = await Promise.all([
-    paymentsService.getPayments(),
-    paymentsService.getPaymentMethods(),
-    paymentsService.getBillingSettings()
-  ])
+  try {
+    const [paymentsData, methodsData, settingsData] = await Promise.all([
+      paymentsService.getPayments().catch(() => []),
+      paymentsService.getPaymentMethods().catch(() => []),
+      paymentsService.getBillingSettings().catch(() => [])
+    ])
+
+    payments.value = Array.isArray(paymentsData) ? paymentsData : []
+    paymentMethods.value = Array.isArray(methodsData) ? methodsData : []
+
+    if (Array.isArray(settingsData)) {
+      settings.value = settingsData.length > 0 ? settingsData[0] : {}
+    } else {
+      settings.value = settingsData || {}
+    }
+  } catch (error) {
+    showToast('error', 'Error loading data', 'Please try refreshing the page')
+  }
 }
 
 const saveSettings = async (updated) => {
-  await paymentsService.updateBillingSettings(updated)
-  settings.value = updated
+  try {
+    const settingsId = settings.value?.id
+
+    if (!settingsId) {
+      showToast('error', 'Error', 'Configuration ID not found. Please reload the page.')
+      return
+    }
+
+    const response = await paymentsService.updateBillingSettings(settingsId, updated)
+    settings.value = response
+
+    showToast('success', 'Settings Saved', 'Your billing settings have been updated successfully')
+  } catch (error) {
+    showToast('error', 'Error saving settings', error.message || 'An error occurred while saving')
+  }
 }
 
 onMounted(loadData)
 </script>
+
 <style scoped>
 .billing-page {
   padding: 40px;
