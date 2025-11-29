@@ -1,8 +1,12 @@
 <template>
   <div :class="['anomaly-card', severityClass]">
     <div class="content">
-      <h4>{{ anomaly.type }}</h4> <p>Profile ID: {{ anomaly.profile_id }}</p> <p>{{ formatDate(anomaly.detected_anomaly) }}</p> <p :class="anomaly.resolved ? 'resolved' : 'unresolved'">
-      {{ anomaly.resolved ? 'Resolved' : 'Unresolved' }} </p>
+      <h4>{{ $t(`anomalyTypes.${anomaly.type}`) }}</h4>
+      <p>{{ $t('anomalyCard.profileId') }}: {{ anomaly.profile_id }}</p>
+      <p>{{ formatDate(anomaly.detected_anomaly) }}</p>
+      <p :class="anomaly.resolved ? 'resolved' : 'unresolved'">
+        {{ anomaly.resolved ? $t('anomalyCard.resolved') : $t('anomalyCard.unresolved') }}
+      </p>
     </div>
   </div>
 </template>
