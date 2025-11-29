@@ -1,5 +1,5 @@
 <template>
-  <div :class="['alert-card', alert.type.toLowerCase()]">
+  <div :class="['alert-card', alertType.toLowerCase()]">
     <div class="icon-section">
       <i :class="iconClass" class="main-icon"></i>
     </div>
@@ -19,19 +19,27 @@ import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 
 const props = defineProps({ alert: Object })
-const { t, te, locale } = useI18n()
+const { t, te } = useI18n()
 
-const iconClass = {
-  Critical: 'pi pi-exclamation-triangle text-red-500',
-  Warning: 'pi pi-exclamation-circle text-yellow-500',
-  Info: 'pi pi-info-circle text-blue-500'
-}[props.alert.type] || 'pi pi-bell'
+const alertType = computed(() => props.alert?.alertType || 'Info')
 
-const dismissIconClass = {
-  Critical: 'pi pi-times text-red-500',
-  Warning: 'pi pi-times text-yellow-500',
-  Info: 'pi pi-times text-blue-500'
-}[props.alert.type] || 'pi pi-times'
+const iconClass = computed(() => {
+  const icons = {
+    Critical: 'pi pi-exclamation-triangle text-red-500',
+    Warning: 'pi pi-exclamation-circle text-yellow-500',
+    Info: 'pi pi-info-circle text-blue-500'
+  }
+  return icons[alertType.value] || 'pi pi-bell'
+})
+
+const dismissIconClass = computed(() => {
+  const icons = {
+    Critical: 'pi pi-times text-red-500',
+    Warning: 'pi pi-times text-yellow-500',
+    Info: 'pi pi-times text-blue-500'
+  }
+  return icons[alertType.value] || 'pi pi-times'
+})
 
 // Use computed properties for reactive translations
 const translatedTitle = computed(() => {
