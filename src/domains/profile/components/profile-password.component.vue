@@ -1,8 +1,8 @@
 <template>
   <div class="password-card">
     <div class="card-header">
-      <h3>Seguridad</h3>
-      <p>Cambia tu contraseña</p>
+      <h3>{{ $t('security.title') }}</h3>
+      <p>{{ $t('security.subtitle') }}</p>
     </div>
 
     <form @submit.prevent="handleSubmit" class="password-form">
@@ -18,12 +18,12 @@
       </div>
 
       <div class="form-group">
-        <label for="currentPassword">Contraseña Actual *</label>
+        <label for="currentPassword">{{ $t('security.currentPassword') }} *</label>
         <div class="password-input-wrapper">
           <InputText
               id="currentPassword"
               v-model="formData.currentPassword"
-              placeholder="Ingresa tu contraseña actual"
+              :placeholder="$t('security.enterCurrent')"
               :type="showCurrentPassword ? 'text' : 'password'"
               :class="{ 'p-invalid': errors.currentPassword }"
               class="w-full"
@@ -40,12 +40,12 @@
       </div>
 
       <div class="form-group">
-        <label for="newPassword">Nueva Contraseña *</label>
+        <label for="newPassword">{{ $t('security.newPassword') }} *</label>
         <div class="password-input-wrapper">
           <InputText
               id="newPassword"
               v-model="formData.newPassword"
-              placeholder="Ingresa tu nueva contraseña"
+              :placeholder="$t('security.enterNew')"
               :type="showNewPassword ? 'text' : 'password'"
               :class="{ 'p-invalid': errors.newPassword }"
               class="w-full"
@@ -58,17 +58,17 @@
             <i :class="showNewPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
           </button>
         </div>
-        <small class="hint">Mínimo 8 caracteres, con mayúsculas, minúsculas y números</small>
+        <small class="hint">{{ $t('security.passwordHint') }}</small>
         <small v-if="errors.newPassword" class="error-message">{{ errors.newPassword }}</small>
       </div>
 
       <div class="form-group">
-        <label for="confirmPassword">Confirmar Nueva Contraseña *</label>
+        <label for="confirmPassword">{{ $t('security.confirmPassword') }} *</label>
         <div class="password-input-wrapper">
           <InputText
               id="confirmPassword"
               v-model="formData.confirmPassword"
-              placeholder="Confirma tu nueva contraseña"
+              :placeholder="$t('security.confirmNew')"
               :type="showConfirmPassword ? 'text' : 'password'"
               :class="{ 'p-invalid': errors.confirmPassword }"
               class="w-full"
@@ -87,7 +87,7 @@
       <div class="form-actions">
         <Button
             type="submit"
-            label="Cambiar Contraseña"
+            :label="$t('security.changePassword')"
             :loading="isLoading"
             severity="warning"
         />
@@ -98,11 +98,13 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 import Message from 'primevue/message'
 
 const emit = defineEmits(['change-password'])
+const { t } = useI18n()
 
 // Estado reactivo
 const formData = ref({
@@ -126,21 +128,21 @@ const validateForm = () => {
   errorMessage.value = ''
 
   if (!formData.value.currentPassword) {
-    errors.value.currentPassword = 'La contraseña actual es requerida'
+    errors.value.currentPassword = t('security.currentPasswordRequired')
   }
 
   if (!formData.value.newPassword) {
-    errors.value.newPassword = 'La nueva contraseña es requerida'
+    errors.value.newPassword = t('security.newPasswordRequired')
   } else if (formData.value.newPassword.length < 8) {
-    errors.value.newPassword = 'La contraseña debe tener al menos 8 caracteres'
+    errors.value.newPassword = t('security.passwordMinLength')
   } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.value.newPassword)) {
-    errors.value.newPassword = 'Debe contener mayúsculas, minúsculas y números'
+    errors.value.newPassword = t('security.passwordComplexity')
   }
 
   if (!formData.value.confirmPassword) {
-    errors.value.confirmPassword = 'Confirma tu nueva contraseña'
+    errors.value.confirmPassword = t('security.confirmPasswordRequired')
   } else if (formData.value.newPassword !== formData.value.confirmPassword) {
-    errors.value.confirmPassword = 'Las contraseñas no coinciden'
+    errors.value.confirmPassword = t('security.passwordsDontMatch')
   }
 
   return Object.keys(errors.value).length === 0
@@ -162,7 +164,7 @@ const handleSubmit = async () => {
     })
 
     // Éxito - solo si llegamos aquí sin errores (el emit no lanzó excepción)
-    successMessage.value = '¡Contraseña cambiada exitosamente!'
+    successMessage.value = t('security.passwordChangedSuccess')
 
     // Limpiar formulario después de éxito
     formData.value = {
@@ -186,10 +188,10 @@ const handleSubmit = async () => {
 
     // Mostrar mensaje de error específico
     if (error.message.includes('incorrecta')) {
-      errorMessage.value = 'La contraseña actual es incorrecta. Por favor, verifica e intenta nuevamente.'
-      errors.value.currentPassword = 'Contraseña incorrecta'
+      errorMessage.value = t('security.currentPasswordIncorrect')
+      errors.value.currentPassword = t('security.incorrectPassword')
     } else {
-      errorMessage.value = 'Error al cambiar la contraseña. Por favor, intenta nuevamente.'
+      errorMessage.value = t('security.passwordChangeError')
     }
 
     // Auto-ocultar mensaje de error después de 5 segundos
