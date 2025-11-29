@@ -4,7 +4,7 @@
     <div class="controls">
       <button @click="editLimits">{{ $t('usageSection.edit') }}</button>
       <button @click="toggleAlerts">
-        {{ alertsEnabled ? 'Disable Alerts' : 'Enable Alerts' }}
+        {{ alertsEnabled ? $t('usageSettings.disableAlerts') : $t('usageSettings.enableAlerts') }}
       </button>
     </div>
   </section>
@@ -13,9 +13,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const alertsEnabled = ref(false)
+const { t } = useI18n()
 
 onMounted(async () => {
   try {
@@ -37,7 +39,7 @@ async function toggleAlerts() {
 }
 
 function editLimits() {
-  alert('Edit limits modal would open here.')
+  alert(t('usageSettings.editLimitsModal'))
 }
 </script>
 
