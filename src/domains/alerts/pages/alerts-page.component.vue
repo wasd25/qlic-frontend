@@ -12,9 +12,6 @@
       <div class="left-column">
         <h2 class="section-title">{{ $t('alertsSection.active') }}</h2>
         <active-alerts-list :alerts="filteredAlerts" />
-        <div class="alert-cards-grid">
-          <alert-card v-for="a in filteredAlerts.slice(0, 3)" :key="a.id" :alert="a" />
-        </div>
       </div>
         <div class="right-column">
           <div class="sticky-wrapper">
@@ -28,35 +25,40 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { fetchAlerts, fetchSettings, saveNotificationSettings } from '../services/alerts.service.js'
+import { fetchAlerts } from '../services/alerts.service.js'
 import AlertSummaryPanel from '../components/alert-summary-panel.component.vue'
 import ActiveAlertsList from '../components/active-alerts-list.component.vue'
 import NotificationSettings from '../components/notification-settings.component.vue'
-import AlertCard from '../components/alert-card.component.vue'
 
 const alerts = ref([])
-const settings = ref({})
+const settings = ref({
+  types: ['Critical Alerts', 'Usage Warnings', 'Maintenance Reminders'],
+  emailEnabled: true,
+  smsEnabled: false
+})
 const summary = ref({})
-const activeFilter = ref([])
+const activeFilter = ref(['Critical Alerts', 'Usage Warnings', 'Maintenance Reminders'])
 
 onMounted(async () => {
-  alerts.value = await fetchAlerts()
-  settings.value = await fetchSettings()
+  try {
+    alerts.value = await fetchAlerts()
 
-  activeFilter.value = settings.value.types?.length
-      ? settings.value.types
-      : ['Critical Alerts', 'Usage Warnings', 'Maintenance Reminders']
-  summary.value = { critical: alerts.value.filter(a => a.type === 'Critical').length,
-    warning: alerts.value.filter(a => a.type === 'Warning').length,
-    info: alerts.value.filter(a => a.type === 'Info').length,
-    resolvedToday: 15
+    summary.value = {
+      critical: alerts.value.filter(a => a.alertType === 'Critical').length,
+      warning: alerts.value.filter(a => a.alertType === 'Warning').length,
+      info: alerts.value.filter(a => a.alertType === 'Info').length,
+      resolvedToday: 0
+    }
+  } catch (error) {
+    console.error('Error loading alerts:', error)
+    alerts.value = []
+    summary.value = { critical: 0, warning: 0, info: 0, resolvedToday: 0 }
   }
 })
 
 function saveSettings(newSettings) {
-  saveNotificationSettings(newSettings)
   settings.value = newSettings
-  activeFilter.value = newSettings.types
+  activeFilter.value = newSettings.types || []
 }
 
 const filteredAlerts = computed(() =>
@@ -66,9 +68,8 @@ const filteredAlerts = computed(() =>
         'Usage Warnings': 'Warning',
         'Maintenance Reminders': 'Info'
       }
-      return activeFilter.value.includes(
-          Object.keys(labelMap).find(key => labelMap[key] === a.type)
-      )
+      const matchedLabel = Object.keys(labelMap).find(key => labelMap[key] === a.alertType)
+      return matchedLabel && activeFilter.value.includes(matchedLabel)
     })
 )
 </script>
@@ -172,12 +173,5 @@ const filteredAlerts = computed(() =>
     position: sticky;
     top: 2rem;
   }
-}
-
-/* --- GRID PARA LAS ALERT CARDS --- */
-.alert-cards-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 </style>
