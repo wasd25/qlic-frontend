@@ -2,13 +2,13 @@
   <div class="transactions-card card-root">
     <div class="transactions-header">
       <h2>{{ $t('paymentSection.transaction') }}</h2>
-      <a href="#" class="view-all">View All</a>
+      <a href="#" class="view-all">{{ $t('transactions.viewAll') }}</a>
     </div>
 
     <ul class="transactions-list">
       <li v-for="t in transactions" :key="t.id" class="transaction-item">
         <div class="transaction-info">
-          <p class="transaction-desc">{{ t.description || 'Payment' }}</p>
+          <p class="transaction-desc">{{ t.description || $t('transactions.payment') }}</p>
           <p class="transaction-date">{{ formatDate(t.date) }}</p>
         </div>
         <p
