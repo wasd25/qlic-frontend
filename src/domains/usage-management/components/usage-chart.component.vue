@@ -11,9 +11,11 @@
 import { ref, onMounted } from 'vue'
 import Chart from 'chart.js/auto'
 import axios from 'axios'
+import { useI18n } from 'vue-i18n'
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const chartRef = ref(null)
+const { t } = useI18n()
 
 onMounted(async () => {
   try {
@@ -26,7 +28,7 @@ onMounted(async () => {
       data: {
         labels,
         datasets: [{
-          label: 'Liters Used',
+          label: t('usageChart.gallons'),
           data: values,
           backgroundColor: '#60a5fa'
         }]
