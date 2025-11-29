@@ -2,7 +2,7 @@
   <div class="avatar-modal" v-if="isOpen" @click.self="closeModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>Cambiar Foto de Perfil</h3>
+        <h3>{{ $t('avatar.changePhoto') }}</h3>
         <button @click="closeModal" class="close-btn">
           <i class="pi pi-times"></i>
         </button>
@@ -14,11 +14,11 @@
           <div class="avatar-preview">
             <img
                 :src="previewUrl || currentAvatar"
-                alt="Vista previa"
+                :alt="$t('avatar.preview')"
                 class="preview-image"
             />
           </div>
-          <p class="preview-text">Vista previa</p>
+          <p class="preview-text">{{ $t('avatar.preview') }}</p>
         </div>
 
         <!-- Controles de upload -->
@@ -34,29 +34,29 @@
 
           <label for="avatar-upload" class="upload-btn">
             <i class="pi pi-cloud-upload"></i>
-            Seleccionar Imagen
+            {{ $t('avatar.selectImage') }}
           </label>
 
           <div class="file-info" v-if="selectedFile">
-            <p><strong>Archivo:</strong> {{ selectedFile.name }}</p>
-            <p><strong>Tamaño:</strong> {{ formatFileSize(selectedFile.size) }}</p>
+            <p><strong>{{ $t('avatar.file') }}:</strong> {{ selectedFile.name }}</p>
+            <p><strong>{{ $t('avatar.size') }}:</strong> {{ formatFileSize(selectedFile.size) }}</p>
           </div>
 
           <div class="upload-hint">
-            <small>Formatos soportados: JPG, PNG, GIF. Tamaño máximo: 5MB</small>
+            <small>{{ $t('avatar.supportedFormats') }}</small>
           </div>
         </div>
       </div>
 
       <div class="modal-actions">
         <Button
-            label="Cancelar"
+            :label="$t('avatar.cancel')"
             severity="secondary"
             @click="closeModal"
             :disabled="isLoading"
         />
         <Button
-            label="Actualizar Foto"
+            :label="$t('avatar.updatePhoto')"
             @click="handleUpload"
             :loading="isLoading"
             :disabled="!selectedFile"
@@ -68,6 +68,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Button from 'primevue/button'
 
 const props = defineProps({
@@ -82,6 +83,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update', 'close'])
+const { t } = useI18n()
 
 // Estado reactivo
 const fileInput = ref(null)
@@ -97,12 +99,12 @@ const handleFileSelect = (event) => {
 
   // Validaciones
   if (!file.type.startsWith('image/')) {
-    alert('Por favor selecciona un archivo de imagen válido')
+    alert(t('avatar.invalidImage'))
     return
   }
 
   if (file.size > 5 * 1024 * 1024) { // 5MB
-    alert('La imagen no debe superar los 5MB')
+    alert(t('avatar.fileTooLarge'))
     return
   }
 
@@ -124,7 +126,7 @@ const handleUpload = async () => {
     closeModal()
   } catch (error) {
     console.error('Error uploading avatar:', error)
-    alert('Error al actualizar la foto de perfil')
+    alert(t('avatar.uploadError'))
   } finally {
     isLoading.value = false
   }
