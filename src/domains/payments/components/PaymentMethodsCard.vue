@@ -7,7 +7,7 @@
         <div class="method-info">
           <p class="method-type">{{ method.type }}</p>
           <p class="method-details">{{ method.details }}</p>
-          <p v-if="method.isDefault" class="default-label">{{ $t('paymentSection.default') }}</p>
+          <p v-if="method.isDefault || method.is_default" class="default-label">{{ $t('paymentSection.default') }}</p>
         </div>
 
         <button class="btn-delete" @click="deleteMethod(method.id)">
@@ -95,12 +95,20 @@ const saveNewMethod = async () => {
   }
 
   try {
-    const created = await paymentsService.addPaymentMethod(newMethod.value)
+    // Mapear camelCase a snake_case para la API
+    const dataToSend = {
+      type: newMethod.value.type,
+      details: newMethod.value.details,
+      is_default: newMethod.value.isDefault ? 1 : 0  // DB espera tinyint(1)
+    }
+
+    const created = await paymentsService.addPaymentMethod(dataToSend)
     localMethods.value.push(created)
     cancelAdd()
     emit('refresh') // Sync with backend
   } catch (err) {
     console.error('Error adding method:', err)
+    alert(t('paymentMethods.error') || 'Error al agregar método de pago')
   }
 }
 
