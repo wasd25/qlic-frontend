@@ -1,6 +1,6 @@
 {
   "sidebar": {
-    "dashboard": "Dashboard",
+    "dashboard": "Panel Principal",
     "reports": "Reportes",
     "profile": "Perfil",
     "alerts": "Alertas",
@@ -46,7 +46,19 @@
     "saveChanges": "Guardar Cambios",
     "cancel": "Cancelar",
     "years": "años",
-    "notSpecified": "No especificado"
+    "notSpecified": "No especificado",
+    "editTitle": "Editar Información Personal",
+    "editSubtitle": "Actualiza tus datos básicos",
+    "yourName": "Tu nombre",
+    "yourLastName": "Tu apellido",
+    "yourEmail": "tu@email.com",
+    "yourPhone": "+1234567890",
+    "yourAddress": "Tu dirección completa",
+    "nameRequired": "El nombre es requerido",
+    "lastNameRequired": "El apellido es requerido",
+    "emailRequired": "El email es requerido",
+    "emailInvalid": "El email no es válido",
+    "defaultUser": "Usuario"
   },
   "security": {
     "title": "Seguridad",
@@ -55,14 +67,33 @@
     "newPassword": "Nueva Contraseña",
     "confirmPassword": "Confirmar Nueva Contraseña",
     "changePassword": "Cambiar Contraseña",
-    "passwordHint": "Mínimo 8 caracteres, con mayúsculas, minúsculas y números"
+    "passwordHint": "Mínimo 8 caracteres, con mayúsculas, minúsculas y números",
+    "currentPasswordRequired": "La contraseña actual es requerida",
+    "newPasswordRequired": "La nueva contraseña es requerida",
+    "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordComplexity": "Debe contener mayúsculas, minúsculas y números",
+    "confirmPasswordRequired": "Confirma tu nueva contraseña",
+    "passwordsDontMatch": "Las contraseñas no coinciden",
+    "passwordChangedSuccess": "¡Contraseña cambiada exitosamente!",
+    "passwordChangeError": "Error al cambiar la contraseña. Por favor, intenta nuevamente.",
+    "currentPasswordIncorrect": "La contraseña actual es incorrecta. Por favor, verifica e intenta nuevamente.",
+    "incorrectPassword": "Contraseña incorrecta",
+    "enterCurrent": "Ingresa tu contraseña actual",
+    "enterNew": "Ingresa tu nueva contraseña",
+    "confirmNew": "Confirma tu nueva contraseña"
   },
   "avatar": {
     "changePhoto": "Cambiar Foto de Perfil",
     "selectImage": "Seleccionar Imagen",
     "updatePhoto": "Actualizar Foto",
     "preview": "Vista Previa",
-    "supportedFormats": "Formatos soportados: JPG, PNG, GIF. Tamaño máximo: 5MB"
+    "supportedFormats": "Formatos soportados: JPG, PNG, GIF. Tamaño máximo: 5MB",
+    "cancel": "Cancelar",
+    "file": "Archivo",
+    "size": "Tamaño",
+    "invalidImage": "Por favor selecciona un archivo de imagen válido",
+    "fileTooLarge": "La imagen no debe superar los 5MB",
+    "uploadError": "Error al actualizar la foto de perfil"
   },
   "common": {
     "required": "Requerido",
@@ -137,7 +168,7 @@
     "recent": "Anomalías recientes",
     "critical": "Crítico",
     "warning": "Peligros",
-    "info": "Info",
+    "info": "Información",
     "resolved": "Resueltos",
     "trend": "Tendencia de anomalía",
     "detected": "Anomalías detectadas",
@@ -180,6 +211,174 @@
     "loading": "Cargando...",
     "select": "Selecciona tu plan",
     "price": "Precio",
-    "description-plan": "Descripción"
+    "description-plan": "Descripción",
+    "saving": "Guardando...",
+    "save": "Guardar",
+    "planUpdated": "¡Plan actualizado!",
+    "updateError": "Error al actualizar el plan."
+  },
+  "subscriptionPlans": {
+    "Basic Plan": "Plan Básico",
+    "Pro Plan": "Plan Pro",
+    "Enterprise Plan": "Plan Empresarial"
+  },
+  "subscriptionPrices": {
+    "$19/month": "$19/mes",
+    "$49/month": "$49/mes",
+    "Custom": "Personalizado"
+  },
+  "subscriptionDescriptions": {
+    "Access to standard features with limited support.": "Acceso a funciones estándar con soporte limitado.",
+    "Includes premium tools and priority support.": "Incluye herramientas premium y soporte prioritario.",
+    "Full access and dedicated account management.": "Acceso completo y gestión de cuenta dedicada."
+  },
+  "dashboard": {
+    "title": "Panel Principal",
+    "subtitle": "Resumen general y accesos rápidos",
+    "alertsAndNotifications": "Alertas & Notificaciones",
+    "anomalyDetection": "Detección de Anomalías",
+    "billingAndPayments": "Facturación y Pagos",
+    "manageBilling": "Gestiona tu información de facturación e historial.",
+    "currentBalance": "Balance Actual",
+    "nextPayment": "Próximo Pago",
+    "averagePayment": "Pago Promedio",
+    "recentReports": "Reportes Recientes"
+  },
+  "notificationSettings": {
+    "applyFilter": "Aplicar Filtro",
+    "criticalAlerts": "Alertas Críticas",
+    "usageWarnings": "Avisos de Uso",
+    "maintenanceReminders": "Recordatorios de Mantenimiento"
+  },
+  "anomalyCard": {
+    "profileId": "ID de Perfil",
+    "resolved": "Resuelto",
+    "unresolved": "Sin Resolver"
+  },
+  "anomalyTable": {
+    "resolved": "Resuelto",
+    "unresolved": "Sin Resolver"
+  },
+  "anomalyChart": {
+    "anomaliesPerDay": "Anomalías por Día"
+  },
+  "reportFilter": {
+    "typeOptions": {
+      "usageAnalytics": "Análisis de Uso",
+      "costAnalysis": "Análisis de Costos",
+      "efficiency": "Eficiencia"
+    },
+    "periodOptions": {
+      "last7Days": "Últimos 7 Días",
+      "last30Days": "Últimos 30 Días",
+      "thisYear": "Este Año"
+    },
+    "locationOptions": {
+      "allLocations": "Todas las Ubicaciones",
+      "zoneA": "Zona A",
+      "zoneB": "Zona B"
+    }
+  },
+  "paymentMethods": {
+    "deleteConfirm": "¿Estás seguro de que deseas eliminar este método de pago?",
+    "fillAllFields": "Por favor completa todos los campos",
+    "placeholder": "VISA ****1234 o paypal@ejemplo.com",
+    "type": "Tipo"
+  },
+  "transactions": {
+    "viewAll": "Ver Todo",
+    "payment": "Pago"
+  },
+  "usageChart": {
+    "title": "Consumo Diario (Últimos 7 Días)",
+    "gallons": "Galones"
+  },
+  "usageSettings": {
+    "enableAlerts": "Habilitar Alertas",
+    "disableAlerts": "Deshabilitar Alertas",
+    "editLimitsModal": "Se abriría el modal para editar límites aquí."
+  },
+  "alertTypes": {
+    "Critical": "Crítico",
+    "Warning": "Advertencia",
+    "Info": "Información"
+  },
+  "anomalyTypes": {
+    "Leak detected": "Fuga Detectada",
+    "High temperature": "Temperatura Alta",
+    "Unusual consumption": "Consumo Inusual",
+    "Low reservoir level": "Nivel de Reservorio Bajo",
+    "Sensor offline": "Sensor Desconectado",
+    "High pressure": "Presión Alta"
+  },
+  "reportTypes": {
+    "Usage Analytics": "Análisis de Uso",
+    "Cost Analysis": "Análisis de Costos",
+    "Efficiency": "Eficiencia"
+  },
+  "locations": {
+    "All Locations": "Todas las Ubicaciones",
+    "Zone A": "Zona A",
+    "Zone B": "Zona B"
+  },
+  "periods": {
+    "Last 7 Days": "Últimos 7 Días",
+    "Last 30 Days": "Últimos 30 Días",
+    "This Year": "Este Año"
+  },
+  "costCategories": {
+    "Pumping": "Bombeo",
+    "Treatment": "Tratamiento",
+    "Distribution": "Distribución",
+    "Maintenance": "Mantenimiento"
+  },
+  "alertTitles": {
+    "Water Pressure Critical": "Presión de Agua Crítica",
+    "Pump Failure Detected": "Falla de Bomba Detectada",
+    "Low Reservoir Level": "Nivel de Reservorio Bajo",
+    "High Water Usage": "Uso Alto de Agua",
+    "Abnormal Temperature": "Temperatura Anormal",
+    "Pressure Fluctuation": "Fluctuación de Presión",
+    "Valve Delay": "Retraso de Válvula",
+    "Unexpected Flow Pattern": "Patrón de Flujo Inesperado",
+    "Sensor Timeout": "Tiempo de Espera del Sensor Agotado",
+    "Usage Spike": "Pico de Uso",
+    "Scheduled Maintenance Due": "Mantenimiento Programado Pendiente",
+    "System Check Completed": "Verificación del Sistema Completada",
+    "New Device Connected": "Nuevo Dispositivo Conectado",
+    "Backup Activated": "Respaldo Activado",
+    "Maintenance Due": "Mantenimiento Pendiente",
+    "Sensor Calibration Needed": "Calibración de Sensor Necesaria"
+  },
+  "alertMessages": {
+    "Main tank pressure dropped below 15 PSI.": "La presión del tanque principal cayó por debajo de 15 PSI.",
+    "Pump #2 stopped responding.": "La bomba #2 dejó de responder.",
+    "Storage tank is at 15% capacity.": "El tanque de almacenamiento está al 15% de capacidad.",
+    "Usage exceeded 500 gallons in 1 hour.": "El uso excedió 500 galones en 1 hora.",
+    "Sensor reports 35°C, outside safe range.": "El sensor reporta 35°C, fuera del rango seguro.",
+    "Pressure dropped and recovered rapidly.": "La presión cayó y se recuperó rápidamente.",
+    "Valve #4 took longer than expected to close.": "La válvula #4 tardó más de lo esperado en cerrar.",
+    "Flow rate inconsistent with schedule.": "La tasa de flujo es inconsistente con el horario.",
+    "Sensor #7 failed to report in last cycle.": "El sensor #7 no pudo reportar en el último ciclo.",
+    "Water usage 40% above normal.": "El uso de agua está 40% por encima de lo normal.",
+    "Filter replacement scheduled for tomorrow.": "Reemplazo de filtro programado para mañana.",
+    "Routine diagnostics completed successfully.": "Diagnósticos de rutina completados exitosamente.",
+    "Sensor #12 added to monitoring network.": "Sensor #12 agregado a la red de monitoreo.",
+    "Backup pump engaged during peak usage.": "Bomba de respaldo activada durante uso pico.",
+    "Scheduled maintenance in 48 hours.": "Mantenimiento programado en 48 horas.",
+    "Sensor #3 readings may be inaccurate.": "Las lecturas del sensor #3 pueden ser inexactas."
+  },
+  "alertTimestamps": {
+    "2 minutes ago": "hace 2 minutos",
+    "3 minutes ago": "hace 3 minutos",
+    "5 minutes ago": "hace 5 minutos",
+    "6 minutes ago": "hace 6 minutos",
+    "8 minutes ago": "hace 8 minutos",
+    "10 minutes ago": "hace 10 minutos",
+    "12 minutes ago": "hace 12 minutos",
+    "15 minutes ago": "hace 15 minutos",
+    "18 minutes ago": "hace 18 minutos",
+    "20 minutes ago": "hace 20 minutos",
+    "25 minutes ago": "hace 25 minutos"
   }
 }
