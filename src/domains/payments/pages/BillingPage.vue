@@ -7,9 +7,9 @@
 
     <!-- Summary cards -->
     <div class="billing-summary">
-      <BillingSummaryCard title="Current Balance" :value="balanceDisplay" />
-      <BillingSummaryCard title="Next Payment" :value="nextPaymentDate" />
-      <BillingSummaryCard title="Average Payment" :value="monthlyAverage" />
+      <BillingSummaryCard :title="$t('dashboard.currentBalance')" :value="balanceDisplay" />
+      <BillingSummaryCard :title="$t('dashboard.nextPayment')" :value="nextPaymentDate" />
+      <BillingSummaryCard :title="$t('dashboard.averagePayment')" :value="monthlyAverage" />
     </div>
 
     <!-- Main content -->
