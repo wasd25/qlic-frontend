@@ -12,14 +12,14 @@
       <div class="anomaly-body">
 
         <div class="chart-section">
-          <h2 class="section-title">Anomaly Trend</h2>
+          <h2 class="section-title">{{ $t('anomalySection.trend') }}</h2>
           <div class="chart-container">
             <anomaly-trend-chart :anomalies="anomalies" />
           </div>
         </div>
 
         <div class="table-section">
-          <h2 class="section-title">Detected Anomalies</h2>
+          <h2 class="section-title">{{ $t('anomalySection.detected') }}</h2>
           <div class="table-container">
             <anomaly-table :anomalies="anomalies" />
           </div>
