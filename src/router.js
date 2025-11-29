@@ -9,6 +9,7 @@ import AlertPage from "./domains/alerts/pages/alerts-page.component.vue"
 import AnomalyPage from './domains/anomaly-detection/pages/anomaly-page.component.vue'
 import DashboardPage from '@/domains/dashboard/pages/dashboard.component.vue'
 import UsageManagementPage from './domains/usage-management/pages/usage-management-page.component.vue'
+import StripeSuccessPage from './stripe/pages/success.vue'
 
 // Lazy load para IAM
 const LoginPage = () => import('./domains/iam/pages/login-page.component.vue')
@@ -70,6 +71,12 @@ const routes = [
         meta: { requiresAuth: true }
     },
     {
+        path: '/success',
+        name: 'StripeSuccess',
+        component: StripeSuccessPage,
+        meta: { requiresAuth: false } // No requiere auth para la redirección de Stripe
+    },
+    {
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: PageNotFound
@@ -85,7 +92,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     const isAuthenticated = authService.isAuthenticated()
 
-    console.log('🛡️ Route guard:', {
+    console.log(' Route guard:', {
         to: to.name,
         requiresAuth: to.meta.requiresAuth,
         requiresGuest: to.meta.requiresGuest,
@@ -94,12 +101,12 @@ router.beforeEach((to, from, next) => {
 
     // Si la ruta requiere autenticación y no está autenticado
     if (to.meta.requiresAuth && !isAuthenticated) {
-        console.log('🔒 Redirecting to login')
+        console.log(' Redirecting to login')
         next('/login')
     }
     // Si la ruta es para invitados (login) y ya está autenticado
     else if (to.meta.requiresGuest && isAuthenticated) {
-        console.log('✅ Already authenticated, redirecting to dashboard')
+        console.log(' Already authenticated, redirecting to dashboard')
         next('/dashboard')
     }
     // Continuar normalmente
