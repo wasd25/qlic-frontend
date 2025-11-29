@@ -74,7 +74,7 @@ const handleRegisterSuccess = (user) => {
 }
 
 .logo {
-  width: 120px;
+  width: 220px;
   height: 120px;
   margin-bottom: 1rem;
   border-radius: 12px;
