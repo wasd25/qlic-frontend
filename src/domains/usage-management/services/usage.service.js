@@ -1,39 +1,91 @@
+// javascript
+// File: `src/domains/usage-management/services/usage.service.js`
 import axios from 'axios'
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL
+const RAW_API_BASE = import.meta.env.VITE_API_BASE_URL || ''
+console.log('[usage.service] VITE_API_BASE_URL=', RAW_API_BASE)
+
+const API_BASE = RAW_API_BASE.replace(/\/+$/, '') // .../api/v1 (sin slash final)
+const API_ROOT = API_BASE.replace(/\/v1\/?$/, '') // .../api
+
+// axios instance for consistent logs / interceptors later
+const client = axios.create({
+    baseURL: API_BASE,
+    timeout: 10000
+})
+
+async function fetchWithLog(fullUrl, opts = {}) {
+    const method = (opts.method || 'get').toLowerCase()
+    console.log(`[usage.service] Request -> ${method.toUpperCase()} ${fullUrl}`)
+    try {
+        const res = await client.request({ url: fullUrl, method, ...opts })
+        console.log(`[usage.service] Response ${res.status} -> ${fullUrl}`, res.data)
+        return res
+    } catch (err) {
+        if (err.response) {
+            console.error(`[usage.service] Error response ${err.response.status} -> ${fullUrl}`, err.response.data)
+        } else {
+            console.error(`[usage.service] Network/Error -> ${fullUrl}`, err.message)
+        }
+        throw err
+    }
+}
 
 export async function getUsageSummary() {
     try {
-        // Usamos reportSummaries/1 como fuente de verdad ya que usageSummary falla
-        const { data } = await axios.get(`${API_BASE}/reportSummaries/1`)
+        // endpoint esperado: /api/vq/usage-summary  -> usamos API_ROOT para construir /api/vq/...
+        const res = await fetchWithLog(`${API_ROOT}/vq/usage-summary`)
+        const data = res.data
+        const item = Array.isArray(data) ? data[0] : (data || {})
+        const current = item.current ?? item.Current ?? item.currentUsage ?? item.CurrentUsage ?? 0
+        const dailyLimit = item.dailyLimit ?? item.DailyLimit ?? item.Daily_Limit ?? item.daily_limit ?? 0
+        const monthlyTotal = item.monthlyTotal ?? item.MonthlyTotal ?? item.monthly_total ?? item.Monthly_Total ?? 0
 
-        // Calculamos el total basado en los trends disponibles
-        const currentUsage = data.usageTrends.reduce((acc, curr) => acc + curr.liters, 0)
-
-        return {
-            current: currentUsage,
-            dailyLimit: 2000, // Valor por defecto o hardcodeado si no viene en la API
-            monthlyTotal: currentUsage * 4 // Estimación basada en datos reales
+        // detect empty object
+        if (!current && !dailyLimit && !monthlyTotal) {
+            console.warn('[usage.service] usage summary parece vacío:', item)
         }
+
+        return { current, dailyLimit, monthlyTotal }
     } catch (error) {
-        console.error('Error fetching usage summary:', error)
+        // ya logueado en fetchWithLog
         return { current: 0, dailyLimit: 0, monthlyTotal: 0 }
     }
 }
 
 export async function getUsageEvents() {
     try {
-        // Mapeamos los trends como eventos recientes para mostrar datos reales
-        const { data } = await axios.get(`${API_BASE}/reportSummaries/1`)
+        // endpoint esperado: /api/v1/usage-events -> usar API_BASE porque contiene /api/v1
+        const res = await fetchWithLog(`/usage-events`)
+        const data = res.data
+        const list = Array.isArray(data) ? data : (data.items ?? data.results ?? data.events ?? [])
 
-        return data.usageTrends.map((trend, index) => ({
-            id: index + 1,
-            time: new Date(trend.day).toLocaleDateString(),
-            amount: trend.liters,
-            source: 'Main Sensor' // Dato estático ya que no viene en el trend
-        })).slice(0, 5) // Mostramos los 5 más recientes
+        if (!Array.isArray(list) || list.length === 0) {
+            console.warn('[usage.service] usage events lista vacía o formato inesperado:', data)
+        }
+
+        return (Array.isArray(list) ? list : []).map(ev => {
+            const raw = ev || {}
+            const rawTime = raw.time ?? raw.Time ?? raw.createdAt ?? raw.timestamp ?? raw.day ?? raw.date ?? ''
+            let time = ''
+            try { time = rawTime ? new Date(rawTime).toLocaleString() : '' } catch { time = String(rawTime) }
+            return {
+                id: raw.id ?? raw.Id ?? raw._id ?? null,
+                time,
+                amount: raw.amount ?? raw.Amount ?? raw.liters ?? raw.value ?? 0,
+                source: raw.source ?? raw.Source ?? raw.sensor ?? raw.device ?? ''
+            }
+        })
     } catch (error) {
-        console.error('Error fetching usage events:', error)
         return []
+    }
+}
+
+export async function getReportSummary(id = 1) {
+    try {
+        const res = await fetchWithLog(`/reportSummaries/${id}`)
+        return res.data
+    } catch (error) {
+        return null
     }
 }
