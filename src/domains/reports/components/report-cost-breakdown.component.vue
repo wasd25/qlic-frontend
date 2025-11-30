@@ -8,7 +8,6 @@
   </div>
 </template>
 
-
 <script setup>
 import { computed } from 'vue'
 import Chart from 'primevue/chart'
@@ -33,11 +32,17 @@ const chartOptions = {
       labels: {
         color: '#374151'
       }
+    },
+    tooltip: {
+      callbacks: {
+        label: (context) => {
+          return ` ${context.raw} L`
+        }
+      }
     }
   }
 }
 </script>
-
 
 <style scoped>
 .panel {
