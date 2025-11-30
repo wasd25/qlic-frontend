@@ -33,7 +33,17 @@ export async function getReportSummary(filters) {
     for (const item of summaries) {
         if (item.usageTrends) summary.usageTrends = item.usageTrends
         if (item.costBreakdown) summary.costBreakdown = item.costBreakdown
-        if (item.efficiencyMetrics) summary.efficiencyMetrics = item.efficiencyMetrics
+
+        if (item.efficiencyMetrics) {
+            // Mapping robusto: backend (snake_case) -> frontend (camelCase)
+            const metrics = item.efficiencyMetrics
+            summary.efficiencyMetrics = {
+                score: metrics.score,
+                waterSaved: metrics.waterSaved || metrics.water_saved,
+                costSaved: metrics.costSaved || metrics.cost_saved,
+                reportSummaryId: metrics.reportSummaryId || metrics.report_summary_id
+            }
+        }
     }
 
     return summary

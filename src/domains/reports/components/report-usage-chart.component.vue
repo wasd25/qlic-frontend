@@ -32,7 +32,10 @@ const props = defineProps({data: Array})
 
 
 const chartData = computed(() => ({
-  labels: props.data.map(d => d.day),
+  labels: props.data.map(d => {
+    const date = new Date(d.day);
+    return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+  }),
   datasets: [
     {
       label: t('reportsSection.liters'),
