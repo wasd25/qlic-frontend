@@ -1,33 +1,31 @@
 <template>
   <section class="metrics">
     <div class="metric-card">
-      <h4>{{$t('usageSection.current')}}</h4>
-      <p>{{ summary.current }} {{$t('usageSection.gallon')}}</p>
+      <h4>{{ $t('usageSection.current') }}</h4>
+      <p>{{ summary.current }} {{ $t('usageSection.gallon') }}</p>
     </div>
     <div class="metric-card">
-      <h4>{{$t('usageSection.daily')}}</h4>
-      <p>{{ summary.dailyLimit }} {{$t('usageSection.gallon')}}</p>
+      <h4>{{ $t('usageSection.daily') }}</h4>
+      <p>{{ summary.dailyLimit }} {{ $t('usageSection.gallon') }}</p>
     </div>
     <div class="metric-card">
-      <h4>{{$t('usageSection.monthly')}}</h4>
-      <p>{{ summary.monthlyTotal }} {{$t('usageSection.gallon')}}</p>
+      <h4>{{ $t('usageSection.monthly') }}</h4>
+      <p>{{ summary.monthlyTotal }} {{ $t('usageSection.gallon') }}</p>
     </div>
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { getUsageSummary } from '../services/usage.service.js'
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const summary = ref({ current: 0, dailyLimit: 0, monthlyTotal: 0 })
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get(`${BASE_URL}/usageSummary`)
-    summary.value = data
-  } catch (error) {
-    console.error('Error fetching usage summary:', error)
+    summary.value = await getUsageSummary()
+  } catch (err) {
+    console.error('Error en componente usage-summary:', err)
   }
 })
 </script>

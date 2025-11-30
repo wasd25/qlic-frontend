@@ -1,19 +1,19 @@
 <template>
   <section class="events-section">
-    <h3>{{$t('usageSection.events')}}</h3>
+    <h3>{{ $t('usageSection.events') }}</h3>
     <div class="table-wrapper">
       <table>
         <thead>
         <tr>
-          <th>{{$t('usageSection.time')}}</th>
-          <th>{{$t('usageSection.amount')}}</th>
-          <th>{{$t('usageSection.source')}}</th>
+          <th>{{ $t('usageSection.time') }}</th>
+          <th>{{ $t('usageSection.amount') }}</th>
+          <th>{{ $t('usageSection.source') }}</th>
         </tr>
         </thead>
         <tbody>
         <tr v-for="event in events" :key="event.id">
           <td>{{ event.time }}</td>
-          <td>{{ event.amount }} {{$t('usageSection.gallon')}}</td>
+          <td>{{ event.amount }} {{ $t('usageSection.gallon') }}</td>
           <td>{{ event.source }}</td>
         </tr>
         </tbody>
@@ -24,21 +24,18 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import { getUsageEvents } from '../services/usage.service.js'
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const events = ref([])
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get(`${BASE_URL}/usageEvents`)
-    events.value = data
-  } catch (error) {
-    console.error('Error fetching usage events:', error)
+    events.value = await getUsageEvents()
+  } catch (err) {
+    console.error('Error en componente usage-events:', err)
   }
 })
 </script>
-
 <style scoped>
 .events-section {
   background: #ffffff;

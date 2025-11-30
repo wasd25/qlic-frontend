@@ -12,29 +12,33 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 import { useI18n } from 'vue-i18n'
+import {
+  getNotificationSettings,
+  updateNotificationSettings
+} from '../services/usage.service.js'
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL
 const alertsEnabled = ref(false)
 const { t } = useI18n()
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get(`${BASE_URL}/notificationSettings`)
-    alertsEnabled.value = data.types.includes('Critical Alerts')
-  } catch (error) {
-    console.error('Error loading notification settings:', error)
+    const data = await getNotificationSettings()
+    const types = data?.types ?? data?.notificationTypes ?? data?.notifications ?? []
+    alertsEnabled.value = Array.isArray(types) && types.includes('Critical Alerts')
+  } catch (err) {
+    console.error('Error en componente usage-settings (carga):', err)
   }
 })
 
 async function toggleAlerts() {
   try {
     const newTypes = alertsEnabled.value ? [] : ['Critical Alerts']
-    await axios.put('http://localhost:3000/notificationSettings', { types: newTypes })
-    alertsEnabled.value = !alertsEnabled.value
-  } catch (error) {
-    console.error('Error updating notification settings:', error)
+    const ok = await updateNotificationSettings({ types: newTypes })
+    if (ok) alertsEnabled.value = !alertsEnabled.value
+    else console.error('updateNotificationSettings no encontró ruta válida')
+  } catch (err) {
+    console.error('Error en componente usage-settings (update):', err)
   }
 }
 
@@ -42,6 +46,7 @@ function editLimits() {
   alert(t('usageSettings.editLimitsModal'))
 }
 </script>
+
 
 <style scoped>
 .settings-section {
