@@ -49,7 +49,8 @@ async function download(report) {
     console.log('📊 Datos para PDF:', data)
     console.log('📥 Descargando:', report.name)
 
-    exportReportToPDF(report.type, data)
+    const reportType = report.type || 'Usage Analytics'
+    exportReportToPDF(reportType, data)
   } catch (error) {
     console.error('Error al descargar el reporte:', error)
   }
