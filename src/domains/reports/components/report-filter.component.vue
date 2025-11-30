@@ -2,59 +2,53 @@
   <div class="report-filter">
     <div class="filter-box">
       <label>{{ $t('reportsSection.timePeriod') }}</label>
-      <div class="input-box">
-        <Select
-            v-model="filters.period"
-            :options="periods"
-            :placeholder="$t('reportsSection.select')"
-            class="select-full"
-        >
-          <template #option="slotProps">
-            {{ $t(`periods.${slotProps.option}`) }}
-          </template>
-          <template #value="slotProps">
-            {{ $t(`periods.${slotProps.value}`) }}
-          </template>
-        </Select>
-      </div>
+      <Select
+          v-model="filters.period"
+          :options="periods"
+          :placeholder="$t('reportsSection.select')"
+          class="select-full"
+      >
+        <template #option="slotProps">
+          {{ $t(`periods.${slotProps.option}`) }}
+        </template>
+        <template #value="slotProps">
+          {{ $t(`periods.${slotProps.value}`) }}
+        </template>
+      </Select>
     </div>
 
     <div class="filter-box">
       <label>{{ $t('reportsSection.reportType') }}</label>
-      <div class="input-box">
-        <Select
-            v-model="filters.type"
-            :options="types"
-            :placeholder="$t('reportsSection.select')"
-            class="select-full"
-        >
-          <template #option="slotProps">
-            {{ $t(`reportTypes.${slotProps.option}`) }}
-          </template>
-          <template #value="slotProps">
-            {{ $t(`reportTypes.${slotProps.value}`) }}
-          </template>
-        </Select>
-      </div>
+      <Select
+          v-model="filters.type"
+          :options="types"
+          :placeholder="$t('reportsSection.select')"
+          class="select-full"
+      >
+        <template #option="slotProps">
+          {{ $t(`reportTypes.${slotProps.option}`) }}
+        </template>
+        <template #value="slotProps">
+          {{ $t(`reportTypes.${slotProps.value}`) }}
+        </template>
+      </Select>
     </div>
 
     <div class="filter-box">
       <label>{{ $t('reportsSection.location') }}</label>
-      <div class="input-box">
-        <Select
-            v-model="filters.location"
-            :options="locations"
-            :placeholder="$t('reportsSection.select')"
-            class="select-full"
-        >
-          <template #option="slotProps">
-            {{ $t(`locations.${slotProps.option}`) }}
-          </template>
-          <template #value="slotProps">
-            {{ $t(`locations.${slotProps.value}`) }}
-          </template>
-        </Select>
-      </div>
+      <Select
+          v-model="filters.location"
+          :options="locations"
+          :placeholder="$t('reportsSection.select')"
+          class="select-full"
+      >
+        <template #option="slotProps">
+          {{ $t(`locations.${slotProps.option}`) }}
+        </template>
+        <template #value="slotProps">
+          {{ $t(`locations.${slotProps.value}`) }}
+        </template>
+      </Select>
     </div>
 
     <Button :label="$t('reportsSection.generateReport')" class="generate-btn" @click="emitFilters" />
@@ -95,7 +89,7 @@ function emitFilters() {
   background-color: #ffffff;
   padding: 1.5rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   width: 100%;
   max-width: 100%;
 }
@@ -109,19 +103,20 @@ function emitFilters() {
 
 .filter-box label {
   font-size: 0.85rem;
-  font-weight: 500;
-  color: #374151;
-}
-
-.input-box {
-  background-color: #f9fafb;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 0.5rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-left: 0.25rem;
 }
 
 .select-full {
   width: 100%;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.select-full:hover {
+  border-color: #3b82f6;
 }
 
 .generate-btn {
@@ -131,20 +126,73 @@ function emitFilters() {
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   border: none;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   white-space: nowrap;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
 }
 
 .generate-btn:hover {
   background-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px rgba(59, 130, 246, 0.3);
 }
 
-/* 🔧 Elimina fondo del ítem seleccionado */
-::v-deep(.p-select-item.p-highlight),
-::v-deep(.p-select-item:hover),
-::v-deep(.p-select-panel),
-::v-deep(.p-select-items) {
-  background-color: transparent;
-  box-shadow: none;
+/* --- Personalización Profunda de PrimeVue Select --- */
+
+/* El input/trigger principal */
+::v-deep(.p-select) {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  background: #f9fafb;
+  transition: all 0.2s;
+}
+
+::v-deep(.p-select:not(.p-disabled):hover) {
+  border-color: #3b82f6;
+}
+
+::v-deep(.p-select:not(.p-disabled).p-focus) {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* El texto dentro del select */
+::v-deep(.p-select-label) {
+  padding: 0;
+  font-size: 0.95rem;
+  color: #1f2937;
+}
+
+/* El panel desplegable */
+::v-deep(.p-select-overlay) {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  margin-top: 0.5rem;
+}
+
+/* Items de la lista */
+::v-deep(.p-select-option) {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: #374151;
+  transition: background-color 0.15s;
+  border-radius: 6px;
+  margin: 0.25rem;
+}
+
+/* Hover en items */
+::v-deep(.p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus) {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* Item seleccionado */
+::v-deep(.p-select-option.p-select-option-selected) {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
 }
 </style>
