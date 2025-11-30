@@ -41,36 +41,34 @@ function buildChart() {
     },
     options: {
       responsive: true,
+      maintainAspectRatio: false, // <-- importante
       plugins: {
         legend: { display: false }
       },
       scales: {
         y: {
           beginAtZero: true,
-          ticks: {
-            stepSize: 1
-          }
+          ticks: { stepSize: 1 }
         }
       }
     }
   })
 }
 
-onMounted(() => {
-  buildChart()
-})
-
-watch(() => props.anomalies, () => {
-  buildChart()
-})
+onMounted(buildChart)
+watch(() => props.anomalies, buildChart)
 </script>
 
 <style scoped>
 .trend-chart {
-  background-color: white;
-  padding: 1.5rem;
+  background-color: transparent;
+  padding: 0;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  flex: 1;
+  }
+
+.trend-chart canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
 }
 </style>

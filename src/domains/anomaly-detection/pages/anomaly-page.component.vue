@@ -21,7 +21,10 @@
         <div class="table-section">
           <h2 class="section-title">{{ $t('anomalySection.detected') }}</h2>
           <div class="table-container">
-            <anomaly-table :anomalies="anomalies" />
+            <!-- wrapper que gestiona el scroll interno -->
+            <div class="table-scroll">
+              <anomaly-table :anomalies="anomalies" />
+            </div>
           </div>
         </div>
 
@@ -61,7 +64,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* CONFIGURACIÓN GENERAL DE PÁGINA */
+
 .anomaly-page {
   background-color: var(--body-bg, #f3f4f6);
   min-height: 100%;
@@ -71,13 +74,12 @@ onMounted(async () => {
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 1rem; /* Padding reducido para móvil */
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-/* Ajuste padding Desktop */
 @media (min-width: 768px) {
   .container {
     padding: 2rem;
@@ -98,8 +100,6 @@ onMounted(async () => {
   margin-bottom: 1rem;
 }
 
-/* --- 1. ARREGLO DEL RESUMEN (Tarjetas de colores) --- */
-/* Forzamos grid responsivo en el componente hijo */
 .summary-wrapper :deep(> *) {
   display: grid !important;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -107,7 +107,6 @@ onMounted(async () => {
   width: 100%;
 }
 
-/* --- 2. LAYOUT DEL CUERPO (Chart vs Table) --- */
 .anomaly-body {
   display: flex;
   flex-direction: column; /* MÓVIL: Uno debajo del otro */
@@ -115,32 +114,57 @@ onMounted(async () => {
   width: 100%;
 }
 
-/* DESKTOP: Lado a lado */
-@media (min-width: 1024px) {
-  .anomaly-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 50% Gráfico, 50% Tabla */
-    align-items: start;
+@media (max-width: 1023px) {
+  .chart-container {
+    min-height: 220px; /* ajustar según preferencia (180-260px) */
   }
 }
 
-/* Estilos para el contenedor del gráfico */
+@media (min-width: 1024px) {
+  .anomaly-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 2rem;
+  }
+
+
+  .chart-container,
+  .table-container {
+    height: 320px;
+    min-height: 260px;
+  }
+
+   .table-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
 .chart-section {
   width: 100%;
-  min-width: 0; /* Vital para que el gráfico no rompa el layout */
-}
+  min-width: 0; }
 
 .chart-container {
   background: white;
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  /* Asegura que el canvas del gráfico se adapte */
   position: relative;
   width: 100%;
+  min-height: 0;
 }
 
-/* Estilos para la tabla */
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+
 .table-section {
   width: 100%;
   min-width: 0;
@@ -149,14 +173,38 @@ onMounted(async () => {
 .table-container {
   background: white;
   border-radius: 12px;
-  overflow: hidden; /* Redondea bordes */
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 
-  /* IMPORTANTE: Permite scroll horizontal si la tabla es muy ancha en móvil */
-  overflow-x: auto;
+   overflow: hidden;
 }
 
-/* --- 3. TARJETAS RECIENTES --- */
+
+.table-scroll {
+ overflow-x: auto;
+}
+
+.table-container table,
+.table-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table-container th,
+.table-container td,
+.table-scroll th,
+.table-scroll td {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  padding: 0.5rem 0.75rem;
+  vertical-align: top;
+}
+
+.table-container tr:nth-child(even) {
+  background: rgba(0,0,0,0.02);
+}
+
 .anomaly-cards-section {
   display: flex;
   flex-direction: column;
