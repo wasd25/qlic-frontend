@@ -8,10 +8,10 @@
         </div>
         <div class="text-wrapper">
           <span class="report-name">
-            {{ $t(`reportTypes.${report.type}`) || report.title }}
+            {{ report.type ? $t(`reportTypes.${report.type}`) : report.title }}
           </span>
           <span class="report-date">
-            {{ report.date ? $t('reportsSection.generatedDaysAgo', { days: report.date }) : new Date(report.created_at).toLocaleDateString() }}
+            {{ report.date ? $t('reportsSection.generatedDaysAgo', { days: report.date }) : (report.created_at ? new Date(report.created_at).toLocaleDateString() : 'Invalid Date') }}
           </span>
         </div>
         <i class="pi pi-download download-icon" @click.stop="download(report)" />

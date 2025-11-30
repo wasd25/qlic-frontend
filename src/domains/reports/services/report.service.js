@@ -20,9 +20,9 @@ export async function updateReport(id, data) {
 }
 
 export async function getReportSummary(filters) {
-    const params = new URLSearchParams(filters).toString()
-    console.log('🔍 Fetching report summaries with params:', params)
-    const response = await axios.get(`${BASE_URL}/reportSummaries`, { params })
+    console.log('🔍 Fetching report summaries with params:', filters)
+    // Fix: Pass filters object directly as params, axios handles serialization
+    const response = await axios.get(`${BASE_URL}/reportSummaries`, { params: filters })
 
     // Robust handling: check if response.data is the array or if it's wrapped in a 'data' property
     let summaries = response.data
