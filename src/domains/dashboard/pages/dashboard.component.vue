@@ -81,15 +81,22 @@ onMounted(async () => {
     recentReports.value = reportsData
     payments.value = paymentsData
     settings.value = settingsData
-
+//changed the data names to match the variables , thats why  it wasnt working before.
     summary.value = {
-      critical: alerts.value.filter(a => a.type === 'Critical').length,
-      warning: alerts.value.filter(a => a.type === 'Warning').length,
-      info: alerts.value.filter(a => a.type === 'Info').length,
-      resolvedToday: 15
+      critical: alerts.value.filter(a => a.alertType === 'Critical').length,
+      warning: alerts.value.filter(a => a.alertType === 'Warning').length,
+      info: alerts.value.filter(a => a.alertType === 'Info').length,
+
+      resolvedToday: alerts.value.filter(a => (
+          (a.resolved === true || a.status === 'resolved' || a.status === 'Resolved') &&
+          isToday(a.timestamp)
+      )).length
     }
   } catch (error) {
     console.error("Error loading dashboard data", error)
+
+    summary.value = { critical: 0, warning: 0, info: 0, resolvedToday: 0 }
+    alerts.value = []
   }
 })
 
