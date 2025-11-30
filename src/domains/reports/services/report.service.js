@@ -45,8 +45,17 @@ export async function getReportSummary(filters) {
     }
 
     for (const item of summaries) {
-        if (item.usageTrends) summary.usageTrends = item.usageTrends
-        if (item.costBreakdown) summary.costBreakdown = item.costBreakdown
+        console.log('📦 Processing summary item keys:', Object.keys(item))
+
+        const usage = item.usageTrends || item.usage_trends
+        if (usage) {
+            summary.usageTrends = usage
+        }
+
+        const cost = item.costBreakdown || item.cost_breakdown
+        if (cost) {
+            summary.costBreakdown = cost
+        }
 
         if (item.efficiencyMetrics) {
             // Mapping robusto: backend (snake_case) -> frontend (camelCase)
