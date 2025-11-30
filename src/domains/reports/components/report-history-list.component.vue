@@ -32,11 +32,14 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL
 defineProps({ reports: Array })
 
 async function download(report) {
+  console.log('🖱️ Click en descargar reporte:', report)
   try {
-    // 1. Marcar como descargado
-    await axios.patch(`${BASE_URL}/reports/${report.id}`, {
-      downloaded: true
-    })
+    // 1. Intentar marcar como descargado (no bloqueante)
+    try {
+      await axios.patch(`${BASE_URL}/reports/${report.id}`, { downloaded: true })
+    } catch (e) {
+      console.warn('⚠️ No se pudo actualizar el estado de descarga (backend 405?), continuando...', e)
+    }
 
     // 2. Obtener resumen filtrado
     const filters = {
