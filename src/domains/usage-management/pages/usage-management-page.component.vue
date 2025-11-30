@@ -8,7 +8,7 @@
       </p>
     </section>
 
-    <!-- Componentes funcionales -->
+
     <UsageSummaryPanel />
     <UsageChart />
     <UsageEventsTable />
@@ -21,6 +21,7 @@ import UsageSummaryPanel from '../components/usage-summary-panel.component.vue'
 import UsageChart from '../components/usage-chart.component.vue'
 import UsageEventsTable from '../components/usage-events-table.component.vue'
 import UsageSettingsPanel from '../components/usage-settings-panel.component.vue'
+import {$t} from "@primeuix/styled";
 </script>
 
 <style scoped>

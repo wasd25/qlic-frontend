@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@primeuix/styled": "^0.7.4",
     "@primeuix/themes": "^1.2.5",
     "@stripe/stripe-js": "^8.5.3",
     "axios": "^1.12.2",
@@ -25,6 +26,6 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.1",
     "json-server": "^0.17.4",
-    "vite": "^7.1.7"
+    "vite": "^7.2.4"
   }
 }
