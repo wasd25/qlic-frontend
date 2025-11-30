@@ -8,7 +8,7 @@ console.log('[usage.service] VITE_API_BASE_URL=', RAW_API_BASE)
 const API_BASE = RAW_API_BASE.replace(/\/+$/, '') // .../api/v1 (sin slash final)
 const API_ROOT = API_BASE.replace(/\/v1\/?$/, '') // .../api
 
-// axios instance for consistent logs / interceptors later
+
 const client = axios.create({
     baseURL: API_BASE,
     timeout: 10000
@@ -33,7 +33,7 @@ async function fetchWithLog(fullUrl, opts = {}) {
 
 export async function getUsageSummary() {
     try {
-        // endpoint esperado: /api/vq/usage-summary  -> usamos API_ROOT para construir /api/vq/...
+        // usamos API_ROOT para construir /api/vq/...
         const res = await fetchWithLog(`${API_ROOT}/vq/usage-summary`)
         const data = res.data
         const item = Array.isArray(data) ? data[0] : (data || {})
@@ -41,21 +41,21 @@ export async function getUsageSummary() {
         const dailyLimit = item.dailyLimit ?? item.DailyLimit ?? item.Daily_Limit ?? item.daily_limit ?? 0
         const monthlyTotal = item.monthlyTotal ?? item.MonthlyTotal ?? item.monthly_total ?? item.Monthly_Total ?? 0
 
-        // detect empty object
+
         if (!current && !dailyLimit && !monthlyTotal) {
             console.warn('[usage.service] usage summary parece vacío:', item)
         }
 
         return { current, dailyLimit, monthlyTotal }
     } catch (error) {
-        // ya logueado en fetchWithLog
+
         return { current: 0, dailyLimit: 0, monthlyTotal: 0 }
     }
 }
 
 export async function getUsageEvents() {
     try {
-        // endpoint esperado: /api/v1/usage-events -> usar API_BASE porque contiene /api/v1
+
         const res = await fetchWithLog(`/usage-events`)
         const data = res.data
         const list = Array.isArray(data) ? data : (data.items ?? data.results ?? data.events ?? [])
