@@ -86,17 +86,17 @@ function emitFilters() {
 <style>
 /* 🌍 Estilos Globales para el Overlay Teleportado (Fuera del Scope) */
 .report-dropdown-panel {
-  background: #1f2937 !important; /* Fondo Oscuro */
-  border: 1px solid #374151 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3) !important;
+  background: #ffffff !important; /* Fondo Blanco (Premium) */
+  border: 1px solid #e5e7eb !important;
+  border-radius: 12px !important; /* Bordes más redondeados */
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
   margin-top: 0.5rem;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
 }
 
 .report-dropdown-panel .p-select-list {
   padding: 0 !important;
-  gap: 2px;
+  gap: 4px; /* Espacio entre opciones */
   display: flex;
   flex-direction: column;
 }
@@ -104,24 +104,26 @@ function emitFilters() {
 .report-dropdown-panel .p-select-option {
   padding: 0.75rem 1rem !important;
   font-size: 0.95rem !important;
-  color: #e5e7eb !important; /* Texto claro */
-  transition: background-color 0.15s;
-  border-radius: 4px !important;
-  margin: 0 0.5rem !important;
+  color: #374151 !important; /* Texto gris oscuro */
+  transition: all 0.2s ease;
+  border-radius: 8px !important;
+  margin: 0 !important;
   background: transparent !important;
+  font-weight: 500;
 }
 
 /* Hover y Focus en opciones */
 .report-dropdown-panel .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus,
 .report-dropdown-panel .p-select-option:not(.p-select-option-selected):not(.p-disabled):hover {
-  background-color: #374151 !important;
-  color: #ffffff !important;
+  background-color: #f3f4f6 !important; /* Gris muy suave al hover */
+  color: #111827 !important;
+  transform: translateX(4px); /* Pequeño desplazamiento elegante */
 }
 
 /* Opción Seleccionada */
 .report-dropdown-panel .p-select-option.p-select-option-selected {
-  background-color: #3B82F6 !important;
-  color: #ffffff !important;
+  background-color: #eff6ff !important; /* Azul muy claro */
+  color: #2563eb !important; /* Azul vibrante */
   font-weight: 600;
 }
 </style>
