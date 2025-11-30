@@ -139,60 +139,81 @@ function emitFilters() {
 
 /* --- Personalización Profunda de PrimeVue Select --- */
 
-/* El input/trigger principal */
-::v-deep(.p-select) {
+/* El input/trigger principal (Barra visible) */
+:deep(.p-select) {
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 0.5rem 0.75rem;
-  background: #f9fafb;
+  background: #ffffff;
   transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-::v-deep(.p-select:not(.p-disabled):hover) {
+:deep(.p-select:not(.p-disabled):hover) {
   border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-::v-deep(.p-select:not(.p-disabled).p-focus) {
+:deep(.p-select:not(.p-disabled).p-focus) {
   border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 /* El texto dentro del select */
-::v-deep(.p-select-label) {
+:deep(.p-select-label) {
   padding: 0;
   font-size: 0.95rem;
   color: #1f2937;
 }
 
-/* El panel desplegable */
-::v-deep(.p-select-overlay) {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  margin-top: 0.5rem;
+/* Icono del dropdown */
+:deep(.p-select-dropdown) {
+  color: #6b7280;
 }
 
-/* Items de la lista */
-::v-deep(.p-select-option) {
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  color: #374151;
+/* --- EL MENÚ DESPLEGABLE (Estilo Dark como la imagen 4) --- */
+:deep(.p-select-overlay) {
+  background: #1f2937 !important; /* Fondo Oscuro */
+  border: 1px solid #374151 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3) !important;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+/* Lista de opciones */
+:deep(.p-select-list) {
+  padding: 0 !important;
+  gap: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Items individuales */
+:deep(.p-select-option) {
+  padding: 0.75rem 1rem !important;
+  font-size: 0.95rem !important;
+  color: #e5e7eb !important; /* Texto claro */
   transition: background-color 0.15s;
-  border-radius: 6px;
-  margin: 0.25rem;
+  border-radius: 4px !important;
+  margin: 0 0.5rem !important;
+  background: transparent !important;
 }
 
 /* Hover en items */
-::v-deep(.p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus) {
-  background-color: #eff6ff;
-  color: #1d4ed8;
+:deep(.p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus),
+:deep(.p-select-option:not(.p-select-option-selected):not(.p-disabled):hover) {
+  background-color: #374151 !important; /* Gris más claro al hover */
+  color: #ffffff !important;
 }
 
 /* Item seleccionado */
-::v-deep(.p-select-option.p-select-option-selected) {
-  background-color: #eff6ff;
-  color: #1d4ed8;
+:deep(.p-select-option.p-select-option-selected) {
+  background-color: #3B82F6 !important; /* Azul vibrante */
+  color: #ffffff !important;
   font-weight: 600;
 }
 </style>
