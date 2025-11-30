@@ -21,13 +21,27 @@ export async function updateReport(id, data) {
 
 export async function getReportSummary(filters) {
     const params = new URLSearchParams(filters).toString()
-    const response = await axios.get(`${BASE_URL}/reportSummaries?${params}`)
-    const summaries = response.data
+    console.log('🔍 Fetching report summaries with params:', params)
+    const response = await axios.get(`${BASE_URL}/reportSummaries`, { params })
+
+    // Robust handling: check if response.data is the array or if it's wrapped in a 'data' property
+    let summaries = response.data
+    if (summaries && !Array.isArray(summaries) && Array.isArray(summaries.data)) {
+        console.log('📦 Unwrapping summaries from data property')
+        summaries = summaries.data
+    }
+
+    console.log('✅ Summaries received:', summaries)
 
     const summary = {
         usageTrends: [],
         costBreakdown: [],
         efficiencyMetrics: {}
+    }
+
+    if (!Array.isArray(summaries)) {
+        console.warn('⚠️ Expected array for summaries but got:', typeof summaries)
+        return summary
     }
 
     for (const item of summaries) {

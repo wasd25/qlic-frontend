@@ -62,6 +62,39 @@ const summary = ref({
 })
 
 const reports = ref([])
+const currentFilters = ref({})
+
+async function fetchReports(filters = {}) {
+  try {
+    console.log('🔍 Fetching reports list...')
+    const response = await axios.get(`${BASE_URL}/reports`)
+    
+    // Robust handling for reports list
+    let allReports = response.data
+    if (allReports && !Array.isArray(allReports) && Array.isArray(allReports.data)) {
+        console.log('📦 Unwrapping reports from data property')
+        allReports = allReports.data
+    }
+    
+    console.log('✅ Reports list received:', allReports)
+    
+    if (!Array.isArray(allReports)) {
+        console.warn('⚠️ Expected array for reports but got:', typeof allReports)
+        reports.value = []
+        return
+    }
+
+    const filtered = allReports.filter(report => {
+      // Si el reporte no tiene type (backend SQL), asumimos que coincide o ignoramos el filtro de tipo
+      const matchType = filters.type && report.type ? report.type === filters.type : true
+      const matchLocation = filters.location && report.location ? report.location === filters.location : true
+      return matchType && matchLocation
+    })
+    reports.value = filtered
+  } catch (error) {
+    console.error('Error al cargar los reportes:', error)
+  }
+}
 
 async function downloadReport(report) {
   try {
