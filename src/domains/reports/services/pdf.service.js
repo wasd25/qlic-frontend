@@ -13,13 +13,14 @@ export function exportReportToPDF(type, data, canvas) {
 
     let y = 35
 
-    if (type === 'Usage Analytics') {
+    if (type === 'Usage Analytics' && data.usageTrends) {
         doc.text('Water Usage Trends:', 20, y)
         y += 10
         data.usageTrends.forEach(item => {
             doc.text(`${item.day}: ${item.liters}L`, 20, y)
             y += 8
         })
+        y += 10
 
         // 📊 Agregar gráfico si se recibió canvas
         if (canvas) {
@@ -29,16 +30,17 @@ export function exportReportToPDF(type, data, canvas) {
         }
     }
 
-    if (type === 'Cost Analysis') {
+    if (type === 'Cost Analysis' && data.costBreakdown) {
         doc.text('Cost Breakdown:', 20, y)
         y += 10
         data.costBreakdown.forEach(item => {
             doc.text(`${item.category}: $${item.cost}`, 20, y)
             y += 8
         })
+        y += 10
     }
 
-    if (type === 'Efficiency') {
+    if (type === 'Efficiency' && data.efficiencyMetrics) {
         doc.text('Efficiency Metrics:', 20, y)
         y += 10
         doc.text(`Score: ${data.efficiencyMetrics.score}%`, 20, y)
@@ -46,6 +48,11 @@ export function exportReportToPDF(type, data, canvas) {
         doc.text(`Water Saved: ${data.efficiencyMetrics.waterSaved}L`, 20, y)
         y += 8
         doc.text(`Cost Saved: $${data.efficiencyMetrics.costSaved}`, 20, y)
+    }
+
+    // Fallback if no specific data found
+    if (y === 35) {
+        doc.text('No detailed data available for this report.', 20, y)
     }
 
     doc.save(`${type.replace(/\s+/g, '_')}_Report.pdf`)
