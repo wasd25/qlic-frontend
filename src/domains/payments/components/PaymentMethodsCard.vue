@@ -1,22 +1,27 @@
+
 <template>
   <div class="payment-methods-card card-root">
     <h2>{{ $t('paymentSection.methods') }}</h2>
 
     <ul class="methods-list">
-      <li v-for="method in methods" :key="method.id" class="method-item">
+      <li v-for="method in localMethods" :key="method.id" class="method-item">
         <div class="method-info">
           <p class="method-type">{{ method.type }}</p>
           <p class="method-details">{{ method.details }}</p>
           <p v-if="method.isDefault || method.is_default" class="default-label">{{ $t('paymentSection.default') }}</p>
         </div>
 
-        <button class="btn-delete" @click="deleteMethod(method.id)">
-          {{ $t('paymentSection.delete') }}
-        </button>
+        <div class="method-actions">
+          <button v-if="!(method.isDefault || method.is_default)" class="btn-link" @click="setDefaultMethod(method)">
+            {{ $t('paymentMethods.setDefault') || 'Set as default' }}
+          </button>
+          <button class="btn-delete" @click="deleteMethod(method.id)">
+            {{ $t('paymentSection.delete') }}
+          </button>
+        </div>
       </li>
     </ul>
 
-    <!-- Add new payment method form -->
     <div v-if="adding" class="add-form">
       <h3>{{ $t('paymentSection.new_method') }}</h3>
 
@@ -51,7 +56,6 @@
       </div>
     </div>
 
-    <!-- Add button -->
     <div v-else>
       <button class="btn-primary" @click="startAdd">{{ $t('paymentSection.add_method') }}</button>
     </div>
@@ -78,8 +82,21 @@ const newMethod = ref({
   isDefault: false
 })
 
+
 watch(() => props.methods, (newVal) => {
-  localMethods.value = Array.isArray(newVal) ? [...newVal] : []
+  localMethods.value = Array.isArray(newVal)
+      ? newVal.map(m => {
+        // DB usa is_default con 0/1, API puede devolver isDefault con true/false
+        const isNum = m.is_default === 1 || m.is_default === '1'
+        const isBool = m.is_default === true || m.isDefault === true
+        const normalized = !!(isNum || isBool)
+        return {
+          ...m,
+          is_default: normalized,
+          isDefault: normalized
+        }
+      })
+      : []
 }, { immediate: true })
 
 const startAdd = () => { adding.value = true }
@@ -95,22 +112,29 @@ const saveNewMethod = async () => {
   }
 
   try {
-    // Mapear camelCase a snake_case para la API
+    // Backend espera "isDefault" (camelCase) como booleano
     const dataToSend = {
       type: newMethod.value.type,
       details: newMethod.value.details,
-      is_default: newMethod.value.isDefault ? 1 : 0  // DB espera tinyint(1)
+      isDefault: !!newMethod.value.isDefault
     }
 
     const created = await paymentsService.addPaymentMethod(dataToSend)
 
-    // Si la API devolvió el objeto creado, agregarlo localmente
     if (created && typeof created === 'object' && created.id) {
-      localMethods.value.push(created)
+      // Normalizar: DB devuelve is_default (0/1), API puede devolver isDefault (true/false)
+      const isNum = created.is_default === 1 || created.is_default === '1'
+      const isBool = created.is_default === true || created.isDefault === true
+      const normalized = {
+        ...created,
+        is_default: !!(isNum || isBool),
+        isDefault: !!(isNum || isBool)
+      }
+      localMethods.value.push(normalized)
     }
 
     cancelAdd()
-    emit('refresh') // Sync with backend - esto recargará los métodos de todos modos
+    emit('refresh')
   } catch (err) {
     console.error('Error adding method:', err)
     alert(t('paymentMethods.error') || 'Error al agregar método de pago')
@@ -128,10 +152,31 @@ const deleteMethod = async (id) => {
     }
   }
 }
+
+const setDefaultMethod = async (method) => {
+  if (!method || !method.id) return
+  try {
+
+    await paymentsService.updatePaymentMethod(method.id, { isDefault: true })
+
+
+    localMethods.value = localMethods.value.map(m => ({
+      ...m,
+      is_default: m.id === method.id,
+      isDefault: m.id === method.id
+    }))
+
+
+    emit('refresh')
+  } catch (err) {
+    console.error('Error setting default method:', err)
+    alert(t('paymentMethods.error') || 'Error al establecer método predeterminado')
+  }
+}
 </script>
 
 <style>
-/* Non-scoped on-purpose so styles apply reliably */
+
 .payment-methods-card.card-root {
   background-color: #fff;
   border: 1px solid #e5e7eb;
@@ -183,6 +228,8 @@ const deleteMethod = async (id) => {
 .default-label { font-size: 0.75rem; color: var(--primary-color); font-weight: 600; margin-top: 6px; }
 
 /* Buttons */
+.method-actions { display:flex; gap:8px; align-items:center; }
+.btn-link { background: transparent; color: var(--primary-color); border: none; cursor: pointer; padding: 0; font-weight: 600; }
 .btn-delete {
   background: #dc2626 !important;
   color: #fff !important;

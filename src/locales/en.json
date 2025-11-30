@@ -306,7 +306,9 @@
     "deleteConfirm": "Are you sure you want to delete this payment method?",
     "fillAllFields": "Please fill in all fields",
     "placeholder": "VISA ****1234 or paypal(at)example.com",
-    "type": "Type"
+    "type": "Type",
+    "setDefault": "Set as default",
+    "error": "An error occurred"
   },
   "transactions": {
     "viewAll": "View All",
