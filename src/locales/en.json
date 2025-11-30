@@ -353,7 +353,8 @@
     "Pumping": "Pumping",
     "Treatment": "Treatment",
     "Distribution": "Distribution",
-    "Maintenance": "Maintenance"
+    "Maintenance": "Maintenance",
+    "Filtration": "Filtration"
   },
   "alertTitles": {
     "Water Pressure Critical": "Water Pressure Critical",

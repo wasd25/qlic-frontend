@@ -8,10 +8,10 @@
         </div>
         <div class="text-wrapper">
           <span class="report-name">
-            {{ $t(`reportTypes.${report.type}`) }}
+            {{ $t(`reportTypes.${report.type}`) || report.title }}
           </span>
           <span class="report-date">
-            {{ $t('reportsSection.generatedDaysAgo', { days: report.date }) }}
+            {{ report.date ? $t('reportsSection.generatedDaysAgo', { days: report.date }) : new Date(report.created_at).toLocaleDateString() }}
           </span>
         </div>
         <i class="pi pi-download download-icon" @click.stop="download(report)" />
@@ -40,8 +40,8 @@ async function download(report) {
 
     // 2. Obtener resumen filtrado
     const filters = {
-      type: report.type,
-      location: report.location,
+      type: report.type || 'Usage Analytics', // Fallback
+      location: report.location || 'All Locations', // Fallback
       period: 'Last 7 Days'
     }
 

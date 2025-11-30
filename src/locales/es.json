@@ -341,19 +341,6 @@
   "periods": {
     "Last 7 Days": "Últimos 7 Días",
     "Last 30 Days": "Últimos 30 Días",
-    "This Year": "Este Año"
-  },
-  "costCategories": {
-    "Pumping": "Bombeo",
-    "Treatment": "Tratamiento",
-    "Distribution": "Distribución",
-    "Maintenance": "Mantenimiento"
-  },
-  "alertTitles": {
-    "Water Pressure Critical": "Presión de Agua Crítica",
-    "Pump Failure Detected": "Falla de Bomba Detectada",
-    "Low Reservoir Level": "Nivel de Reservorio Bajo",
-    "High Water Usage": "Uso Alto de Agua",
     "Abnormal Temperature": "Temperatura Anormal",
     "Pressure Fluctuation": "Fluctuación de Presión",
     "Valve Delay": "Retraso de Válvula",

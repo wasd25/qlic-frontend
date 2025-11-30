@@ -62,22 +62,6 @@ const summary = ref({
 })
 
 const reports = ref([])
-const currentFilters = ref({})
-
-async function fetchReports(filters = {}) {
-  try {
-    const response = await axios.get(`${BASE_URL}/reports`)
-    const allReports = response.data
-    const filtered = allReports.filter(report => {
-      const matchType = filters.type ? report.type === filters.type : true
-      const matchLocation = filters.location ? report.location === filters.location : true
-      return matchType && matchLocation
-    })
-    reports.value = filtered
-  } catch (error) {
-    console.error('Error al cargar los reportes:', error)
-  }
-}
 
 async function downloadReport(report) {
   try {
