@@ -1,5 +1,3 @@
-// javascript
-// File: `src/domains/usage-management/services/usage.service.js`
 import axios from 'axios'
 
 const RAW_API_BASE = import.meta.env.VITE_API_BASE_URL || ''
@@ -89,3 +87,25 @@ export async function getReportSummary(id = 1) {
         return null
     }
 }
+
+// dumbass fix haha
+export async function getNotificationSettings() {
+    try {
+        const res = await fetchWithLog('/notificationSettings') // GET .../api/v1/notificationSettings
+        return res.data ?? null
+    } catch (err) {
+        console.error('[usage.service] Error fetching notification settings:', err.message ?? err)
+        return null
+    }
+}
+
+export async function updateNotificationSettings(settings = {}) {
+    try {
+        const res = await fetchWithLog('/notificationSettings', { method: 'put', data: settings })
+        return res.data ?? (res.status >= 200 && res.status < 300)
+    } catch (err) {
+        console.error('[usage.service] Error updating notification settings:', err.message ?? err)
+        return false
+    }
+}
+
