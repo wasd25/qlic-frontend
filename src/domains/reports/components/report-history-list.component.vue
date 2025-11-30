@@ -11,7 +11,7 @@
             {{ report.type ? $t(`reportTypes.${report.type}`) : report.title }}
           </span>
           <span class="report-date">
-            {{ report.date ? $t('reportsSection.generatedDaysAgo', { days: report.date }) : (report.created_at ? new Date(report.created_at).toLocaleDateString() : 'Invalid Date') }}
+            {{ report.date ? $t('reportsSection.generatedDaysAgo', { days: report.date }) : (report.created_at || report.createdAt ? new Date(report.created_at || report.createdAt).toLocaleDateString() : 'Invalid Date') }}
           </span>
         </div>
         <i class="pi pi-download download-icon" @click.stop="download(report)" />
