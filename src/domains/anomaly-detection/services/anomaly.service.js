@@ -21,7 +21,10 @@ export async function fetchAnomalies() {
             profile_id: item.profileId,
             detected_anomaly: item.detectedAt,
             type: TYPE_MAPPING[item.type] || 'Unknown',
-            resolved: item.status === 'Resolved' || item.isResolved || false,
+            // Normalize to boolean `resolved`: prefer explicit boolean, then resolvedAt, then numeric status === 2
+            resolved: typeof item.resolved === 'boolean'
+                ? item.resolved
+                : Boolean(item.resolvedAt) || Number(item.status) === 2,
             description: item.description
         }))
     } catch (error) {
