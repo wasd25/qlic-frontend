@@ -7,6 +7,7 @@
           :options="periods"
           :placeholder="$t('reportsSection.select')"
           class="select-full"
+          :pt="{ overlay: { class: 'report-dropdown-panel' } }"
       >
         <template #option="slotProps">
           {{ $t(`periods.${slotProps.option}`) }}
@@ -24,6 +25,7 @@
           :options="types"
           :placeholder="$t('reportsSection.select')"
           class="select-full"
+          :pt="{ overlay: { class: 'report-dropdown-panel' } }"
       >
         <template #option="slotProps">
           {{ $t(`reportTypes.${slotProps.option}`) }}
@@ -41,6 +43,7 @@
           :options="locations"
           :placeholder="$t('reportsSection.select')"
           class="select-full"
+          :pt="{ overlay: { class: 'report-dropdown-panel' } }"
       >
         <template #option="slotProps">
           {{ $t(`locations.${slotProps.option}`) }}
@@ -79,6 +82,49 @@ function emitFilters() {
   emit('generate', filters.value)
 }
 </script>
+
+<style>
+/* 🌍 Estilos Globales para el Overlay Teleportado (Fuera del Scope) */
+.report-dropdown-panel {
+  background: #1f2937 !important; /* Fondo Oscuro */
+  border: 1px solid #374151 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3) !important;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.report-dropdown-panel .p-select-list {
+  padding: 0 !important;
+  gap: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-dropdown-panel .p-select-option {
+  padding: 0.75rem 1rem !important;
+  font-size: 0.95rem !important;
+  color: #e5e7eb !important; /* Texto claro */
+  transition: background-color 0.15s;
+  border-radius: 4px !important;
+  margin: 0 0.5rem !important;
+  background: transparent !important;
+}
+
+/* Hover y Focus en opciones */
+.report-dropdown-panel .p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus,
+.report-dropdown-panel .p-select-option:not(.p-select-option-selected):not(.p-disabled):hover {
+  background-color: #374151 !important;
+  color: #ffffff !important;
+}
+
+/* Opción Seleccionada */
+.report-dropdown-panel .p-select-option.p-select-option-selected {
+  background-color: #3B82F6 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+</style>
 
 <style scoped>
 .report-filter {
@@ -137,9 +183,7 @@ function emitFilters() {
   box-shadow: 0 6px 8px rgba(59, 130, 246, 0.3);
 }
 
-/* --- Personalización Profunda de PrimeVue Select --- */
-
-/* El input/trigger principal (Barra visible) */
+/* Estilos para el Trigger (Input) - Esto sí está en el scope */
 :deep(.p-select) {
   border: 1px solid #e5e7eb;
   border-radius: 8px;
@@ -172,48 +216,5 @@ function emitFilters() {
 /* Icono del dropdown */
 :deep(.p-select-dropdown) {
   color: #6b7280;
-}
-
-/* --- EL MENÚ DESPLEGABLE (Estilo Dark como la imagen 4) --- */
-:deep(.p-select-overlay) {
-  background: #1f2937 !important; /* Fondo Oscuro */
-  border: 1px solid #374151 !important;
-  border-radius: 8px !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3) !important;
-  margin-top: 0.5rem;
-  padding: 0.5rem 0;
-}
-
-/* Lista de opciones */
-:deep(.p-select-list) {
-  padding: 0 !important;
-  gap: 2px;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Items individuales */
-:deep(.p-select-option) {
-  padding: 0.75rem 1rem !important;
-  font-size: 0.95rem !important;
-  color: #e5e7eb !important; /* Texto claro */
-  transition: background-color 0.15s;
-  border-radius: 4px !important;
-  margin: 0 0.5rem !important;
-  background: transparent !important;
-}
-
-/* Hover en items */
-:deep(.p-select-option:not(.p-select-option-selected):not(.p-disabled).p-focus),
-:deep(.p-select-option:not(.p-select-option-selected):not(.p-disabled):hover) {
-  background-color: #374151 !important; /* Gris más claro al hover */
-  color: #ffffff !important;
-}
-
-/* Item seleccionado */
-:deep(.p-select-option.p-select-option-selected) {
-  background-color: #3B82F6 !important; /* Azul vibrante */
-  color: #ffffff !important;
-  font-weight: 600;
 }
 </style>
