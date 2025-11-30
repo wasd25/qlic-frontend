@@ -32,6 +32,7 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL
 defineProps({ reports: Array })
 
 async function download(report) {
+  console.log('🖱️ Click en descargar reporte:', report)
   try {
     // 1. Marcar como descargado
     await axios.patch(`${BASE_URL}/reports/${report.id}`, {
