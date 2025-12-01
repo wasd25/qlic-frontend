@@ -8,8 +8,6 @@
             alt="QLIC Logo"
             class="logo"
         />
-        <h1>QLIC</h1>
-        <p>Gestión Inteligente del Agua</p>
       </div>
 
       <!-- Formulario de Login -->
@@ -34,7 +32,6 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import LoginFormComponent from '../components/login-form.component.vue'
 import RegisterFormComponent from '../components/register-form.component.vue'
-import { authService } from '../services/auth.service.js'
 
 const router = useRouter()
 const showRegister = ref(false)
