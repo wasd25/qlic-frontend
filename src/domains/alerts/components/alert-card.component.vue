@@ -17,6 +17,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
+import i18n from '../../../i18n.js'
 
 const props = defineProps({ alert: Object })
 const { t, te } = useI18n()
@@ -50,6 +51,15 @@ const translatedTitle = computed(() => {
   if (hasTranslation) {
     return t(key)
   }
+  // Fallback: try direct lookup in the loaded messages to handle keys with dots/spaces
+  try {
+    const locale = i18n.global.locale.value || i18n.global.locale
+    const msgs = i18n.global.getLocaleMessage ? i18n.global.getLocaleMessage(locale) : (i18n.global.messages && i18n.global.messages[locale])
+    const direct = msgs?.alertTitles?.[props.alert.title]
+    if (direct) return direct
+  } catch (e) {
+    // ignore and fallback to original title
+  }
   return props.alert.title
 })
 
@@ -61,6 +71,22 @@ const translatedMessage = computed(() => {
   if (hasTranslation) {
     return t(key)
   }
+
+  // Fallback: buscar directamente en los mensajes cargados (maneja puntos, #, comillas, etc.)
+  try {
+    const locale = i18n.global.locale.value || i18n.global.locale
+    const msgs = i18n.global.getLocaleMessage ? i18n.global.getLocaleMessage(locale) : (i18n.global.messages && i18n.global.messages[locale])
+    const direct = msgs?.alertMessages?.[props.alert.message]
+    if (direct) return direct
+
+    // Si no existe en el locale actual, intentar con 'en' como respaldo
+    const enMsgs = i18n.global.getLocaleMessage ? i18n.global.getLocaleMessage('en') : (i18n.global.messages && i18n.global.messages['en'])
+    const directEn = enMsgs?.alertMessages?.[props.alert.message]
+    if (directEn) return directEn
+  } catch (e) {
+    // ignore
+  }
+
   return props.alert.message
 })
 
