@@ -14,7 +14,7 @@
         <tr v-for="event in events" :key="event.id">
           <td>{{ event.time }}</td>
           <td>{{ event.amount }} {{ $t('usageSection.gallon') }}</td>
-          <td>{{ event.source }}</td>
+          <td>{{ translateSource(event.source) }}</td>
         </tr>
         </tbody>
       </table>
@@ -25,8 +25,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { getUsageEvents } from '../services/usage.service.js'
+import { useI18n } from 'vue-i18n'
+import i18n from '../../../i18n.js'
 
 const events = ref([])
+const { t, te } = useI18n()
 
 onMounted(async () => {
   try {
@@ -35,6 +38,24 @@ onMounted(async () => {
     console.error('Error en componente usage-events:', err)
   }
 })
+
+function translateSource(src) {
+  if (!src) return ''
+  const key = `usageSection.sources.${src}`
+  if (te(key)) return t(key)
+  try {
+    const locale = i18n.global.locale.value || i18n.global.locale
+    const msgs = i18n.global.getLocaleMessage ? i18n.global.getLocaleMessage(locale) : (i18n.global.messages && i18n.global.messages[locale])
+    const direct = msgs?.usageSection?.sources?.[src]
+    if (direct) return direct
+    const enMsgs = i18n.global.getLocaleMessage ? i18n.global.getLocaleMessage('en') : (i18n.global.messages && i18n.global.messages['en'])
+    const directEn = enMsgs?.usageSection?.sources?.[src]
+    if (directEn) return directEn
+  } catch (e) {
+    // ignore
+  }
+  return src
+}
 </script>
 <style scoped>
 .events-section {
