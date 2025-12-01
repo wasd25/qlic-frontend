@@ -13,7 +13,7 @@
   "login": {
     "title": "Sign In",
     "subtitle": "Sign in to your QLIC account",
-    "username": "Username or Email",
+    "username": "Username",
     "password": "Password",
     "signIn": "Sign In",
     "noAccount": "Don't have an account? Sign up",

@@ -13,7 +13,7 @@
   "login": {
     "title": "Iniciar Sesión",
     "subtitle": "Ingresa a tu cuenta QLIC",
-    "username": "Usuario o Email",
+    "username": "Nombre de Usuario",
     "password": "Contraseña",
     "signIn": "Iniciar Sesión",
     "noAccount": "¿No tienes cuenta? Regístrate",
