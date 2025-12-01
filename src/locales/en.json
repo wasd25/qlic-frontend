@@ -168,7 +168,15 @@
     "amount": "Amount",
     "source": "Source",
     "settings": "Usage Settings",
-    "edit": "Edit Limits"
+    "edit": "Edit Limits",
+    "sources": {
+      "Sensor Bathroom": "Sensor Bathroom",
+      "Sensor Garden": "Sensor Garden",
+      "Sensor Main": "Sensor Main",
+      "Sensor Kitchen": "Sensor Kitchen",
+      "Sensor Laundry": "Sensor Laundry",
+      "Sensor Pool": "Sensor Pool"
+    }
   },
   "anomalySection": {
     "title": "Anomaly Detection",
@@ -374,8 +382,17 @@
     "New Device Connected": "New Device Connected",
     "Backup Activated": "Backup Activated",
     "Maintenance Due": "Maintenance Due",
-    "Sensor Calibration Needed": "Sensor Calibration Needed"
+    "Sensor Calibration Needed": "Sensor Calibration Needed",
+    "Calibration Reminder": "Calibration Reminder",
+    "Usage Report Generated": "Usage Report Generated",
+    "No Anomalies Detected": "No Anomalies Detected",
+    "Subscription Renewed": "Subscription Renewed",
+    "New Alert Type Available": "New Alert Type Available",
+    "Support Ticket Closed": "Support Ticket Closed",
+    "Firmware Updated": "Firmware Updated",
+    "New User Added": "New User Added"
   },
+
   "alertMessages": {
     "Main tank pressure dropped below 15 PSI.": "Main tank pressure dropped below 15 PSI.",
     "Pump #2 stopped responding.": "Pump #2 stopped responding.",
@@ -392,7 +409,15 @@
     "Sensor #12 added to monitoring network.": "Sensor #12 added to monitoring network.",
     "Backup pump engaged during peak usage.": "Backup pump engaged during peak usage.",
     "Scheduled maintenance in 48 hours.": "Scheduled maintenance in 48 hours.",
-    "Sensor #3 readings may be inaccurate.": "Sensor #3 readings may be inaccurate."
+    "Sensor #3 readings may be inaccurate.": "Sensor #3 readings may be inaccurate.",
+    "Next calibration due in 5 days.": "Next calibration due in 5 days.",
+    "Daily usage report is ready.": "Daily usage report is ready.",
+    "System running within normal parameters.": "System running within normal parameters.",
+    "Your plan has been renewed successfully.": "Your plan has been renewed successfully.",
+    "You can now enable 'Flow Alerts'.": "You can now enable 'Flow Alerts'.",
+    "Issue #102 resolved by technician.": "Issue #102 resolved by technician.",
+    "All devices updated to v2.3.1.": "All devices updated to v2.3.1.",
+    "Alexander Anisimov added as Administrator.": "Alexander Anisimov added as Administrator."
   },
   "alertTimestamps": {
     "2 minutes ago": "2 minutes ago",

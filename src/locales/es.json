@@ -162,7 +162,15 @@
     "amount": "Cantidad",
     "source": "Fuente",
     "settings": "Configuración de uso",
-    "edit": "Editar límites"
+    "edit": "Editar límites",
+    "sources": {
+      "Sensor Bathroom": "Sensor Baño",
+      "Sensor Garden": "Sensor Jardín",
+      "Sensor Main": "Sensor Principal",
+      "Sensor Kitchen": "Sensor Cocina",
+      "Sensor Laundry": "Sensor Lavandería",
+      "Sensor Pool": "Sensor Piscina"
+    }
   },
   "anomalySection": {
     "title": "Detección de anomalías",
@@ -372,7 +380,41 @@
     "Sensor #12 added to monitoring network.": "Sensor #12 agregado a la red de monitoreo.",
     "Backup pump engaged during peak usage.": "Bomba de respaldo activada durante uso pico.",
     "Scheduled maintenance in 48 hours.": "Mantenimiento programado en 48 horas.",
-    "Sensor #3 readings may be inaccurate.": "Las lecturas del sensor #3 pueden ser inexactas."
+    "Sensor #3 readings may be inaccurate.": "Las lecturas del sensor #3 pueden ser inexactas.",
+    "Next calibration due in 5 days.": "Próxima calibración en 5 días.",
+    "Daily usage report is ready.": "El informe diario de uso está listo.",
+    "System running within normal parameters.": "El sistema funciona dentro de los parámetros normales.",
+    "Your plan has been renewed successfully.": "Su plan ha sido renovado con éxito.",
+    "You can now enable 'Flow Alerts'.": "Ahora puede habilitar 'Alertas de Flujo'.",
+    "Issue #102 resolved by technician.": "Incidencia #102 resuelta por el técnico.",
+    "All devices updated to v2.3.1.": "Todos los dispositivos actualizados a v2.3.1.",
+    "Alexander Anisimov added as Administrator.": "Alexander Anisimov agregado como Administrador."
+  },
+  "alertTitles": {
+    "Water Pressure Critical": "Presión de Agua Crítica",
+    "Pump Failure Detected": "Falla de Bomba Detectada",
+    "Low Reservoir Level": "Nivel de Reservorio Bajo",
+    "High Water Usage": "Consumo de Agua Alto",
+    "Abnormal Temperature": "Temperatura Anormal",
+    "Pressure Fluctuation": "Fluctuación de Presión",
+    "Valve Delay": "Retraso de Válvula",
+    "Unexpected Flow Pattern": "Patrón de Flujo Inesperado",
+    "Sensor Timeout": "Tiempo de Espera del Sensor",
+    "Usage Spike": "Pico de Consumo",
+    "Scheduled Maintenance Due": "Mantenimiento Programado Pendiente",
+    "System Check Completed": "Verificación del Sistema Completada",
+    "New Device Connected": "Nuevo Dispositivo Conectado",
+    "Backup Activated": "Respaldo Activado",
+    "Maintenance Due": "Mantenimiento Pendiente",
+    "Sensor Calibration Needed": "Calibración de Sensor Necesaria",
+    "Calibration Reminder": "Recordatorio de Calibración",
+    "Usage Report Generated": "Informe de Uso Generado",
+    "No Anomalies Detected": "No se detectaron anomalías",
+    "Subscription Renewed": "Suscripción Renovada",
+    "New Alert Type Available": "Nuevo Tipo de Alerta Disponible",
+    "Support Ticket Closed": "Ticket de Soporte Cerrado",
+    "Firmware Updated": "Firmware Actualizado",
+    "New User Added": "Nuevo Usuario Agregado"
   },
   "alertTimestamps": {
     "2 minutes ago": "hace 2 minutos",
